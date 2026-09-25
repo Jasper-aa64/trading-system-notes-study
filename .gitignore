@@ -1,0 +1,9 @@
+# build products of the check programs
+*.exe
+*.o
+*.obj
+*.out
+*.pdb
+# python
+__pycache__/
+*.pyc
