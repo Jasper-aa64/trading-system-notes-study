@@ -25,7 +25,7 @@
 
 ## 接手 / 在新机器上继续
 
-- 仓库:`Jasper-aa64/trading-system-notes-study`(私有),分支 `main`。
+- 仓库:`Jasper-aa64/trading-system-notes-study`(公开),分支 `main`。
 - **先读 [CLAUDE.md](CLAUDE.md)**(教学规则:节奏、格式、检验题、博客约定),再读 [进度追踪.md](进度追踪.md) 的顶部和底部。
 - 笔记里 `:line` 锚点指向的源笔记不在仓库里:`python tools/bootstrap_source.py` 会在**本仓库目录的同级**创建 `trading-system-notes/`(固定上游 `9a8f2f6`,再用 `tools/_split_notes.py` 拆分)。布局:
 
