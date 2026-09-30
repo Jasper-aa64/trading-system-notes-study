@@ -24,7 +24,7 @@
 源笔记开头点了三个名字,其实都是 §5 已经讲透的东西换了个场合出现:
 
 - **LOCK 前缀指令**——`std::atomic` 的 `fetch_add`/`compare_exchange` 这类读改写操作,底层落地就是一条带 `LOCK` 前缀的 x86 指令,保证"读-改-写"这三步对其他核不可分割地原子发生。
-- **MESI 协议**——§5 轮 1/2 讲的"缓存行状态机",这里第一次点名对上正式名字(Modified/Exclusive/Shared/Invalid)。
+- **MESI 协议**——§5 轮 2/轮 4 讲了它的机制(失效通知、写要独占权);这里第一次点名对上正式名字(Modified/Exclusive/Shared/Invalid)。状态机本身在补课 [5补 · MESI](05-补-MESI缓存一致性状态机.md) 里讲。
 - **内存屏障**——就是 §5 轮 3 的 acquire/release、轮 2 的 fence。
 
 这三样不是新概念,是 §5 词汇表第一次被正式点名,后面直接用。
