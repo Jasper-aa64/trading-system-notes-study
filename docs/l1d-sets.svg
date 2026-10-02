@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" width="1100" height="600" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+    <style>
+      .t { font-size: 14px; font-weight: 600; fill: #1f2328; }
+      .s { font-size: 12px; fill: #57606a; }
+      .h { font-size: 18px; font-weight: 700; fill: #1f2328; }
+      .m { font-size: 13px; fill: #1f2328; font-family: Menlo, Consolas, monospace; }
+      .ln { stroke: #555; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1100" height="600" fill="#ffffff"/>
+  <text x="20" y="34" class="h">L1D 内部:64 行 × 8 格的柜子(32 KiB,8 路,每格放一条 64 B 缓存行)</text>
+  <text x="20" y="56" class="s">位置:硬件地图里"L1D 32 KiB · 8 路"那个框的内部。L2、L3 也是这种柜子,只是行数、格数不同。</text>
+
+  <!-- address -->
+  <text x="20" y="100" class="t">要读的地址:10000(十进制)</text>
+  <text x="20" y="122" class="m">二进制  10 011100 010000</text>
+  <rect x="20"  y="135" width="120" height="44" fill="#ffffff" stroke="#8c959f"/>
+  <rect x="140" y="135" width="150" height="44" fill="#ddf4ff" stroke="#54aeff"/>
+  <rect x="290" y="135" width="150" height="44" fill="#fff8c5" stroke="#d4a72c"/>
+  <text x="32"  y="162" class="m">10 → 2</text>
+  <text x="152" y="162" class="m">011100 → 28</text>
+  <text x="302" y="162" class="m">010000 → 16</text>
+  <text x="32"  y="200" class="t">tag</text>
+  <text x="152" y="200" class="t">组号(第几行)</text>
+  <text x="302" y="200" class="t">行内偏移</text>
+  <text x="32"  y="218" class="s">bit 12 以上</text>
+  <text x="152" y="218" class="s">bit 6–11,0–63</text>
+  <text x="302" y="218" class="s">bit 0–5,0–63</text>
+
+  <text x="20" y="262" class="t">三步查找</text>
+  <text x="20" y="288" class="s">① 用组号 28 直接走到第 28 行(不用找,算出来的)</text>
+  <text x="20" y="310" class="s">② 这一行 8 个格子各存着"tag + 64 B 数据",</text>
+  <text x="38" y="328" class="s">8 个 tag 同时和 2 比较(8 个比较器并行)</text>
+  <text x="20" y="350" class="s">③ 有一格 tag 是 2 → 命中,取这条行里第 16 个字节起的数据</text>
+  <text x="38" y="368" class="s">都不是 → 缺失,去 L2 拿整条行回来,放进第 28 行的某一格;</text>
+  <text x="38" y="386" class="s">8 格都满了,就踢掉最久没用的那一格</text>
+
+  <text x="20" y="430" class="t">换一个地址:10000 + 4096 = 14096</text>
+  <text x="20" y="452" class="m">二进制  11 011100 010000</text>
+  <text x="20" y="474" class="s">组号还是 28,只有 tag 变成 3 → 去抢同一行的 8 个格子</text>
+  <text x="20" y="496" class="s">所以地址相差 4096 的倍数 = 同一行;第 9 个这样的地址进来就要踢人,</text>
+  <text x="20" y="514" class="s">哪怕另外 63 行全空着。这就是"关键步长 4 KiB"。</text>
+
+  <!-- cabinet -->
+  <text x="560" y="100" class="t">柜子(64 行 × 8 格)</text>
+  <text x="560" y="120" class="s">第 0 格 … 第 7 格(= 8 路)</text>
+  <g>
+    <!-- rows 0..3 -->
+    <rect x="600" y="135" width="440" height="30" fill="#f6f8fa" stroke="#8c959f"/>
+    <rect x="600" y="165" width="440" height="30" fill="#f6f8fa" stroke="#8c959f"/>
+    <rect x="600" y="195" width="440" height="30" fill="#f6f8fa" stroke="#8c959f"/>
+    <text x="560" y="155" class="s">行 0</text>
+    <text x="560" y="185" class="s">行 1</text>
+    <text x="560" y="215" class="s">行 2</text>
+    <text x="810" y="250" class="s">⋮</text>
+    <!-- row 28 -->
+    <rect x="600" y="265" width="440" height="40" fill="#ddf4ff" stroke="#0969da" stroke-width="2"/>
+    <text x="548" y="290" class="t">行 28</text>
+    <rect x="600" y="265" width="55" height="40" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/>
+    <text x="606" y="282" class="s">tag 2</text>
+    <text x="606" y="298" class="s">64 B</text>
+    <text x="661" y="282" class="s">tag 7</text>
+    <text x="716" y="282" class="s">tag 0</text>
+    <text x="771" y="282" class="s">空</text>
+    <text x="826" y="282" class="s">…</text>
+    <text x="810" y="335" class="s">⋮</text>
+    <rect x="600" y="350" width="440" height="30" fill="#f6f8fa" stroke="#8c959f"/>
+    <text x="560" y="370" class="s">行 63</text>
+    <!-- column separators -->
+    <g stroke="#8c959f" stroke-width="1">
+      <line x1="655" y1="135" x2="655" y2="225"/><line x1="710" y1="135" x2="710" y2="225"/>
+      <line x1="765" y1="135" x2="765" y2="225"/><line x1="820" y1="135" x2="820" y2="225"/>
+      <line x1="875" y1="135" x2="875" y2="225"/><line x1="930" y1="135" x2="930" y2="225"/>
+      <line x1="985" y1="135" x2="985" y2="225"/>
+      <line x1="655" y1="265" x2="655" y2="305"/><line x1="710" y1="265" x2="710" y2="305"/>
+      <line x1="765" y1="265" x2="765" y2="305"/><line x1="820" y1="265" x2="820" y2="305"/>
+      <line x1="875" y1="265" x2="875" y2="305"/><line x1="930" y1="265" x2="930" y2="305"/>
+      <line x1="985" y1="265" x2="985" y2="305"/>
+      <line x1="655" y1="350" x2="655" y2="380"/><line x1="710" y1="350" x2="710" y2="380"/>
+      <line x1="765" y1="350" x2="765" y2="380"/><line x1="820" y1="350" x2="820" y2="380"/>
+      <line x1="875" y1="350" x2="875" y2="380"/><line x1="930" y1="350" x2="930" y2="380"/>
+      <line x1="985" y1="350" x2="985" y2="380"/>
+    </g>
+  </g>
+  <!-- arrow from set field to row 28 -->
+  <path d="M215,135 C215,110 470,110 470,200 C470,260 520,285 545,285" class="ln" marker-end="url(#a)"/>
+  <text x="330" y="106" class="s">① 组号选行</text>
+
+  <text x="560" y="420" class="t">容量算一下</text>
+  <text x="560" y="444" class="s">64 行 × 8 格 × 64 B = 32768 B = 32 KiB</text>
+  <text x="560" y="466" class="s">地址每走 64 行 × 64 B = 4096 B,行号就绕回一圈</text>
+  <text x="560" y="500" class="t">为什么是"8 格一行"这种折中</text>
+  <text x="560" y="524" class="s">每行 1 格:两个相差 4 KiB 的热地址会互相踢个不停</text>
+  <text x="560" y="546" class="s">不分行、512 格随便放:每次读都要比 512 个 tag,1 ns 内做不完</text>
+  <text x="560" y="568" class="s">8 格:每次只比 8 个,又给"撞行"留了 8 个位置</text>
+</svg>
