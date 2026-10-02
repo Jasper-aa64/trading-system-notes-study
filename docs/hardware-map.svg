@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1300" width="1200" height="1300" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+    <style>
+      .t  { font-size: 14px; font-weight: 600; fill: #1f2328; }
+      .s  { font-size: 11px; fill: #57606a; }
+      .h  { font-size: 16px; font-weight: 700; fill: #1f2328; }
+      .tag{ font-size: 11px; fill: #0969da; }
+      .box   { fill: #ffffff; stroke: #8c959f; stroke-width: 1.2; rx: 6; }
+      .core  { fill: #f6f8fa; stroke: #57606a; stroke-width: 1.5; }
+      .sock  { fill: #fbfbfc; stroke: #1f2328; stroke-width: 2; }
+      .cache { fill: #ddf4ff; stroke: #54aeff; stroke-width: 1.2; }
+      .buf   { fill: #fff8c5; stroke: #d4a72c; stroke-width: 1.2; }
+      .mem   { fill: #ffebe9; stroke: #ff8182; stroke-width: 1.2; }
+      .line  { stroke: #555; stroke-width: 1.5; fill: none; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="1300" fill="#ffffff"/>
+  <text x="20" y="38" class="h" style="font-size:22px">硬件地图:一次访存会经过哪些层</text>
+  <text x="20" y="60" class="s">蓝字 = 在哪一节讲过(§N 是源笔记第 N 节,"轮"是我们笔记里的轮次)。数字是典型 x86(Zen 3 / Ryzen 5600GT)的量级。</text>
+
+  <!-- ===== Socket 0 ===== -->
+  <rect x="20" y="75" width="840" height="700" rx="10" class="sock"/>
+  <text x="36" y="98" class="h">CPU 插槽 0 = 一个 NUMA 节点</text>
+  <text x="300" y="98" class="tag">§1 轮1 绑核/隔离 · 轮3 NUMA</text>
+
+  <!-- Core 0 -->
+  <rect x="40" y="110" width="390" height="460" rx="8" class="core"/>
+  <text x="56" y="132" class="t">核心 0</text>
+  <text x="110" y="132" class="tag">2 个硬件线程共用这个核(SMT,§1 轮2)</text>
+
+  <rect x="60" y="145" width="350" height="62" class="box"/>
+  <text x="72" y="168" class="t">流水线:取指 → 译码 → 乱序执行 → 退休</text>
+  <text x="72" y="186" class="tag">§5 轮5 依赖链 · 多累加器</text>
+  <text x="72" y="200" class="tag">#12 分支预测(待讲)</text>
+
+  <rect x="60" y="220" width="165" height="62" class="box"/>
+  <text x="72" y="243" class="t">寄存器</text>
+  <text x="72" y="261" class="tag">§5 轮5 寄存器溢出</text>
+  <text x="72" y="275" class="tag">#11 轮3 存储类别</text>
+
+  <rect x="245" y="220" width="165" height="62" class="buf"/>
+  <text x="257" y="243" class="t">Store buffer</text>
+  <text x="257" y="261" class="tag">§5 轮1 "小本子"</text>
+  <text x="257" y="275" class="tag">§5 轮5 STLF 转发</text>
+
+  <rect x="60" y="295" width="165" height="62" class="buf"/>
+  <text x="72" y="318" class="t">TLB(地址翻译)</text>
+  <text x="72" y="336" class="tag">#7 大页</text>
+  <text x="72" y="350" class="tag">#6 TLB shootdown</text>
+
+  <rect x="245" y="295" width="165" height="62" class="buf"/>
+  <text x="257" y="318" class="t">Invalidate queue</text>
+  <text x="257" y="336" class="tag">§5 轮2 "收件箱"</text>
+  <text x="257" y="350" class="tag">§5 轮3 acquire</text>
+
+  <rect x="60" y="370" width="165" height="70" class="cache"/>
+  <text x="72" y="393" class="t">L1I 32 KiB</text>
+  <text x="72" y="411" class="s">指令缓存</text>
+  <text x="72" y="428" class="tag">#11 轮2 函数分组</text>
+
+  <rect x="245" y="370" width="165" height="70" class="cache"/>
+  <text x="257" y="393" class="t">L1D 32 KiB · 8 路</text>
+  <text x="257" y="411" class="tag">#11 轮1 对齐/跨行</text>
+  <text x="257" y="428" class="tag">#11 轮3 组相联</text>
+
+  <rect x="60" y="455" width="350" height="62" class="cache"/>
+  <text x="72" y="478" class="t">L2 512 KiB · 8 路(本核私有)</text>
+  <text x="72" y="497" class="tag">#11 轮3 关键步长 64 KiB · §5 轮4 L1/L2 私有</text>
+
+  <text x="56" y="545" class="s">缓存和内存之间按 64 B 一整条"缓存行"搬运</text>
+  <text x="56" y="561" class="tag">§5 轮4 · #11 轮2 一次访问碰几条行</text>
+
+  <!-- Core 1..5 -->
+  <rect x="450" y="110" width="390" height="460" rx="8" class="core"/>
+  <text x="466" y="132" class="t">核心 1 … 核心 5(结构相同)</text>
+  <text x="466" y="175" class="s">同一条缓存行可以在多个核的 L1/L2 里各有一份副本。</text>
+  <text x="466" y="193" class="s">谁要写,就得先让别人的副本作废:</text>
+  <text x="466" y="219" class="t">MESI:单写者 / 多读者</text>
+  <text x="466" y="239" class="tag">5补 MESI 状态机</text>
+  <text x="466" y="257" class="tag">§5 轮4 伪共享(两个核抢同一行)</text>
+  <text x="466" y="275" class="tag">#9 缓存游标 · #10 SPMC 读者越多写越贵</text>
+  <text x="466" y="293" class="tag">#11 轮1 alignas(64) 让对象独占一行</text>
+
+  <rect x="660" y="370" width="165" height="70" class="cache"/>
+  <text x="672" y="393" class="t">L1D</text>
+  <text x="672" y="411" class="s">(L1I、TLB、store</text>
+  <text x="672" y="427" class="s">buffer 也各有一份)</text>
+
+  <rect x="470" y="455" width="350" height="62" class="cache"/>
+  <text x="482" y="478" class="t">L2(本核私有)</text>
+  <text x="482" y="497" class="s">每个核各一份</text>
+
+  <!-- coherence arrow -->
+  <line x1="412" y1="486" x2="468" y2="486" class="line" marker-start="url(#arr)" marker-end="url(#arr)" stroke-dasharray="5 3"/>
+  <text x="413" y="476" class="tag">一致性</text>
+
+  <!-- L3 -->
+  <rect x="40" y="590" width="800" height="62" class="cache"/>
+  <text x="56" y="614" class="t">L3 16 MiB · 16 路(全部核共享)</text>
+  <text x="56" y="634" class="tag">§5 轮4 L3 共享 · #11 轮3 高位哈希选组</text>
+  <line x1="380" y1="517" x2="380" y2="588" class="line" marker-start="url(#arr)" marker-end="url(#arr)"/>
+  <line x1="645" y1="517" x2="645" y2="588" class="line" marker-start="url(#arr)" marker-end="url(#arr)"/>
+
+  <!-- Memory controller -->
+  <rect x="40" y="680" width="800" height="62" class="mem"/>
+  <text x="56" y="704" class="t">内存控制器:把连续地址轮流分到各个通道(交织)</text>
+  <text x="56" y="724" class="tag">#11 轮3 多通道均衡(行数和通道数互质)</text>
+  <line x1="440" y1="652" x2="440" y2="678" class="line" marker-start="url(#arr)" marker-end="url(#arr)"/>
+
+  <!-- ===== Right column ===== -->
+  <rect x="880" y="75" width="300" height="160" rx="10" class="sock"/>
+  <text x="896" y="100" class="h">CPU 插槽 1</text>
+  <text x="896" y="125" class="s">自己的核、L3、内存控制器和内存</text>
+  <text x="896" y="145" class="s">访问另一个插槽的内存要过互连,更慢</text>
+  <text x="896" y="170" class="tag">§1 轮3 NUMA:线程和内存放同一节点</text>
+  <line x1="862" y1="160" x2="878" y2="160" class="line" marker-start="url(#arr)" marker-end="url(#arr)"/>
+
+  <rect x="880" y="255" width="300" height="300" rx="8" class="box"/>
+  <text x="896" y="280" class="t">访问延迟量级</text>
+  <text x="896" y="308" class="s">寄存器</text>          <text x="1060" y="308" class="s">&lt; 1 ns</text>
+  <text x="896" y="333" class="s">L1D(4–5 周期)</text>   <text x="1060" y="333" class="s">~1 ns</text>
+  <text x="896" y="358" class="s">L2</text>               <text x="1060" y="358" class="s">~3–4 ns</text>
+  <text x="896" y="383" class="s">L3</text>               <text x="1060" y="383" class="s">~10–15 ns</text>
+  <text x="896" y="408" class="s">本地 DRAM</text>        <text x="1060" y="408" class="s">~80–100 ns</text>
+  <text x="896" y="433" class="s">远端 NUMA 内存</text>   <text x="1060" y="433" class="s">再慢一截</text>
+  <text x="896" y="458" class="s">第一次写一页(缺页)</text><text x="1060" y="458" class="s">~1.5 µs</text>
+  <text x="896" y="488" class="tag">缺页:#10 轮2 实测(Windows)</text>
+  <text x="896" y="506" class="tag">其余是常识量级,不是本机实测</text>
+  <text x="896" y="532" class="s">每往下一层,大约慢 3–10 倍</text>
+
+  <rect x="880" y="575" width="300" height="100" rx="8" class="box"/>
+  <text x="896" y="600" class="t">网卡 → 中断 → 某个核</text>
+  <text x="896" y="622" class="tag">§3 中断绑定:别打扰热路径的核</text>
+  <text x="896" y="642" class="tag">§2 实时优先级 · §4 系统静默</text>
+  <text x="896" y="662" class="s">(操作系统层,不是缓存层)</text>
+
+  <!-- ===== DRAM ===== -->
+  <text x="20" y="805" class="h">内存条(DRAM)</text>
+  <text x="160" y="805" class="tag">#11 轮3</text>
+  <line x1="250" y1="742" x2="250" y2="818" class="line" marker-end="url(#arr)"/>
+  <line x1="440" y1="742" x2="440" y2="818" class="line" marker-end="url(#arr)"/>
+  <line x1="710" y1="742" x2="710" y2="818" class="line" marker-end="url(#arr)"/>
+
+  <rect x="40" y="820" width="260" height="230" rx="8" class="mem"/>
+  <text x="56" y="844" class="t">通道 0</text>
+  <text x="56" y="866" class="s">DIMM → rank → 多个 bank</text>
+  <rect x="56" y="880" width="228" height="155" class="box"/>
+  <text x="68" y="902" class="t">一个 bank = 行 × 列的表</text>
+  <rect x="68" y="914" width="204" height="30" class="buf"/>
+  <text x="78" y="934" class="s">行缓冲:当前打开的那一行</text>
+  <text x="68" y="964" class="s">命中已打开的行 ~14 ns</text>
+  <text x="68" y="983" class="s">换一行(行冲突) ~40 ns</text>
+  <text x="68" y="1006" class="s">刷新:每 ~7.8 µs 一次,</text>
+  <text x="68" y="1024" class="s">卡几百 ns → P99 毛刺</text>
+
+  <rect x="320" y="820" width="240" height="230" rx="8" class="mem"/>
+  <text x="336" y="844" class="t">通道 1</text>
+  <text x="336" y="866" class="s">结构同通道 0</text>
+  <text x="336" y="900" class="s">各通道能同时工作,</text>
+  <text x="336" y="920" class="s">带宽 ≈ 通道数 × 单通道</text>
+
+  <rect x="580" y="820" width="260" height="230" rx="8" class="mem"/>
+  <text x="596" y="844" class="t">通道 2 …</text>
+  <text x="596" y="866" class="s">结构同通道 0</text>
+
+  <!-- ===== Address bits ===== -->
+  <text x="20" y="1095" class="h">一个地址的各段(4 KiB 页,L1D 32 KiB 8 路,64 B 行)</text>
+  <rect x="40"  y="1110" width="560" height="44" fill="#fff8c5" stroke="#d4a72c"/>
+  <rect x="600" y="1110" width="300" height="44" fill="#ddf4ff" stroke="#54aeff"/>
+  <rect x="900" y="1110" width="280" height="44" fill="#ffffff" stroke="#8c959f"/>
+  <text x="56"  y="1137" class="t">虚拟页号(bit 12 以上)→ TLB 翻译</text>
+  <text x="616" y="1137" class="t">组号 bit 6–11</text>
+  <text x="916" y="1137" class="t">行内偏移 bit 0–5</text>
+  <text x="56"  y="1174" class="tag">#7 大页:页号变少,TLB 装得下</text>
+  <text x="616" y="1174" class="tag">#11 轮3 相差 4 KiB 倍数 → 同一组</text>
+  <text x="916" y="1174" class="tag">#11 轮1 对齐 = 这几位为 0</text>
+  <path d="M600,1188 L600,1198 L1180,1198 L1180,1188" class="line"/>
+  <text x="620" y="1220" class="s">页内偏移 bit 0–11:翻译前后不变,所以 L1 能一边翻译一边选组(VIPT)</text>
+  <text x="620" y="1238" class="s">→ L1 的"组数 × 行大小"被卡在 4 KiB,做大只能加路数</text>
+
+  <text x="20" y="1280" class="s">图随课程更新:讲到 #12 分支预测、#21 向量化、#24 自旋锁时再往上补标注。</text>
+</svg>
