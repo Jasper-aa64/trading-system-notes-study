@@ -80,7 +80,9 @@
 
 ## 8. 博客(另一个仓库 `Jasper-aa64/Jasper-aa64.github.io`,Hugo)
 
-- 🔴/大章讲完发一篇,英文,Systems 分类,`homepage: false`,`date:` 写发布当天。**编号按发布顺序**,不是章节号;截至 2026-09-25 已发 #1–#4,下一篇是 #5(以博客仓库里的文章为准)。
+- 🔴/大章讲完发一篇,Systems 分类,`homepage: false`,`date:` 写发布当天。**编号按发布顺序**,不是章节号;截至 2026-10-04 已发 #1–#6,下一篇是 #7(以博客仓库里的文章为准)。
+- **补课/专题不占编号**(用户 2026-10-04 定):标题写 `Low-Latency Trading — <主题>` / 中文 `低时延交易 —— <主题>`,如 MESI(已发)、大页内存、内存带宽与延迟(11补,三轮讲完后发)。正文格式和编号文章一样。
+- **中英双语**(用户 2026-10-04 定):站点是 Hugo 多语言,英文在 `/`,中文在 `/zh/`,顶部按钮切换,界面文字在 `i18n/en.yaml`、`i18n/zh.yaml`。**从现在起新增和维护的每篇文章都出两版**:`<slug>.md` 和 `<slug>.zh.md`,同 slug、同 date、同 tags/categories(分类名保持英文 `Systems`,否则两种语言的分类页对不上)。插图也出两版,文件名 `xxx.en.svg` / `xxx.zh.svg`,各自引用自己语言的那张;中文版的代码块和英文版逐行一致、只翻注释。中文版里链到还没有中文版的文章,用英文链接并注"(英文)"。旧文章(#1–#4、算法类)暂无中文版:中文列表里以英文原文列出、带"英文"小标;在旧文章页点"中文"只会显示"暂无中文版"提示。改了旧文章,就顺手补它的中文版。
 - 格式:frontmatter `title: "Trading System Notes #N: <短主题>"`(要出现两个冒号时,第二个改成破折号);正文先写 insight 式 `# Trading System Notes #N: <insight> — <topics>` 和 `> **One-line thesis**:` 引用块,然后 `## What You're Actually Fighting`、用 `---` 分隔的编号小节、`## Recap`。
   站点是手写的 Hugo(goldmark `unsafe: true`,没有主题、没有 series 分类),所以编号只能写在标题里;页面 h1 用的是 frontmatter 的 title,所以它要短,正文再用长的 insight 式 H1。
 - **纯知识点总结**:不写"我发现源码有 bug"的叙事,不写结尾的来源署名;源里的 bug 只能作为通用的坑出现。文章之间用根相对链接 `/posts/<slug>/`。
@@ -97,6 +99,7 @@
   内联 SVG 的 `rect`/`text` 个数对得上源码且 `svg p` 为 0、配图 `naturalWidth > 0`、首页没有这篇(`homepage: false`)、`/categories/systems/` 里有。
   浏览器面板的截图偶尔会空白或发黑,与页面真实状态无关——优先用 DOM 查询,不靠截图。
 - 博客仓库要自己克隆:`git clone https://github.com/Jasper-aa64/Jasper-aa64.github.io.git`(本机路径见第 10 节)。
+- 博客里的图用 `<a href=图><img src=图 loading="lazy" decoding="async"></a>` 引用 `static/images/<post>/` 下的 SVG 文件(点开看原图);学习仓库 `docs/` 里的图是笔记版(标注写"§N 轮 M"),放进博客前要把标注改成博客编号(`#N` / 专题名)。
 - 提交/推送前:`git fetch`,`git status`,`git rev-list --left-right --count HEAD...origin/main`(这个仓库也会从别的机器推,作者 `mac`)。
   构建预检用 Hugo 0.160.1(CI 同版本):`HUGO_ENVIRONMENT=production hugo --minify --baseURL https://jasper-aa64.github.io/ --destination <临时目录> --cacheDir <临时目录>`(必须给 destination,`publishDir` 是 `docs/`),再起静态服务查 DOM。
 - 不要用 SendUserFile 发含内联 SVG/HTML 的 `.md`(会悄悄改坏文件)。
@@ -123,4 +126,5 @@
 
 **用户的 Mac(2026-10-02 起也在这台上学)**:本仓库克隆在 `~/Documents/trading-study/trading-system-notes-study/`。上游源笔记的本地副本在
 `~/Desktop/HFT-wf/01-博客与资料/trading-system-notes/chinese/`(#11 的 631 行与锚点一致,其他文件未逐一核对)。
+博客克隆在 `~/Documents/trading-study/Jasper-aa64.github.io/`(Hugo 0.160.1 用 Homebrew 装好了)。
 Xcode 许可协议没接受时(2026-10-02 用户已接受) `git`、`clang++` 都用不了,要用户自己在终端跑 `sudo xcodebuild -license`;`gh` 已登录的是 `JMaaa32`,不是 `Jasper-aa64`。
