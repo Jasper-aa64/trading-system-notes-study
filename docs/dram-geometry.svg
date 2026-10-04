@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" width="1100" height="700" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+    <style>
+      .t { font-size: 14px; font-weight: 600; fill: #1f2328; }
+      .s { font-size: 12px; fill: #57606a; }
+      .h { font-size: 18px; font-weight: 700; fill: #1f2328; }
+      .m { font-size: 12px; fill: #1f2328; font-family: Menlo, Consolas, monospace; }
+      .ln { stroke: #555; stroke-width: 1.5; fill: none; }
+      .zm { stroke: #8c959f; stroke-width: 1; stroke-dasharray: 4 3; fill: none; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1100" height="700" fill="#ffffff"/>
+  <text x="20" y="34" class="h">内存条里面:通道 → rank → 芯片 → bank → 行缓冲</text>
+  <text x="20" y="56" class="s">位置:硬件地图里 L3 下面的"内存控制器"和"内存条"两个框。L3 缺失之后,一次 load 走到这里。数字是 DDR4 典型值(常识,没测)。</text>
+
+  <!-- controller -->
+  <rect x="20" y="110" width="140" height="80" rx="6" fill="#ddf4ff" stroke="#0969da"/>
+  <text x="34" y="140" class="t">内存控制器</text>
+  <text x="34" y="160" class="s">在 CPU 芯片里</text>
+  <text x="34" y="178" class="s">把地址拆段、排队</text>
+
+  <!-- channels -->
+  <path d="M160,130 L238,100" class="ln" marker-end="url(#a)"/>
+  <path d="M160,170 L238,220" class="ln" marker-end="url(#a)"/>
+  <text x="168" y="100" class="s">通道 0</text>
+  <text x="168" y="226" class="s">通道 1</text>
+
+  <!-- DIMM channel 0 -->
+  <rect x="240" y="70" width="330" height="80" rx="4" fill="#f6f8fa" stroke="#8c959f"/>
+  <text x="250" y="88" class="s">内存条(通道 0)· rank 0 = 8 颗芯片</text>
+  <g fill="#fff8c5" stroke="#d4a72c">
+    <rect x="250" y="98" width="34" height="40"/><rect x="290" y="98" width="34" height="40"/>
+    <rect x="330" y="98" width="34" height="40"/><rect x="370" y="98" width="34" height="40"/>
+    <rect x="410" y="98" width="34" height="40"/><rect x="450" y="98" width="34" height="40"/>
+    <rect x="490" y="98" width="34" height="40"/><rect x="530" y="98" width="34" height="40"/>
+  </g>
+  <rect x="530" y="98" width="34" height="40" fill="#fff8c5" stroke="#bf8700" stroke-width="2.5"/>
+
+  <!-- DIMM channel 1 -->
+  <rect x="240" y="190" width="330" height="80" rx="4" fill="#f6f8fa" stroke="#8c959f"/>
+  <text x="250" y="208" class="s">内存条(通道 1)· 和通道 0 同时各传各的</text>
+  <g fill="#fff8c5" stroke="#d4a72c">
+    <rect x="250" y="218" width="34" height="40"/><rect x="290" y="218" width="34" height="40"/>
+    <rect x="330" y="218" width="34" height="40"/><rect x="370" y="218" width="34" height="40"/>
+    <rect x="410" y="218" width="34" height="40"/><rect x="450" y="218" width="34" height="40"/>
+    <rect x="490" y="218" width="34" height="40"/><rect x="530" y="218" width="34" height="40"/>
+  </g>
+
+  <text x="240" y="296" class="s">每颗芯片一次出 8 位,8 颗并排 = 64 位 = 通道一拍的宽度;</text>
+  <text x="240" y="314" class="s">一条 64 B 缓存行 = 连续 8 拍,每颗芯片各出 8 字节。</text>
+
+  <!-- zoom chip -->
+  <path d="M564,98 L640,80" class="zm"/>
+  <path d="M564,138 L640,250" class="zm"/>
+  <rect x="640" y="70" width="440" height="180" rx="4" fill="#ffffff" stroke="#bf8700" stroke-width="1.5"/>
+  <text x="652" y="90" class="t">一颗芯片:16 个 bank,各自能独立开行</text>
+  <g fill="#f6f8fa" stroke="#8c959f">
+    <rect x="660" y="104" width="90" height="54"/><rect x="760" y="104" width="90" height="54"/>
+    <rect x="860" y="104" width="90" height="54"/><rect x="960" y="104" width="90" height="54"/>
+    <rect x="660" y="168" width="90" height="54"/><rect x="760" y="168" width="90" height="54"/>
+    <rect x="860" y="168" width="90" height="54"/>
+  </g>
+  <rect x="660" y="104" width="90" height="54" fill="#ddf4ff" stroke="#0969da" stroke-width="2"/>
+  <text x="680" y="136" class="s">bank 0</text>
+  <text x="780" y="136" class="s">bank 1</text>
+  <text x="880" y="136" class="s">bank 2</text>
+  <text x="980" y="136" class="s">bank 3</text>
+  <text x="680" y="200" class="s">bank 4</text>
+  <text x="780" y="200" class="s">bank 5</text>
+  <text x="880" y="200" class="s">bank 6</text>
+  <text x="972" y="200" class="s">… 到 15</text>
+
+  <!-- zoom bank -->
+  <path d="M660,158 L520,370" class="zm"/>
+  <path d="M750,158 L820,370" class="zm"/>
+  <rect x="300" y="370" width="520" height="300" rx="4" fill="#ffffff" stroke="#0969da" stroke-width="1.5"/>
+  <text x="312" y="392" class="t">一个 bank = 一张"行 × 列"的表(几万行,每行约 1 KiB)</text>
+  <g fill="#f6f8fa" stroke="#8c959f">
+    <rect x="330" y="404" width="300" height="22"/>
+    <rect x="330" y="426" width="300" height="22"/>
+    <rect x="330" y="448" width="300" height="22"/>
+    <rect x="330" y="492" width="300" height="22"/>
+  </g>
+  <rect x="330" y="470" width="300" height="22" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/>
+  <text x="640" y="420" class="s">第 0 行</text>
+  <text x="640" y="486" class="s">第 r 行</text>
+  <text x="474" y="530" class="s">⋮</text>
+  <!-- row buffer -->
+  <rect x="330" y="580" width="300" height="34" fill="#dafbe1" stroke="#1a7f37" stroke-width="2"/>
+  <text x="342" y="602" class="t">行缓冲(一个 bank 只有一个)</text>
+  <path d="M480,514 L480,576" class="ln" marker-end="url(#a)"/>
+  <text x="488" y="552" class="s">① 开行:整行搬进来</text>
+  <rect x="550" y="580" width="30" height="34" fill="#fff8c5" stroke="#bf8700" stroke-width="2"/>
+  <path d="M565,614 L565,650" class="ln" marker-end="url(#a)"/>
+  <text x="576" y="646" class="s">② 读列:按列号取 8 字节</text>
+
+  <!-- three cases -->
+  <text x="850" y="392" class="t">读一次,看行缓冲里是哪一行</text>
+  <text x="850" y="420" class="t" fill="#1a7f37">行命中</text>
+  <text x="850" y="440" class="s">要的行已经开着</text>
+  <text x="850" y="458" class="m">读列            ≈ 14 ns</text>
+  <text x="850" y="492" class="t">行空</text>
+  <text x="850" y="512" class="s">bank 没开任何行</text>
+  <text x="850" y="530" class="m">开行+读列       ≈ 28 ns</text>
+  <text x="850" y="564" class="t" fill="#cf222e">行冲突</text>
+  <text x="850" y="584" class="s">开着的是别的行</text>
+  <text x="850" y="602" class="m">关行+开行+读列  ≈ 41 ns</text>
+  <text x="850" y="636" class="s">三个动作各约 14 ns</text>
+  <text x="850" y="654" class="s">(DDR4-3200 CL22:</text>
+  <text x="850" y="672" class="s">22 个时钟 × 0.625 ns)</text>
+
+  <!-- address split -->
+  <text x="20" y="392" class="t">控制器怎么拆地址(示意)</text>
+  <text x="20" y="412" class="s">和 L1 选组同一个思路:</text>
+  <text x="20" y="430" class="s">地址的几段决定去哪</text>
+  <rect x="20"  y="446" width="70" height="30" fill="#dafbe1" stroke="#1a7f37"/>
+  <rect x="90"  y="446" width="60" height="30" fill="#ddf4ff" stroke="#54aeff"/>
+  <rect x="150" y="446" width="60" height="30" fill="#fff8c5" stroke="#d4a72c"/>
+  <rect x="210" y="446" width="60" height="30" fill="#ffffff" stroke="#8c959f"/>
+  <text x="38"  y="466" class="s">行</text>
+  <text x="104" y="466" class="s">bank</text>
+  <text x="164" y="466" class="s">通道</text>
+  <text x="228" y="466" class="s">列</text>
+  <text x="20" y="500" class="s">高位 ←                    → 低位</text>
+  <text x="20" y="526" class="s">低位给列:连续的地址</text>
+  <text x="20" y="544" class="s">落在同一行 → 吃行命中</text>
+  <text x="20" y="570" class="s">真实位置因平台而异,</text>
+  <text x="20" y="588" class="s">常做哈希,不公开</text>
+</svg>
