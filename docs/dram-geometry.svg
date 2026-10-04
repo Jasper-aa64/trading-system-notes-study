@@ -29,32 +29,25 @@
   <text x="168" y="226" class="s">通道 1</text>
 
   <!-- DIMM channel 0 -->
-  <rect x="240" y="70" width="330" height="80" rx="4" fill="#f6f8fa" stroke="#8c959f"/>
-  <text x="250" y="88" class="s">内存条(通道 0)· rank 0 = 8 颗芯片</text>
-  <g fill="#fff8c5" stroke="#d4a72c">
-    <rect x="250" y="98" width="34" height="40"/><rect x="290" y="98" width="34" height="40"/>
-    <rect x="330" y="98" width="34" height="40"/><rect x="370" y="98" width="34" height="40"/>
-    <rect x="410" y="98" width="34" height="40"/><rect x="450" y="98" width="34" height="40"/>
-    <rect x="490" y="98" width="34" height="40"/><rect x="530" y="98" width="34" height="40"/>
-  </g>
-  <rect x="530" y="98" width="34" height="40" fill="#fff8c5" stroke="#bf8700" stroke-width="2.5"/>
-
+  <rect x="240" y="64" width="345" height="106" rx="4" fill="#f6f8fa" stroke="#8c959f"/>
+  <text x="250" y="80" class="s">通道 0 上的内存条:正反两面 = 2 个 rank</text>
+  <text x="250" y="109" class="s">rank 0</text>
+  <g fill="#fff8c5" stroke="#d4a72c"><rect x="318" y="88" width="28" height="32"/><rect x="351" y="88" width="28" height="32"/><rect x="384" y="88" width="28" height="32"/><rect x="417" y="88" width="28" height="32"/><rect x="450" y="88" width="28" height="32"/><rect x="483" y="88" width="28" height="32"/><rect x="516" y="88" width="28" height="32"/><rect x="549" y="88" width="28" height="32"/></g>
+  <text x="250" y="151" class="s">rank 1</text>
+  <g fill="#fff8c5" stroke="#d4a72c"><rect x="318" y="130" width="28" height="32"/><rect x="351" y="130" width="28" height="32"/><rect x="384" y="130" width="28" height="32"/><rect x="417" y="130" width="28" height="32"/><rect x="450" y="130" width="28" height="32"/><rect x="483" y="130" width="28" height="32"/><rect x="516" y="130" width="28" height="32"/><rect x="549" y="130" width="28" height="32"/></g>
+  <rect x="549" y="88" width="28" height="32" fill="#fff8c5" stroke="#bf8700" stroke-width="2.5"/>
   <!-- DIMM channel 1 -->
-  <rect x="240" y="190" width="330" height="80" rx="4" fill="#f6f8fa" stroke="#8c959f"/>
-  <text x="250" y="208" class="s">内存条(通道 1)· 和通道 0 同时各传各的</text>
-  <g fill="#fff8c5" stroke="#d4a72c">
-    <rect x="250" y="218" width="34" height="40"/><rect x="290" y="218" width="34" height="40"/>
-    <rect x="330" y="218" width="34" height="40"/><rect x="370" y="218" width="34" height="40"/>
-    <rect x="410" y="218" width="34" height="40"/><rect x="450" y="218" width="34" height="40"/>
-    <rect x="490" y="218" width="34" height="40"/><rect x="530" y="218" width="34" height="40"/>
-  </g>
-
-  <text x="240" y="296" class="s">每颗芯片一次出 8 位,8 颗并排 = 64 位 = 通道一拍的宽度;</text>
-  <text x="240" y="314" class="s">一条 64 B 缓存行 = 连续 8 拍,每颗芯片各出 8 字节。</text>
+  <rect x="240" y="192" width="345" height="78" rx="4" fill="#f6f8fa" stroke="#8c959f"/>
+  <text x="250" y="208" class="s">通道 1 上的内存条:1 个 rank</text>
+  <text x="250" y="243" class="s">rank 0</text>
+  <g fill="#fff8c5" stroke="#d4a72c"><rect x="318" y="222" width="28" height="32"/><rect x="351" y="222" width="28" height="32"/><rect x="384" y="222" width="28" height="32"/><rect x="417" y="222" width="28" height="32"/><rect x="450" y="222" width="28" height="32"/><rect x="483" y="222" width="28" height="32"/><rect x="516" y="222" width="28" height="32"/><rect x="549" y="222" width="28" height="32"/></g>
+  <text x="20" y="292" class="s">通道 = 一组独立的 64 位数据线;rank = 凑满 64 位的一组芯片(8 颗 × 8 位)。</text>
+  <text x="20" y="310" class="s">一个通道上可以挂好几个 rank(通道 0 有 2 个):共用这组线,同一时刻只有一个在传。</text>
+  <text x="20" y="328" class="s">不同通道才真正同时各传各的。一条 64 B 缓存行 = 8 拍,rank 里每颗芯片各出 8 字节。</text>
 
   <!-- zoom chip -->
-  <path d="M564,98 L640,80" class="zm"/>
-  <path d="M564,138 L640,250" class="zm"/>
+  <path d="M577,88 L640,80" class="zm"/>
+  <path d="M577,120 L640,250" class="zm"/>
   <rect x="640" y="70" width="440" height="180" rx="4" fill="#ffffff" stroke="#bf8700" stroke-width="1.5"/>
   <text x="652" y="90" class="t">一颗芯片:16 个 bank,各自能独立开行</text>
   <g fill="#f6f8fa" stroke="#8c959f">
