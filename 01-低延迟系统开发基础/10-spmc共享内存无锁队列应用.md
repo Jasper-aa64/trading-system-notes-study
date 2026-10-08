@@ -279,10 +279,9 @@ close(fd);                                                                     /
 
 ### 3. 行情怎么流:一个写者,四个队列,多个读者进程
 
-```
-交易所 API 回调线程 ──write──▶ 共享内存队列(每个 ≈ 64 MiB) ──read──▶ 读者进程 A:转发 MQTT
-  (OnRtnNGTSTick)                                            └──read──▶ 读者进程 B:写 CSV
-```
+- 交易所 API 回调线程（`OnRtnNGTSTick`）**写** → 共享内存队列（每个约 64 MiB）
+- 共享内存队列 **读** → 读者进程 A：转发 MQTT
+- 共享内存队列 **读** → 读者进程 B：写 CSV
 
 - **写者**([:120-137](../../trading-system-notes/chinese/01-low-latency/10-spmc共享内存无锁队列应用.md:120)):回调 `OnRtnNGTSTick` 里,`write()` 的 lambda 把交易所结构体的字段**一个一个**拷进块里(`strcpy` 拷代码、`TickTime * 10` 换成 `TradeTime` 等)。
 - **读者**([:140-171](../../trading-system-notes/chinese/01-low-latency/10-spmc共享内存无锁队列应用.md:140)、[:174-207](../../trading-system-notes/chinese/01-low-latency/10-spmc共享内存无锁队列应用.md:174)):各自 `shmmap` + `getReader()`,然后 `while (1) { read(); … }`——忙轮询。每个读者一个进程,各有各的私有游标,互不影响;重启一个不会碰到别的。
