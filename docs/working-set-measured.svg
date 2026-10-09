@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 550" width="1100" height="550" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<style>.h{font-size:19px;font-weight:700;fill:#1f2328}.ax{stroke:#57606a;stroke-width:1.2}.g{stroke:#d0d7de;stroke-width:1}.tk{font-size:12.5px;fill:#57606a}.lab{font-size:13.5px;fill:#1f2328}.cap{stroke:#9a6700;stroke-width:1.3;stroke-dasharray:5 4}.capt{font-size:12.5px;fill:#9a6700;font-weight:600}.cur{stroke:#0969da;stroke-width:2.5;fill:none}.pt{fill:#0969da}.ft{font-size:12px;fill:#57606a}</style>
+<rect x="0" y="0" width="1100" height="550" fill="#ffffff"/>
+<text class="h" x="90" y="36">实测：反复顺序求和一个 int 数组（AMD Ryzen 5 5600GT，一个核）</text>
+<line class="g" x1="90" y1="470.0" x2="1060" y2="470.0"/>
+<text class="tk" x="80" y="474.0" text-anchor="end">10</text>
+<line class="g" x1="90" y1="409.8" x2="1060" y2="409.8"/>
+<text class="tk" x="80" y="413.8" text-anchor="end">20</text>
+<line class="g" x1="90" y1="330.2" x2="1060" y2="330.2"/>
+<text class="tk" x="80" y="334.2" text-anchor="end">50</text>
+<line class="g" x1="90" y1="270.0" x2="1060" y2="270.0"/>
+<text class="tk" x="80" y="274.0" text-anchor="end">100</text>
+<line class="g" x1="90" y1="209.8" x2="1060" y2="209.8"/>
+<text class="tk" x="80" y="213.8" text-anchor="end">200</text>
+<line class="g" x1="90" y1="130.2" x2="1060" y2="130.2"/>
+<text class="tk" x="80" y="134.2" text-anchor="end">500</text>
+<line class="g" x1="90" y1="70.0" x2="1060" y2="70.0"/>
+<text class="tk" x="80" y="74.0" text-anchor="end">1000</text>
+<text class="tk" x="90.0" y="490" text-anchor="middle">4 KiB</text>
+<text class="tk" x="211.2" y="490" text-anchor="middle">16 KiB</text>
+<text class="tk" x="332.5" y="490" text-anchor="middle">64 KiB</text>
+<text class="tk" x="453.8" y="490" text-anchor="middle">256 KiB</text>
+<text class="tk" x="575.0" y="490" text-anchor="middle">1 MiB</text>
+<text class="tk" x="696.2" y="490" text-anchor="middle">4 MiB</text>
+<text class="tk" x="817.5" y="490" text-anchor="middle">16 MiB</text>
+<text class="tk" x="938.8" y="490" text-anchor="middle">64 MiB</text>
+<text class="tk" x="1060.0" y="490" text-anchor="middle">256 MiB</text>
+<line class="ax" x1="90" y1="470" x2="1060" y2="470"/><line class="ax" x1="90" y1="70" x2="90" y2="470"/>
+<line class="cap" x1="271.9" y1="80" x2="271.9" y2="470"/>
+<text class="capt" x="277.9" y="94">L1D 32 KiB</text>
+<line class="cap" x1="514.4" y1="80" x2="514.4" y2="470"/>
+<text class="capt" x="520.4" y="94">L2 512 KiB</text>
+<line class="cap" x1="817.5" y1="80" x2="817.5" y2="470"/>
+<text class="capt" x="823.5" y="94">L3 16 MiB</text>
+<path class="cur" d="M90.0,178.1 L107.3,179.4 L121.7,177.9 L135.8,184.8 L150.6,178.7 L166.8,184.5 L181.4,179.6 L196.4,179.2 L211.2,182.0 L226.9,181.2 L242.0,180.9 L257.0,180.5 L271.9,180.7 L287.2,236.9 L302.4,237.3 L317.4,237.5 L332.5,237.8 L347.7,237.9 L362.9,237.6 L378.1,237.6 L393.1,237.7 L408.3,237.6 L423.5,237.2 L438.6,237.2 L453.8,237.8 L468.9,240.0 L484.1,242.9 L499.2,248.0 L514.4,253.4 L529.5,255.6 L544.7,256.2 L559.8,256.5 L575.0,256.8 L590.2,256.1 L605.3,256.1 L620.5,256.6 L635.6,257.0 L650.8,256.3 L665.9,256.1 L681.1,258.3 L696.2,256.3 L711.4,256.2 L726.6,256.9 L741.7,256.4 L756.9,259.0 L772.0,266.5 L787.2,287.0 L802.3,311.4 L817.5,335.7 L832.7,342.9 L847.8,350.0 L863.0,359.6 L878.1,366.2 L893.3,371.7 L908.4,378.4 L923.6,378.5 L938.8,382.1 L953.9,382.8 L969.1,384.3 L984.2,385.4 L999.4,384.8 L1014.5,385.7 L1029.7,386.5 L1044.8,387.0 L1060.0,387.4"/>
+<circle class="pt" cx="90.0" cy="178.1" r="2.6"/>
+<circle class="pt" cx="107.3" cy="179.4" r="2.6"/>
+<circle class="pt" cx="121.7" cy="177.9" r="2.6"/>
+<circle class="pt" cx="135.8" cy="184.8" r="2.6"/>
+<circle class="pt" cx="150.6" cy="178.7" r="2.6"/>
+<circle class="pt" cx="166.8" cy="184.5" r="2.6"/>
+<circle class="pt" cx="181.4" cy="179.6" r="2.6"/>
+<circle class="pt" cx="196.4" cy="179.2" r="2.6"/>
+<circle class="pt" cx="211.2" cy="182.0" r="2.6"/>
+<circle class="pt" cx="226.9" cy="181.2" r="2.6"/>
+<circle class="pt" cx="242.0" cy="180.9" r="2.6"/>
+<circle class="pt" cx="257.0" cy="180.5" r="2.6"/>
+<circle class="pt" cx="271.9" cy="180.7" r="2.6"/>
+<circle class="pt" cx="287.2" cy="236.9" r="2.6"/>
+<circle class="pt" cx="302.4" cy="237.3" r="2.6"/>
+<circle class="pt" cx="317.4" cy="237.5" r="2.6"/>
+<circle class="pt" cx="332.5" cy="237.8" r="2.6"/>
+<circle class="pt" cx="347.7" cy="237.9" r="2.6"/>
+<circle class="pt" cx="362.9" cy="237.6" r="2.6"/>
+<circle class="pt" cx="378.1" cy="237.6" r="2.6"/>
+<circle class="pt" cx="393.1" cy="237.7" r="2.6"/>
+<circle class="pt" cx="408.3" cy="237.6" r="2.6"/>
+<circle class="pt" cx="423.5" cy="237.2" r="2.6"/>
+<circle class="pt" cx="438.6" cy="237.2" r="2.6"/>
+<circle class="pt" cx="453.8" cy="237.8" r="2.6"/>
+<circle class="pt" cx="468.9" cy="240.0" r="2.6"/>
+<circle class="pt" cx="484.1" cy="242.9" r="2.6"/>
+<circle class="pt" cx="499.2" cy="248.0" r="2.6"/>
+<circle class="pt" cx="514.4" cy="253.4" r="2.6"/>
+<circle class="pt" cx="529.5" cy="255.6" r="2.6"/>
+<circle class="pt" cx="544.7" cy="256.2" r="2.6"/>
+<circle class="pt" cx="559.8" cy="256.5" r="2.6"/>
+<circle class="pt" cx="575.0" cy="256.8" r="2.6"/>
+<circle class="pt" cx="590.2" cy="256.1" r="2.6"/>
+<circle class="pt" cx="605.3" cy="256.1" r="2.6"/>
+<circle class="pt" cx="620.5" cy="256.6" r="2.6"/>
+<circle class="pt" cx="635.6" cy="257.0" r="2.6"/>
+<circle class="pt" cx="650.8" cy="256.3" r="2.6"/>
+<circle class="pt" cx="665.9" cy="256.1" r="2.6"/>
+<circle class="pt" cx="681.1" cy="258.3" r="2.6"/>
+<circle class="pt" cx="696.2" cy="256.3" r="2.6"/>
+<circle class="pt" cx="711.4" cy="256.2" r="2.6"/>
+<circle class="pt" cx="726.6" cy="256.9" r="2.6"/>
+<circle class="pt" cx="741.7" cy="256.4" r="2.6"/>
+<circle class="pt" cx="756.9" cy="259.0" r="2.6"/>
+<circle class="pt" cx="772.0" cy="266.5" r="2.6"/>
+<circle class="pt" cx="787.2" cy="287.0" r="2.6"/>
+<circle class="pt" cx="802.3" cy="311.4" r="2.6"/>
+<circle class="pt" cx="817.5" cy="335.7" r="2.6"/>
+<circle class="pt" cx="832.7" cy="342.9" r="2.6"/>
+<circle class="pt" cx="847.8" cy="350.0" r="2.6"/>
+<circle class="pt" cx="863.0" cy="359.6" r="2.6"/>
+<circle class="pt" cx="878.1" cy="366.2" r="2.6"/>
+<circle class="pt" cx="893.3" cy="371.7" r="2.6"/>
+<circle class="pt" cx="908.4" cy="378.4" r="2.6"/>
+<circle class="pt" cx="923.6" cy="378.5" r="2.6"/>
+<circle class="pt" cx="938.8" cy="382.1" r="2.6"/>
+<circle class="pt" cx="953.9" cy="382.8" r="2.6"/>
+<circle class="pt" cx="969.1" cy="384.3" r="2.6"/>
+<circle class="pt" cx="984.2" cy="385.4" r="2.6"/>
+<circle class="pt" cx="999.4" cy="384.8" r="2.6"/>
+<circle class="pt" cx="1014.5" cy="385.7" r="2.6"/>
+<circle class="pt" cx="1029.7" cy="386.5" r="2.6"/>
+<circle class="pt" cx="1044.8" cy="387.0" r="2.6"/>
+<circle class="pt" cx="1060.0" cy="387.4" r="2.6"/>
+<text class="lab" x="575.0" y="516" text-anchor="middle">工作集大小（对数坐标）</text>
+<text class="lab" transform="translate(28,270.0) rotate(-90)" text-anchor="middle">一个核每秒读多少（GB/s，对数坐标）</text>
+<text class="ft" x="1060" y="536" text-anchor="end">每个大小测 5 次取最快；4 个向量累加器；测的是这段循环，不是硬件峰值。</text>
+</svg>
