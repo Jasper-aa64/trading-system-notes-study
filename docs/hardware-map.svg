@@ -142,7 +142,7 @@
   <text x="68" y="964" class="s">命中已打开的行 ~15 ns</text>
   <text x="68" y="983" class="s">换一行(行冲突) ~40 ns</text>
   <text x="68" y="1006" class="s">刷新:每 ~7.8 µs 一次,</text>
-  <text x="68" y="1024" class="s">卡几百 ns → P99 毛刺</text>
+  <text x="68" y="1024" class="s">卡 300–500 ns → P99 毛刺</text>
 
   <rect x="320" y="820" width="240" height="230" rx="8" class="mem"/>
   <text x="336" y="844" class="t">通道 1</text>
@@ -208,7 +208,7 @@
   <rect x="340" y="1484" width="840" height="46" fill="#f1f5f9"/>
   <line x1="340" y1="1484" x2="1180" y2="1484" stroke="#ffffff" stroke-width="3"/>
   <text x="480" y="1513" text-anchor="middle" style="font-size:15px;fill:#1f2328">~40–120 周期（~10–30 ns）</text>
-  <text x="750" y="1513" text-anchor="middle" style="font-size:15px;fill:#1f2328">十几到几百 MiB，全部核共享</text>
+  <text x="750" y="1513" text-anchor="middle" style="font-size:15px;fill:#1f2328">约 10–500 MiB，全部核共享</text>
   <text x="1030" y="1513" text-anchor="middle" style="font-size:15px;fill:#1f2328">硬件</text>
   <rect x="170" y="1490" width="150" height="34" rx="3" fill="#7f9db9" stroke="#5d7d9c"/>
   <text x="245" y="1512" text-anchor="middle" style="font-size:13px;fill:#ffffff">L3 缓存</text>
@@ -217,7 +217,7 @@
   <rect x="340" y="1530" width="840" height="46" fill="#e3ebf3"/>
   <line x1="340" y1="1530" x2="1180" y2="1530" stroke="#ffffff" stroke-width="3"/>
   <text x="480" y="1559" text-anchor="middle" style="font-size:15px;fill:#1f2328">~300–500 周期（~70–120 ns）</text>
-  <text x="750" y="1559" text-anchor="middle" style="font-size:15px;fill:#1f2328">几十 GB 到几 TB</text>
+  <text x="750" y="1559" text-anchor="middle" style="font-size:15px;fill:#1f2328">约 16 GB 到 4 TB</text>
   <text x="1030" y="1559" text-anchor="middle" style="font-size:15px;fill:#1f2328">操作系统(页表)</text>
   <rect x="170" y="1536" width="150" height="34" rx="3" fill="#7f9db9" stroke="#5d7d9c"/>
   <text x="245" y="1558" text-anchor="middle" style="font-size:13px;fill:#ffffff">本地内存</text>
