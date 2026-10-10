@@ -81,7 +81,7 @@
 - 每个源主题一份 `.md`(如 `01-低延迟系统开发基础/10-spmc共享内存无锁队列应用.md`),内部按"轮 N"累积;检验题作答后写"附 N";用户追问的补充写〔补〕;末尾有"与其他主题的连接"。
 - 验证程序放在笔记旁(`NN-*-check.cpp/py`),内嵌的源码逐字来自源笔记(标行号);引用前先编译/运行过;数字写明机器与配置。带 `windows.h` 的程序只能在 Windows 上跑。
   `mmap` / `shm_open` / `memfd_create` 是 POSIX-only,在 Windows 上只能用桩声明做语法检查——笔记里要写"未验证"。
-- [硬件地图.md](硬件地图.md)（图在 `docs/hardware-map.svg`）把讲过的硬件层画在一张图上，每个框标“哪节讲过”。讲完一个涉及新硬件层的轮次，顺手在图上补标注（2026-10-02 用户要的：“之后理解的时候对着图看”）。博客速查页同步：新硬件层补到博客 `static/images/ref/hardware-map.{zh,en}.svg` 的标注，新数字按“帮助理解的范围”补进 `content/ref/cpu-memory(.zh).md` 第 2 部分（不标来源），改 `lastmod`。
+- [硬件地图.md](硬件地图.md)（图在 `docs/hardware-map.svg`）把讲过的硬件层画在一张图上，每个框标“哪节讲过”。讲完一个涉及新硬件层的轮次，顺手在图上补标注（2026-10-02 用户要的：“之后理解的时候对着图看”）。博客速查页同步：新硬件层补到博客的硬件地图。这张图由 `tools/draw_hardware_map.py` 生成（`--out-dir <博客>/static/images/ref --page-dir <博客>/static/maps`），改脚本里的文字再重新生成，不手改 SVG。脚本同时出静态图 `static/images/ref/hardware-map.{zh,en}.svg` 和交互版 `static/maps/hardware-map.{zh,en}.html`（点框看说明，按 load / store / 分支猜错 / 指令来源逐步高亮，蓝字链到文章；`#load` 这类 hash 直接打开对应路径）。新讲的文章要在脚本的 `POSTS` 里登记 slug，路径说明在 `UI[...]["tours"]` 里。**文中提到“硬件地图”就链到交互版、新窗口打开**（2026-10-10 用户要求，先说链 SVG，随后改成要可交互的版本）：`<a href="/maps/hardware-map.zh.html" target="_blank" rel="noopener">硬件地图</a>`，英文版链 `.en.html`。不再链 `/zh/ref/cpu-memory/#map`。新数字按“帮助理解的范围”补进 `content/ref/cpu-memory(.zh).md` 第 2 部分（不标来源），改 `lastmod`。
 - [进度追踪.md](进度追踪.md) 是状态的**唯一真源**:顶部"当前进度"和"下一步"、状态列(⬜🔄✅📖)、"回炉点堆栈"(面试前过一遍)、底部更新日志(一次一行,日期打头)。每轮结束同步改。
 - 本仓库只放学习材料(笔记、验证程序、追踪表、工具);上游文本和编译产物不进来(`.gitignore` 已挡编译产物)。每次提交前先 `git status`。
 
