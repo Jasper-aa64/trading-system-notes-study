@@ -6,6 +6,7 @@
   pipeline-flush   流水线时间线：猜对 vs 猜错（错误路径作废、执行级空出几个周期）
   two-bit-counter  2 位饱和计数器的 4 个状态，加一个循环的例子
   sorted-strip     不排序 vs 排序后，这条 if 的方向和 2 位计数器猜错的位置（按计数器真的模拟出来）
+  cmov-chain       轮 2：even_sum 每个元素的依赖链，猜对的分支 1 个周期 vs cmov 2 个周期
 --note-dir 给了就把中文版也写一份到那里（学习仓库的笔记用）。只用标准库。
 """
 import argparse
@@ -221,12 +222,65 @@ def strip(lang):
     return svg(lang, W, 290, o)
 
 
+# ---------------------------------------------------------------- 4. 依赖链：分支 vs cmov（轮 2）
+CHAIN = {
+    "zh": dict(title="even_sum 的循环里，sum 每次都要等上一次的结果：这条链有多长，每个元素就要多久",
+               a="保留分支，猜对了：链上只有 add",
+               a_off="load、and、je 不在链上：方向已经猜好，CPU 先往下走，条件晚点算出来再核对",
+               b="cmov：链上是 add + cmove",
+               b_off="cmove 要等 and 算出条件、add 算出 sum + x，才能决定新的 sum；下一个元素的 add 又要等它",
+               el="第 {i} 个", cycle="周期",
+               note="实测（1.5 节）：猜对时约 0.25 ns/个，约 1 个周期；cmov 约 0.44 ns/个，约 2 个周期，和数据有没有规律无关。"),
+    "en": dict(title="In the even_sum loop, sum always waits for the previous result: the length of this chain is the time per element",
+               a="Branch kept, predicted right: only add is on the chain",
+               a_off="load, and, je are off the chain: the direction is already guessed, the CPU runs ahead and checks the condition later",
+               b="cmov: add + cmove are on the chain",
+               b_off="cmove needs the condition from and and sum + x from add before it can produce the new sum; the next element's add waits for it",
+               el="elem {i}", cycle="cycle",
+               note="Measured (Section 1.5): predicted right, about 0.25 ns per element, about 1 cycle; cmov about 0.44 ns, about 2 cycles, whatever the data looks like."),
+}
+
+
+def chain(lang):
+    t = CHAIN[lang]
+    W, L, CW, NC = 1100, 60, 110, 8
+    o = [text(20, 34, t["title"], "t")]
+    # 周期刻度
+    for k in range(NC + 1):
+        x = L + k * CW
+        o.append(f'<line x1="{x}" y1="62" x2="{x}" y2="372" stroke="#eaeef2"/>')
+        if k < NC:
+            o.append(text(x + CW / 2, 66, f'{t["cycle"]} {k + 1}', "k", "middle"))
+
+    def panel(y, cap, off, ops, per):
+        o.append(text(L, y, cap, "t"))
+        boxes = []
+        for k, op in enumerate(ops):
+            x = L + k * CW
+            red = op == "cmove"
+            o.append(f'<rect x="{x + 8}" y="{y + 16}" width="{CW - 16}" height="40" rx="6" fill="{"#fff1c2" if red else "#ddf4ff"}" stroke="{"#d4a72c" if red else "#54aeff"}" stroke-width="1.6"/>')
+            o.append(text(x + CW / 2, y + 41, op, "c", "middle"))
+            boxes.append(x)
+        for x in boxes[:-1]:
+            o.append(f'<line x1="{x + CW - 8}" y1="{y + 36}" x2="{x + CW + 8}" y2="{y + 36}" stroke="#57606a" stroke-width="1.6" marker-end="url(#a)"/>')
+        for i in range(len(ops) // per):
+            x0, x1 = L + i * per * CW + 10, L + (i + 1) * per * CW - 10
+            o.append(f'<path d="M{x0},{y + 64} v6 H{x1} v-6" fill="none" stroke="#8c959f"/>')
+            o.append(text((x0 + x1) / 2, y + 86, t["el"].format(i=i + 1), "k", "middle"))
+        o.append(text(L, y + 112, off, "s"))
+
+    panel(100, t["a"], t["a_off"], ["add"] * NC, 1)
+    panel(250, t["b"], t["b_off"], ["add", "cmove"] * (NC // 2), 2)
+    o.append(text(L, 400, t["note"], "s"))
+    return svg(lang, W, 420, o)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--note-dir")
     a = ap.parse_args()
-    figs = {"pipeline-flush": pipeline, "two-bit-counter": counter, "sorted-strip": strip}
+    figs = {"pipeline-flush": pipeline, "two-bit-counter": counter, "sorted-strip": strip, "cmov-chain": chain}
     os.makedirs(a.out_dir, exist_ok=True)
     for name, fn in figs.items():
         for lang in ("zh", "en"):
