@@ -7,6 +7,7 @@
   two-bit-counter  2 位饱和计数器的 4 个状态，加一个循环的例子
   sorted-strip     不排序 vs 排序后，这条 if 的方向和 2 位计数器猜错的位置（按计数器真的模拟出来）
   cmov-chain       轮 2：even_sum 每个元素的依赖链，猜对的分支 1 个周期 vs cmov 2 个周期
+  hint-layout      轮 3：UNLIKELY 写对 vs LIKELY 写反时 process() 的机器码怎么排（GCC 13 -O2 真实输出）
   bsearch-timeline 轮 2：大数组二分查找最后 6 层的读，cmov 排队 vs 分支猜着先读 vs cmov + 预取两个候选（模型，不是实测）
 --note-dir 给了就把中文版也写一份到那里（学习仓库的笔记用）。只用标准库。
 """
@@ -327,12 +328,67 @@ def bsearch(lang):
     return svg(lang, W, 512, o)
 
 
+# ---------------------------------------------------------------- 6. 提示改的是布局（轮 3）
+HL = {
+    "zh": dict(title="同一个 process()，提示不同，GCC -O2 排出来的机器码（地址从上往下增大，省略了栈调整）",
+               cols=["if (UNLIKELY(n <= 0))：提示对", "if (LIKELY(n <= 0))：提示写反"],
+               hot="热路径", err="错误路径",
+               rare="很少跳", always="每次都跳",
+               fall="热路径顺着往下走，不用跳", jump="热路径每次都要跳过错误处理",
+               note="两种排法预测器都猜得准：它看的是这条跳转的历史，不看提示。差别在热路径要不要跳：顺着走时取指不断，热代码挤在一起，占的缓存行少。"),
+    "en": dict(title="The same process(), two different hints: the machine code GCC -O2 lays out (addresses grow downward; stack adjustments omitted)",
+               cols=["if (UNLIKELY(n <= 0)): hint right", "if (LIKELY(n <= 0)): hint backwards"],
+               hot="hot path", err="error path",
+               rare="rarely taken", always="taken every time",
+               fall="the hot path falls straight through", jump="the hot path jumps over the error code every time",
+               note="The predictor guesses both layouts well: it uses this jump's history, not the hint. The difference is whether the hot path jumps: falling through keeps fetch going and packs the hot code into fewer cache lines."),
+}
+
+
+def hint_layout(lang):
+    t = HL[lang]
+    W = 1200
+    o = [text(20, 34, t["title"], "t")]
+    good = [("test %esi, %esi", None), ("jle .L9", "j"),
+            ("movslq %esi, %rsi", "h"), ("movl (%rdi), %eax", "h"), ("addl -4(%rdi,%rsi,4), %eax", "h"), ("ret", "h"),
+            (".L9:  call report_error", "e"), ("movl $-1, %eax", "e"), ("ret", "e")]
+    bad = [("test %esi, %esi", None), ("jg .L11", "j"),
+           ("call report_error", "e"), ("movl $-1, %eax", "e"), ("ret", "e"),
+           (".L11:  movslq %esi, %rsi", "h"), ("movl (%rdx), %eax", "h"), ("addl -4(%rdx,%rsi,4), %eax", "h"), ("ret", "h")]
+    RH, Y0 = 30, 96
+    for c, (rows, cap, lab, kind) in enumerate([(good, t["cols"][0], t["rare"], "dash"), (bad, t["cols"][1], t["always"], "solid")]):
+        x = 60 + c * 530
+        o.append(text(x, 72, cap, "t", extra=' style="font-family:monospace"' if False else ""))
+        for i, (ins, k) in enumerate(rows):
+            y = Y0 + i * RH
+            fill, st = {"h": ("#ddf4ff", "#54aeff"), "e": ("#f6f8fa", "#afb8c1"), "j": ("#fff1c2", "#d4a72c"), None: ("#ffffff", "#d0d7de")}[k]
+            o.append(f'<rect x="{x}" y="{y}" width="300" height="{RH - 4}" rx="4" fill="{fill}" stroke="{st}"/>')
+            o.append(f'<text x="{x + 10}" y="{y + 18}" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">{escape(ins)}</text>')
+        # 段落标签
+        hs = [i for i, (_, k) in enumerate(rows) if k == "h"]
+        es = [i for i, (_, k) in enumerate(rows) if k == "e"]
+        for idxs, name, col in ((hs, t["hot"], "#0969da"), (es, t["err"], "#57606a")):
+            y0, y1 = Y0 + idxs[0] * RH, Y0 + idxs[-1] * RH + RH - 4
+            o.append(f'<path d="M{x + 308},{y0} h6 V{y1} h-6" fill="none" stroke="{col}"/>')
+            o.append(text(x + 320, (y0 + y1) / 2 + 5, name, "s", extra=f' style="fill:{col}"'))
+        # 跳转箭头：从 j 行到目标行，走左边
+        tgt = 6 if c == 0 else 5
+        yj, yt = Y0 + RH + RH / 2 - 2, Y0 + tgt * RH + RH / 2 - 2
+        dash = ' stroke-dasharray="5 4"' if kind == "dash" else ""
+        col = "#8c959f" if kind == "dash" else "#cf222e"
+        o.append(f'<path d="M{x},{yj} h-28 V{yt} h24" fill="none" stroke="{col}" stroke-width="2"{dash} marker-end="url(#a)"/>')
+        o.append(text(x - 34, (yj + yt) / 2, lab, "k", "end" if False else None, f' transform="rotate(-90 {x - 36} {(yj + yt) / 2})" text-anchor="middle" style="fill:{col}"'))
+        o.append(text(x, Y0 + 9 * RH + 22, t["fall"] if c == 0 else t["jump"], "s", extra=f' style="fill:{"#0969da" if c == 0 else "#cf222e"}"'))
+    o.append(text(20, Y0 + 9 * RH + 62, t["note"], "s"))
+    return svg(lang, W, Y0 + 9 * RH + 84, o)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--note-dir")
     a = ap.parse_args()
-    figs = {"pipeline-flush": pipeline, "two-bit-counter": counter, "sorted-strip": strip, "cmov-chain": chain, "bsearch-timeline": bsearch}
+    figs = {"pipeline-flush": pipeline, "two-bit-counter": counter, "sorted-strip": strip, "cmov-chain": chain, "bsearch-timeline": bsearch, "hint-layout": hint_layout}
     os.makedirs(a.out_dir, exist_ok=True)
     for name, fn in figs.items():
         for lang in ("zh", "en"):

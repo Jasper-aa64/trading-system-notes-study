@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#eaeef2"/><line x1="0" y1="0" x2="0" y2="8" stroke="#afb8c1" stroke-width="3"/></pattern><style>.h{font-size:19px;font-weight:700;fill:#1f2328}.t{font-size:14px;font-weight:600;fill:#1f2328}.s{font-size:13px;fill:#57606a}.c{font-size:13px;font-weight:600;fill:#1f2328}.red{fill:#cf222e}.k{font-size:12px;fill:#57606a}</style></defs>
+<rect x="0" y="0" width="1200" height="450" fill="#ffffff"/>
+<text x="20" y="34" class="t">同一个 process()，提示不同，GCC -O2 排出来的机器码（地址从上往下增大，省略了栈调整）</text>
+<text x="60" y="72" class="t">if (UNLIKELY(n &lt;= 0))：提示对</text>
+<rect x="60" y="96" width="300" height="26" rx="4" fill="#ffffff" stroke="#d0d7de"/>
+<text x="70" y="114" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">test %esi, %esi</text>
+<rect x="60" y="126" width="300" height="26" rx="4" fill="#fff1c2" stroke="#d4a72c"/>
+<text x="70" y="144" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">jle .L9</text>
+<rect x="60" y="156" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="70" y="174" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">movslq %esi, %rsi</text>
+<rect x="60" y="186" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="70" y="204" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">movl (%rdi), %eax</text>
+<rect x="60" y="216" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="70" y="234" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">addl -4(%rdi,%rsi,4), %eax</text>
+<rect x="60" y="246" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="70" y="264" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">ret</text>
+<rect x="60" y="276" width="300" height="26" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="70" y="294" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">.L9:  call report_error</text>
+<rect x="60" y="306" width="300" height="26" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="70" y="324" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">movl $-1, %eax</text>
+<rect x="60" y="336" width="300" height="26" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="70" y="354" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">ret</text>
+<path d="M368,156 h6 V272 h-6" fill="none" stroke="#0969da"/>
+<text x="380" y="219.0" class="s" style="fill:#0969da">热路径</text>
+<path d="M368,276 h6 V362 h-6" fill="none" stroke="#57606a"/>
+<text x="380" y="324.0" class="s" style="fill:#57606a">错误路径</text>
+<path d="M60,139.0 h-28 V289.0 h24" fill="none" stroke="#8c959f" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a)"/>
+<text x="26" y="214.0" class="k" transform="rotate(-90 24 214.0)" text-anchor="middle" style="fill:#8c959f">很少跳</text>
+<text x="60" y="388" class="s" style="fill:#0969da">热路径顺着往下走，不用跳</text>
+<text x="590" y="72" class="t">if (LIKELY(n &lt;= 0))：提示写反</text>
+<rect x="590" y="96" width="300" height="26" rx="4" fill="#ffffff" stroke="#d0d7de"/>
+<text x="600" y="114" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">test %esi, %esi</text>
+<rect x="590" y="126" width="300" height="26" rx="4" fill="#fff1c2" stroke="#d4a72c"/>
+<text x="600" y="144" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">jg .L11</text>
+<rect x="590" y="156" width="300" height="26" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="600" y="174" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">call report_error</text>
+<rect x="590" y="186" width="300" height="26" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="600" y="204" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">movl $-1, %eax</text>
+<rect x="590" y="216" width="300" height="26" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="600" y="234" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">ret</text>
+<rect x="590" y="246" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="600" y="264" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">.L11:  movslq %esi, %rsi</text>
+<rect x="590" y="276" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="600" y="294" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">movl (%rdx), %eax</text>
+<rect x="590" y="306" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="600" y="324" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">addl -4(%rdx,%rsi,4), %eax</text>
+<rect x="590" y="336" width="300" height="26" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="600" y="354" class="c" style="font-family:Menlo,Consolas,monospace;font-weight:400">ret</text>
+<path d="M898,246 h6 V362 h-6" fill="none" stroke="#0969da"/>
+<text x="910" y="309.0" class="s" style="fill:#0969da">热路径</text>
+<path d="M898,156 h6 V242 h-6" fill="none" stroke="#57606a"/>
+<text x="910" y="204.0" class="s" style="fill:#57606a">错误路径</text>
+<path d="M590,139.0 h-28 V259.0 h24" fill="none" stroke="#cf222e" stroke-width="2" marker-end="url(#a)"/>
+<text x="556" y="199.0" class="k" transform="rotate(-90 554 199.0)" text-anchor="middle" style="fill:#cf222e">每次都跳</text>
+<text x="590" y="388" class="s" style="fill:#cf222e">热路径每次都要跳过错误处理</text>
+<text x="20" y="428" class="s">两种排法预测器都猜得准：它看的是这条跳转的历史，不看提示。差别在热路径要不要跳：顺着走时取指不断，热代码挤在一起，占的缓存行少。</text>
+</svg>
