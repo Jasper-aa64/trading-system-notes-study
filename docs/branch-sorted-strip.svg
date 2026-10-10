@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 290" width="1180" height="290" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#eaeef2"/><line x1="0" y1="0" x2="0" y2="8" stroke="#afb8c1" stroke-width="3"/></pattern><style>.h{font-size:19px;font-weight:700;fill:#1f2328}.t{font-size:14px;font-weight:600;fill:#1f2328}.s{font-size:13px;fill:#57606a}.c{font-size:13px;font-weight:600;fill:#1f2328}.red{fill:#cf222e}.k{font-size:12px;fill:#57606a}</style></defs>
+<rect x="0" y="0" width="1180" height="290" fill="#ffffff"/>
+<text x="20" y="34" class="t">if (data[c] % 2 == 0)：格子里是 data[c]，蓝 = 偶数（条件成立），灰 = 奇数；红框 = 2 位计数器猜错</text>
+<text x="40" y="80" class="t">不排序：奇偶随机，方向没有规律</text>
+<rect x="42" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="63.0" y="118" class="c" text-anchor="middle">82</text>
+<rect x="88" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="109.0" y="118" class="c" text-anchor="middle">38</text>
+<rect x="134" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="155.0" y="118" class="c" text-anchor="middle">101</text>
+<rect x="132" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="180" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="201.0" y="118" class="c" text-anchor="middle">166</text>
+<rect x="226" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="247.0" y="118" class="c" text-anchor="middle">12</text>
+<rect x="272" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="293.0" y="118" class="c" text-anchor="middle">18</text>
+<rect x="318" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="339.0" y="118" class="c" text-anchor="middle">137</text>
+<rect x="316" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="364" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="385.0" y="118" class="c" text-anchor="middle">24</text>
+<rect x="410" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="431.0" y="118" class="c" text-anchor="middle">93</text>
+<rect x="408" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="456" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="477.0" y="118" class="c" text-anchor="middle">149</text>
+<rect x="454" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="502" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="523.0" y="118" class="c" text-anchor="middle">14</text>
+<rect x="500" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="548" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="569.0" y="118" class="c" text-anchor="middle">129</text>
+<rect x="546" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="594" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="615.0" y="118" class="c" text-anchor="middle">54</text>
+<rect x="592" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="640" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="661.0" y="118" class="c" text-anchor="middle">9</text>
+<rect x="638" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="686" y="94" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="707.0" y="118" class="c" text-anchor="middle">22</text>
+<rect x="684" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="732" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="753.0" y="118" class="c" text-anchor="middle">111</text>
+<rect x="730" y="92" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="778" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="799.0" y="118" class="c" text-anchor="middle">107</text>
+<rect x="824" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="845.0" y="118" class="c" text-anchor="middle">17</text>
+<rect x="870" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="891.0" y="118" class="c" text-anchor="middle">61</text>
+<rect x="916" y="94" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="937.0" y="118" class="c" text-anchor="middle">23</text>
+<text x="974" y="118" class="c" style="fill:#cf222e">这 20 个里猜错 10 个</text>
+<text x="40" y="170" class="t">排序后：一段偶数接一段奇数（这里是 36、37 的交界）</text>
+<rect x="42" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="63.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="88" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="109.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="134" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="155.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="180" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="201.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="226" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="247.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="272" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="293.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="318" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="339.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="364" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="385.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="410" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="431.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="456" y="184" width="42" height="38" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="477.0" y="208" class="c" text-anchor="middle">36</text>
+<rect x="502" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="523.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="500" y="182" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="548" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="569.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="546" y="182" width="46" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>
+<rect x="594" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="615.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="640" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="661.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="686" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="707.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="732" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="753.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="778" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="799.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="824" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="845.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="870" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="891.0" y="208" class="c" text-anchor="middle">37</text>
+<rect x="916" y="184" width="42" height="38" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="937.0" y="208" class="c" text-anchor="middle">37</text>
+<text x="974" y="208" class="c" style="fill:#cf222e">这 20 个里猜错 2 个</text>
+<text x="40" y="268" class="s">排序后每个值约 82 个、一共 200 段，只在段与段的交界处猜错 1–2 次；一遍 16384 次里错约 200–400 次，约 1%–2%。</text>
+</svg>

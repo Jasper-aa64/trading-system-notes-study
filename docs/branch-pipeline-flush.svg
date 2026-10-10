@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 660" width="1260" height="660" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#eaeef2"/><line x1="0" y1="0" x2="0" y2="8" stroke="#afb8c1" stroke-width="3"/></pattern><style>.h{font-size:19px;font-weight:700;fill:#1f2328}.t{font-size:14px;font-weight:600;fill:#1f2328}.s{font-size:13px;fill:#57606a}.c{font-size:13px;font-weight:600;fill:#1f2328}.red{fill:#cf222e}.k{font-size:12px;fill:#57606a}</style></defs>
+<rect x="0" y="0" width="1260" height="660" fill="#ffffff"/>
+<text x="20" y="34" class="h">流水线：每格 = 一条指令在这个周期所在的级</text>
+<text x="20" y="80" class="t">猜对：分支 B 后面的指令一个接一个进来，执行级每个周期都有活</text>
+<text x="118" y="106" class="k" text-anchor="end">周期</text>
+<text x="174.0" y="106" class="k" text-anchor="middle">1</text>
+<text x="262.0" y="106" class="k" text-anchor="middle">2</text>
+<text x="350.0" y="106" class="k" text-anchor="middle">3</text>
+<text x="438.0" y="106" class="k" text-anchor="middle">4</text>
+<text x="526.0" y="106" class="k" text-anchor="middle">5</text>
+<text x="614.0" y="106" class="k" text-anchor="middle">6</text>
+<text x="702.0" y="106" class="k" text-anchor="middle">7</text>
+<text x="790.0" y="106" class="k" text-anchor="middle">8</text>
+<text x="878.0" y="106" class="k" text-anchor="middle">9</text>
+<text x="966.0" y="106" class="k" text-anchor="middle">10</text>
+<text x="118" y="144" class="c" text-anchor="end">取指</text>
+<rect x="133" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="118" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<text x="118" y="190" class="c" text-anchor="end">译码</text>
+<rect x="133" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="164" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<text x="118" y="236" class="c" text-anchor="end">执行</text>
+<rect x="133" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="210" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<text x="118" y="282" class="c" text-anchor="end">退休</text>
+<rect x="133" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="256" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="133" y="118" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="174.0" y="144" class="c" text-anchor="middle">I1</text>
+<rect x="221" y="164" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="262.0" y="190" class="c" text-anchor="middle">I1</text>
+<rect x="309" y="210" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="350.0" y="236" class="c" text-anchor="middle">I1</text>
+<rect x="397" y="256" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="438.0" y="282" class="c" text-anchor="middle">I1</text>
+<rect x="221" y="118" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="262.0" y="144" class="c" text-anchor="middle">I2</text>
+<rect x="309" y="164" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="350.0" y="190" class="c" text-anchor="middle">I2</text>
+<rect x="397" y="210" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="438.0" y="236" class="c" text-anchor="middle">I2</text>
+<rect x="485" y="256" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="526.0" y="282" class="c" text-anchor="middle">I2</text>
+<rect x="309" y="118" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="350.0" y="144" class="c" text-anchor="middle">B</text>
+<rect x="397" y="164" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="438.0" y="190" class="c" text-anchor="middle">B</text>
+<rect x="485" y="210" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="526.0" y="236" class="c" text-anchor="middle">B</text>
+<rect x="573" y="256" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="614.0" y="282" class="c" text-anchor="middle">B</text>
+<rect x="397" y="118" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="438.0" y="144" class="c" text-anchor="middle">I3</text>
+<rect x="485" y="164" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="526.0" y="190" class="c" text-anchor="middle">I3</text>
+<rect x="573" y="210" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="614.0" y="236" class="c" text-anchor="middle">I3</text>
+<rect x="661" y="256" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="702.0" y="282" class="c" text-anchor="middle">I3</text>
+<rect x="485" y="118" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="526.0" y="144" class="c" text-anchor="middle">I4</text>
+<rect x="573" y="164" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="614.0" y="190" class="c" text-anchor="middle">I4</text>
+<rect x="661" y="210" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="702.0" y="236" class="c" text-anchor="middle">I4</text>
+<rect x="749" y="256" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="790.0" y="282" class="c" text-anchor="middle">I4</text>
+<rect x="573" y="118" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="614.0" y="144" class="c" text-anchor="middle">I5</text>
+<rect x="661" y="164" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="702.0" y="190" class="c" text-anchor="middle">I5</text>
+<rect x="749" y="210" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="790.0" y="236" class="c" text-anchor="middle">I5</text>
+<rect x="837" y="256" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="878.0" y="282" class="c" text-anchor="middle">I5</text>
+<rect x="661" y="118" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="702.0" y="144" class="c" text-anchor="middle">I6</text>
+<rect x="749" y="164" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="790.0" y="190" class="c" text-anchor="middle">I6</text>
+<rect x="837" y="210" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="878.0" y="236" class="c" text-anchor="middle">I6</text>
+<rect x="925" y="256" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="966.0" y="282" class="c" text-anchor="middle">I6</text>
+<rect x="749" y="118" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="790.0" y="144" class="c" text-anchor="middle">I7</text>
+<rect x="837" y="164" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="878.0" y="190" class="c" text-anchor="middle">I7</text>
+<rect x="925" y="210" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="966.0" y="236" class="c" text-anchor="middle">I7</text>
+<text x="20" y="352" class="t">猜错：B 在第 5 周期执行时发现猜错，W1、W2 作废，从第 6 周期起重新取 I3</text>
+<text x="118" y="378" class="k" text-anchor="end">周期</text>
+<text x="174.0" y="378" class="k" text-anchor="middle">1</text>
+<text x="262.0" y="378" class="k" text-anchor="middle">2</text>
+<text x="350.0" y="378" class="k" text-anchor="middle">3</text>
+<text x="438.0" y="378" class="k" text-anchor="middle">4</text>
+<text x="526.0" y="378" class="k" text-anchor="middle">5</text>
+<text x="614.0" y="378" class="k" text-anchor="middle">6</text>
+<text x="702.0" y="378" class="k" text-anchor="middle">7</text>
+<text x="790.0" y="378" class="k" text-anchor="middle">8</text>
+<text x="878.0" y="378" class="k" text-anchor="middle">9</text>
+<text x="966.0" y="378" class="k" text-anchor="middle">10</text>
+<text x="118" y="416" class="c" text-anchor="end">取指</text>
+<rect x="133" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="390" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<text x="118" y="462" class="c" text-anchor="end">译码</text>
+<rect x="133" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="436" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<text x="118" y="508" class="c" text-anchor="end">执行</text>
+<rect x="133" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="482" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<text x="118" y="554" class="c" text-anchor="end">退休</text>
+<rect x="133" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="221" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="309" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="397" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="485" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="573" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="661" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="749" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="837" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="925" y="528" width="82" height="40" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>
+<rect x="133" y="390" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="174.0" y="416" class="c" text-anchor="middle">I1</text>
+<rect x="221" y="436" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="262.0" y="462" class="c" text-anchor="middle">I1</text>
+<rect x="309" y="482" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="350.0" y="508" class="c" text-anchor="middle">I1</text>
+<rect x="397" y="528" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="438.0" y="554" class="c" text-anchor="middle">I1</text>
+<rect x="221" y="390" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="262.0" y="416" class="c" text-anchor="middle">I2</text>
+<rect x="309" y="436" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="350.0" y="462" class="c" text-anchor="middle">I2</text>
+<rect x="397" y="482" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="438.0" y="508" class="c" text-anchor="middle">I2</text>
+<rect x="485" y="528" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="526.0" y="554" class="c" text-anchor="middle">I2</text>
+<rect x="309" y="390" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="350.0" y="416" class="c" text-anchor="middle">B</text>
+<rect x="397" y="436" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="438.0" y="462" class="c" text-anchor="middle">B</text>
+<rect x="485" y="482" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="526.0" y="508" class="c" text-anchor="middle">B</text>
+<rect x="573" y="528" width="82" height="40" rx="4" fill="#fff1c2" stroke="#d4a72c" stroke-width="1.3"/>
+<text x="614.0" y="554" class="c" text-anchor="middle">B</text>
+<rect x="397" y="390" width="82" height="40" rx="4" fill="url(#hatch)" stroke="#8c959f" stroke-width="1.3"/>
+<text x="438.0" y="416" class="c" text-anchor="middle">W1</text>
+<path d="M405,396 L471,424 M471,396 L405,424" stroke="#cf222e" stroke-width="2"/>
+<rect x="485" y="436" width="82" height="40" rx="4" fill="url(#hatch)" stroke="#8c959f" stroke-width="1.3"/>
+<text x="526.0" y="462" class="c" text-anchor="middle">W1</text>
+<path d="M493,442 L559,470 M559,442 L493,470" stroke="#cf222e" stroke-width="2"/>
+<rect x="485" y="390" width="82" height="40" rx="4" fill="url(#hatch)" stroke="#8c959f" stroke-width="1.3"/>
+<text x="526.0" y="416" class="c" text-anchor="middle">W2</text>
+<path d="M493,396 L559,424 M559,396 L493,424" stroke="#cf222e" stroke-width="2"/>
+<rect x="573" y="390" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="614.0" y="416" class="c" text-anchor="middle">I3</text>
+<rect x="661" y="436" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="702.0" y="462" class="c" text-anchor="middle">I3</text>
+<rect x="749" y="482" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="790.0" y="508" class="c" text-anchor="middle">I3</text>
+<rect x="837" y="528" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="878.0" y="554" class="c" text-anchor="middle">I3</text>
+<rect x="661" y="390" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="702.0" y="416" class="c" text-anchor="middle">I4</text>
+<rect x="749" y="436" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="790.0" y="462" class="c" text-anchor="middle">I4</text>
+<rect x="837" y="482" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="878.0" y="508" class="c" text-anchor="middle">I4</text>
+<rect x="925" y="528" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="966.0" y="554" class="c" text-anchor="middle">I4</text>
+<rect x="749" y="390" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="790.0" y="416" class="c" text-anchor="middle">I5</text>
+<rect x="837" y="436" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="878.0" y="462" class="c" text-anchor="middle">I5</text>
+<rect x="925" y="482" width="82" height="40" rx="4" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.3"/>
+<text x="966.0" y="508" class="c" text-anchor="middle">I5</text>
+<rect x="571" y="480" width="174" height="44" rx="6" fill="none" stroke="#cf222e" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="1024" y="508" class="c" style="fill:#cf222e">执行级空了 2 个周期</text>
+<rect x="20" y="596" width="28" height="18" rx="3" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="56" y="610" class="s">普通指令</text>
+<rect x="136" y="596" width="28" height="18" rx="3" fill="#fff1c2" stroke="#d4a72c"/>
+<text x="172" y="610" class="s">分支 B</text>
+<rect x="252" y="596" width="28" height="18" rx="3" fill="url(#hatch)" stroke="#8c959f"/>
+<text x="288" y="610" class="s">猜错路径上的指令（作废）</text>
+<text x="20" y="640" class="s">这里只画了 4 级，所以只空出 2 个周期。真实 CPU 从取指到执行有 15–20 级，猜错一次空出约 15–20 个周期。</text>
+</svg>

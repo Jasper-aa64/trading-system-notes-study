@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 515" width="1000" height="515" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#eaeef2"/><line x1="0" y1="0" x2="0" y2="8" stroke="#afb8c1" stroke-width="3"/></pattern><style>.h{font-size:19px;font-weight:700;fill:#1f2328}.t{font-size:14px;font-weight:600;fill:#1f2328}.s{font-size:13px;fill:#57606a}.c{font-size:13px;font-weight:600;fill:#1f2328}.red{fill:#cf222e}.k{font-size:12px;fill:#57606a}</style></defs>
+<rect x="0" y="0" width="1000" height="515" fill="#ffffff"/>
+<text x="20" y="34" class="h">2 位饱和计数器：每条分支一个，0–3，≥ 2 就猜“跳”</text>
+<rect x="60" y="70" width="440" height="200" rx="12" fill="#f6f8fa" stroke="#d0d7de" stroke-dasharray="6 4"/>
+<rect x="500" y="70" width="440" height="200" rx="12" fill="#ddf4ff" stroke="#54aeff" stroke-dasharray="6 4"/>
+<text x="280" y="92" class="t" text-anchor="middle">猜：不跳</text>
+<text x="720" y="92" class="t" text-anchor="middle" style="fill:#0969da">猜：跳</text>
+<path d="M216,157 Q280.0,105 344,157" fill="none" stroke="#1a7f37" stroke-width="2" marker-end="url(#a)"/>
+<path d="M344,193 Q280.0,245 216,193" fill="none" stroke="#cf222e" stroke-width="2" marker-end="url(#a)"/>
+<text x="280.0" y="125" class="s" text-anchor="middle" style="fill:#1a7f37">跳了：+1</text>
+<text x="280.0" y="237" class="s" text-anchor="middle" style="fill:#cf222e">没跳：−1</text>
+<path d="M436,157 Q500.0,105 564,157" fill="none" stroke="#1a7f37" stroke-width="2" marker-end="url(#a)"/>
+<path d="M564,193 Q500.0,245 436,193" fill="none" stroke="#cf222e" stroke-width="2" marker-end="url(#a)"/>
+<text x="500.0" y="125" class="s" text-anchor="middle" style="fill:#1a7f37">跳了：+1</text>
+<text x="500.0" y="237" class="s" text-anchor="middle" style="fill:#cf222e">没跳：−1</text>
+<path d="M656,157 Q720.0,105 784,157" fill="none" stroke="#1a7f37" stroke-width="2" marker-end="url(#a)"/>
+<path d="M784,193 Q720.0,245 656,193" fill="none" stroke="#cf222e" stroke-width="2" marker-end="url(#a)"/>
+<text x="720.0" y="125" class="s" text-anchor="middle" style="fill:#1a7f37">跳了：+1</text>
+<text x="720.0" y="237" class="s" text-anchor="middle" style="fill:#cf222e">没跳：−1</text>
+<circle cx="170" cy="175" r="44" fill="#ffffff" stroke="#57606a" stroke-width="1.8"/>
+<text x="170" y="173" class="h" text-anchor="middle">0</text>
+<text x="170" y="195" class="k" text-anchor="middle">强不跳</text>
+<circle cx="390" cy="175" r="44" fill="#ffffff" stroke="#57606a" stroke-width="1.8"/>
+<text x="390" y="173" class="h" text-anchor="middle">1</text>
+<text x="390" y="195" class="k" text-anchor="middle">弱不跳</text>
+<circle cx="610" cy="175" r="44" fill="#ffffff" stroke="#57606a" stroke-width="1.8"/>
+<text x="610" y="173" class="h" text-anchor="middle">2</text>
+<text x="610" y="195" class="k" text-anchor="middle">弱跳</text>
+<circle cx="830" cy="175" r="44" fill="#ffffff" stroke="#57606a" stroke-width="1.8"/>
+<text x="830" y="173" class="h" text-anchor="middle">3</text>
+<text x="830" y="195" class="k" text-anchor="middle">强跳</text>
+<path d="M860,143 C920,95 940,165 874,177" fill="none" stroke="#1a7f37" stroke-width="2" marker-end="url(#a)"/>
+<path d="M140,207 C80,255 60,185 126,173" fill="none" stroke="#cf222e" stroke-width="2" marker-end="url(#a)"/>
+<text x="20" y="320" class="t">例：一个循环每次进去跳 7 次、最后不跳 1 次（退出），然后再进这个循环</text>
+<text x="98" y="364" class="c" text-anchor="end">实际</text>
+<text x="98" y="404" class="c" text-anchor="end">计数器</text>
+<text x="98" y="444" class="c" text-anchor="end">猜</text>
+<rect x="113" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="145.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="145.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="145.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="183" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="215.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="215.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="215.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="253" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="285.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="285.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="285.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="323" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="355.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="355.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="355.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="393" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="425.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="425.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="425.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="463" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="495.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="495.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="495.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="533" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="565.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="565.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="565.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="603" y="340" width="64" height="34" rx="4" fill="#f6f8fa" stroke="#afb8c1"/>
+<text x="635.0" y="362" class="c" text-anchor="middle">不跳</text>
+<text x="635.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="635.0" y="444" class="c" text-anchor="middle" style="fill:#cf222e">跳 ✗</text>
+<rect x="602" y="422" width="66" height="32" rx="4" fill="none" stroke="#cf222e" stroke-width="2"/>
+<rect x="673" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="705.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="705.0" y="404" class="c" text-anchor="middle">2</text>
+<text x="705.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="743" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="775.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="775.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="775.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="813" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="845.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="845.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="845.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<rect x="883" y="340" width="64" height="34" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="915.0" y="362" class="c" text-anchor="middle">跳</text>
+<text x="915.0" y="404" class="c" text-anchor="middle">3</text>
+<text x="915.0" y="444" class="c" text-anchor="middle">跳 ✓</text>
+<text x="20" y="490" class="s">只在退出那一次猜错。计数器从 3 降到 2 还是猜“跳”，下一次进循环不会跟着错。</text>
+</svg>

@@ -1,0 +1,244 @@
+"""画 #12 分支预测轮 1 的三张示意图（SVG，中英文各一张）。
+
+用法:
+  python tools/draw_branch_figs.py --out-dir <博客仓库>/static/images/branch-prediction [--note-dir docs]
+
+  pipeline-flush   流水线时间线：猜对 vs 猜错（错误路径作废、执行级空出几个周期）
+  two-bit-counter  2 位饱和计数器的 4 个状态，加一个循环的例子
+  sorted-strip     不排序 vs 排序后，这条 if 的方向和 2 位计数器猜错的位置（按计数器真的模拟出来）
+--note-dir 给了就把中文版也写一份到那里（学习仓库的笔记用）。只用标准库。
+"""
+import argparse
+import os
+import random
+from xml.sax.saxutils import escape
+
+FONT = {"zh": "PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif", "en": "Helvetica, Arial, sans-serif"}
+STYLE = (".h{font-size:19px;font-weight:700;fill:#1f2328}.t{font-size:14px;font-weight:600;fill:#1f2328}"
+         ".s{font-size:13px;fill:#57606a}.c{font-size:13px;font-weight:600;fill:#1f2328}.red{fill:#cf222e}"
+         ".k{font-size:12px;fill:#57606a}")
+
+
+def svg(lang, w, h, body):
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" font-family="{FONT[lang]}">\n'
+            '<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
+            '<path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>'
+            '<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+            '<rect width="8" height="8" fill="#eaeef2"/><line x1="0" y1="0" x2="0" y2="8" stroke="#afb8c1" stroke-width="3"/></pattern>'
+            f'<style>{STYLE}</style></defs>\n'
+            f'<rect x="0" y="0" width="{w}" height="{h}" fill="#ffffff"/>\n' + "\n".join(body) + "\n</svg>\n")
+
+
+def text(x, y, s, cls, anchor=None, extra=""):
+    a = f' text-anchor="{anchor}"' if anchor else ""
+    return f'<text x="{x}" y="{y}" class="{cls}"{a}{extra}>{escape(s)}</text>'
+
+
+# ---------------------------------------------------------------- 1. 流水线时间线
+PIPE = {
+    "zh": dict(title="流水线：每格 = 一条指令在这个周期所在的级",
+               stages=["取指", "译码", "执行", "退休"], cycle="周期",
+               a="猜对：分支 B 后面的指令一个接一个进来，执行级每个周期都有活",
+               b="猜错：B 在第 5 周期执行时发现猜错，W1、W2 作废，从第 6 周期起重新取 I3",
+               bubble="执行级空了 2 个周期",
+               legend=[("#ddf4ff", "#54aeff", "普通指令"), ("#fff1c2", "#d4a72c", "分支 B"), ("url(#hatch)", "#8c959f", "猜错路径上的指令（作废）")],
+               note="这里只画了 4 级，所以只空出 2 个周期。真实 CPU 从取指到执行有 15–20 级，猜错一次空出约 15–20 个周期。"),
+    "en": dict(title="Pipeline: each cell = the stage an instruction is in during that cycle",
+               stages=["Fetch", "Decode", "Execute", "Retire"], cycle="Cycle",
+               a="Predicted right: instructions after branch B keep flowing; Execute has work every cycle",
+               b="Mispredicted: B executes in cycle 5 and finds the guess wrong; W1, W2 are discarded and I3 is fetched from cycle 6",
+               bubble="Execute idles for 2 cycles",
+               legend=[("#ddf4ff", "#54aeff", "ordinary instruction"), ("#fff1c2", "#d4a72c", "branch B"), ("url(#hatch)", "#8c959f", "wrong-path instruction (discarded)")],
+               note="Only 4 stages are drawn, so only 2 cycles are lost. Real CPUs have 15–20 stages from fetch to execute, so one mispredict loses about 15–20 cycles."),
+}
+
+
+def pipeline(lang):
+    t = PIPE[lang]
+    W, H = 1260, 720
+    L, CW, RH, NC = 130, 88, 40, 10
+    o = [text(20, 34, t["title"], "h")]
+
+    def panel(y0, cap, sched, flushed, bubble):
+        o.append(text(20, y0, cap, "t"))
+        hy = y0 + 26
+        o.append(text(L - 12, hy, t["cycle"], "k", "end"))
+        for c in range(NC):
+            o.append(text(L + c * CW + CW / 2, hy, str(c + 1), "k", "middle"))
+        for s, name in enumerate(t["stages"]):
+            y = hy + 12 + s * (RH + 6)
+            o.append(text(L - 12, y + 26, name, "c", "end"))
+            for c in range(NC):
+                o.append(f'<rect x="{L + c * CW + 3}" y="{y}" width="{CW - 6}" height="{RH}" rx="4" fill="#f6f8fa" stroke="#eaeef2"/>')
+        for name, start in sched:
+            for s in range(4):
+                c = start + s
+                if c > NC or (name, s) in flushed["cut"]:
+                    continue
+                y = hy + 12 + s * (RH + 6)
+                x = L + (c - 1) * CW + 3
+                if name.startswith("W"):
+                    fill, stroke = "url(#hatch)", "#8c959f"
+                elif name == "B":
+                    fill, stroke = "#fff1c2", "#d4a72c"
+                else:
+                    fill, stroke = "#ddf4ff", "#54aeff"
+                o.append(f'<rect x="{x}" y="{y}" width="{CW - 6}" height="{RH}" rx="4" fill="{fill}" stroke="{stroke}" stroke-width="1.3"/>')
+                o.append(text(x + (CW - 6) / 2, y + 26, name, "c", "middle"))
+                if name.startswith("W"):
+                    o.append(f'<path d="M{x + 8},{y + 6} L{x + CW - 14},{y + RH - 6} M{x + CW - 14},{y + 6} L{x + 8},{y + RH - 6}" stroke="#cf222e" stroke-width="2"/>')
+        if bubble:
+            c0, c1 = bubble
+            y = hy + 12 + 2 * (RH + 6)
+            x0, x1 = L + (c0 - 1) * CW + 1, L + c1 * CW - 1
+            o.append(f'<rect x="{x0}" y="{y - 2}" width="{x1 - x0}" height="{RH + 4}" rx="6" fill="none" stroke="#cf222e" stroke-width="2" stroke-dasharray="6 4"/>')
+            o.append(text(L + NC * CW + 14, y + 26, t["bubble"], "c", extra=' style="fill:#cf222e"'))
+        return hy + 12 + 4 * (RH + 6)
+
+    order_a = [("I1", 1), ("I2", 2), ("B", 3), ("I3", 4), ("I4", 5), ("I5", 6), ("I6", 7), ("I7", 8)]
+    end = panel(80, t["a"], order_a, {"cut": set()}, None)
+    # 猜错：W1 在第 4 周期取指、第 5 周期译码；W2 第 5 周期取指；B 第 5 周期执行，发现猜错，W1/W2 后面的级都不再走
+    order_b = [("I1", 1), ("I2", 2), ("B", 3), ("W1", 4), ("W2", 5), ("I3", 6), ("I4", 7), ("I5", 8)]
+    cut = {("W1", 2), ("W1", 3), ("W2", 1), ("W2", 2), ("W2", 3)}
+    end = panel(end + 50, t["b"], order_b, {"cut": cut}, (6, 7))
+    # 图例
+    ly = end + 36
+    x = 20
+    for fill, stroke, lab in t["legend"]:
+        o.append(f'<rect x="{x}" y="{ly - 14}" width="28" height="18" rx="3" fill="{fill}" stroke="{stroke}"/>')
+        o.append(text(x + 36, ly, lab, "s"))
+        x += 60 + len(lab) * (14 if lang == "zh" else 7)
+    o.append(text(20, ly + 30, t["note"], "s"))
+    H = ly + 50
+    return svg(lang, W, H, o)
+
+
+# ---------------------------------------------------------------- 2. 2 位饱和计数器
+CNT = {
+    "zh": dict(title="2 位饱和计数器：每条分支一个，0–3，≥ 2 就猜“跳”",
+               states=[("0", "强不跳"), ("1", "弱不跳"), ("2", "弱跳"), ("3", "强跳")],
+               zone=("猜：不跳", "猜：跳"), up="跳了：+1", down="没跳：−1",
+               ex="例：一个循环每次进去跳 7 次、最后不跳 1 次（退出），然后再进这个循环",
+               rows=("实际", "计数器", "猜"), T="跳", N="不跳",
+               ex_note="只在退出那一次猜错。计数器从 3 降到 2 还是猜“跳”，下一次进循环不会跟着错。"),
+    "en": dict(title="2-bit saturating counter: one per branch, 0–3, predict “taken” at ≥ 2",
+               states=[("0", "strong not"), ("1", "weak not"), ("2", "weak taken"), ("3", "strong taken")],
+               zone=("predict: not taken", "predict: taken"), up="taken: +1", down="not taken: −1",
+               ex="Example: a loop taken 7 times then not taken once (the exit), then entered again",
+               rows=("actual", "counter", "guess"), T="T", N="N",
+               ex_note="Only the exit is mispredicted. The counter drops from 3 to 2, still predicts taken, so re-entering the loop isn’t mispredicted too."),
+}
+
+
+def counter(lang):
+    t = CNT[lang]
+    W = 1000
+    o = [text(20, 34, t["title"], "h")]
+    xs = [170, 390, 610, 830]
+    cy = 175
+    o.append(f'<rect x="60" y="70" width="440" height="200" rx="12" fill="#f6f8fa" stroke="#d0d7de" stroke-dasharray="6 4"/>')
+    o.append(f'<rect x="500" y="70" width="440" height="200" rx="12" fill="#ddf4ff" stroke="#54aeff" stroke-dasharray="6 4"/>')
+    o.append(text(280, 92, t["zone"][0], "t", "middle"))
+    o.append(text(720, 92, t["zone"][1], "t", "middle", ' style="fill:#0969da"'))
+    for k in range(3):  # 跳：上弧往右；没跳：下弧往左
+        x0, x1 = xs[k] + 46, xs[k + 1] - 46
+        o.append(f'<path d="M{x0},{cy - 18} Q{(x0 + x1) / 2},{cy - 70} {x1},{cy - 18}" fill="none" stroke="#1a7f37" stroke-width="2" marker-end="url(#a)"/>')
+        o.append(f'<path d="M{x1},{cy + 18} Q{(x0 + x1) / 2},{cy + 70} {x0},{cy + 18}" fill="none" stroke="#cf222e" stroke-width="2" marker-end="url(#a)"/>')
+        o.append(text((x0 + x1) / 2, cy - 50, t["up"], "s", "middle", ' style="fill:#1a7f37"'))
+        o.append(text((x0 + x1) / 2, cy + 62, t["down"], "s", "middle", ' style="fill:#cf222e"'))
+    for x, (n, name) in zip(xs, t["states"]):
+        o.append(f'<circle cx="{x}" cy="{cy}" r="44" fill="#ffffff" stroke="#57606a" stroke-width="1.8"/>')
+        o.append(text(x, cy - 2, n, "h", "middle"))
+        o.append(text(x, cy + 20, name, "k", "middle"))
+    # 两头的自环
+    o.append(f'<path d="M{xs[3] + 30},{cy - 32} C{xs[3] + 90},{cy - 80} {xs[3] + 110},{cy - 10} {xs[3] + 44},{cy + 2}" fill="none" stroke="#1a7f37" stroke-width="2" marker-end="url(#a)"/>')
+    o.append(f'<path d="M{xs[0] - 30},{cy + 32} C{xs[0] - 90},{cy + 80} {xs[0] - 110},{cy + 10} {xs[0] - 44},{cy - 2}" fill="none" stroke="#cf222e" stroke-width="2" marker-end="url(#a)"/>')
+    # 例子：循环
+    y0 = 320
+    o.append(text(20, y0, t["ex"], "t"))
+    seq = [1] * 7 + [0] + [1] * 4
+    c = 3
+    L, CW = 110, 70
+    for r, lab in enumerate(t["rows"]):
+        o.append(text(L - 12, y0 + 44 + r * 40, lab, "c", "end"))
+    for i, taken in enumerate(seq):
+        x = L + i * CW
+        pred = c >= 2
+        ok = pred == bool(taken)
+        o.append(f'<rect x="{x + 3}" y="{y0 + 20}" width="{CW - 6}" height="34" rx="4" fill="{"#ddf4ff" if taken else "#f6f8fa"}" stroke="{"#54aeff" if taken else "#afb8c1"}"/>')
+        o.append(text(x + CW / 2, y0 + 42, t["T"] if taken else t["N"], "c", "middle"))
+        o.append(text(x + CW / 2, y0 + 84, str(c), "c", "middle"))
+        o.append(text(x + CW / 2, y0 + 124, (t["T"] if pred else t["N"]) + (" ✓" if ok else " ✗"), "c", "middle",
+                      "" if ok else ' style="fill:#cf222e"'))
+        if not ok:
+            o.append(f'<rect x="{x + 2}" y="{y0 + 102}" width="{CW - 4}" height="32" rx="4" fill="none" stroke="#cf222e" stroke-width="2"/>')
+        c = min(3, c + 1) if taken else max(0, c - 1)
+    o.append(text(20, y0 + 170, t["ex_note"], "s"))
+    return svg(lang, W, y0 + 195, o)
+
+
+# ---------------------------------------------------------------- 3. 排序前后的方向条带
+STRIP = {
+    "zh": dict(title="if (data[c] % 2 == 0)：格子里是 data[c]，蓝 = 偶数（条件成立），灰 = 奇数；红框 = 2 位计数器猜错",
+               un="不排序：奇偶随机，方向没有规律", so="排序后：一段偶数接一段奇数（这里是 36、37 的交界）",
+               cnt="这 {n} 个里猜错 {m} 个",
+               note="排序后每个值约 82 个、一共 200 段，只在段与段的交界处猜错 1–2 次；一遍 16384 次里错约 200–400 次，约 1%–2%。"),
+    "en": dict(title="if (data[c] % 2 == 0): each cell is data[c]; blue = even (condition true), grey = odd; red box = the 2-bit counter guessed wrong",
+               un="Unsorted: parity is random, the direction has no pattern", so="Sorted: a run of evens, then a run of odds (here the 36/37 boundary)",
+               cnt="{m} wrong out of these {n}",
+               note="Sorted, each value appears about 82 times in 200 runs, and only the run boundaries mispredict, 1–2 times each: about 200–400 per pass of 16384, about 1%–2%."),
+}
+
+
+def strip(lang):
+    t = STRIP[lang]
+    W = 1180
+    N, CW = 20, 46
+    L = 40
+    o = [text(20, 34, t["title"], "t")]
+    rng = random.Random(7)
+    un = [rng.randrange(200) for _ in range(N)]
+    so = [36] * 10 + [37] * 10
+
+    def row(y, vals, cap, c0):
+        o.append(text(L, y, cap, "t"))
+        c, miss = c0, 0
+        for i, v in enumerate(vals):
+            even = v % 2 == 0
+            pred = c >= 2
+            x = L + i * CW
+            o.append(f'<rect x="{x + 2}" y="{y + 14}" width="{CW - 4}" height="38" rx="4" fill="{"#ddf4ff" if even else "#f6f8fa"}" stroke="{"#54aeff" if even else "#afb8c1"}"/>')
+            o.append(text(x + CW / 2, y + 38, str(v), "c", "middle"))
+            if pred != even:
+                miss += 1
+                o.append(f'<rect x="{x}" y="{y + 12}" width="{CW}" height="42" rx="5" fill="none" stroke="#cf222e" stroke-width="2.5"/>')
+            c = min(3, c + 1) if even else max(0, c - 1)
+        o.append(text(L + N * CW + 14, y + 38, t["cnt"].format(n=N, m=miss), "c", extra=' style="fill:#cf222e"'))
+
+    row(80, un, t["un"], 2)
+    row(170, so, t["so"], 3)
+    o.append(text(L, 268, t["note"], "s"))
+    return svg(lang, W, 290, o)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out-dir", required=True)
+    ap.add_argument("--note-dir")
+    a = ap.parse_args()
+    figs = {"pipeline-flush": pipeline, "two-bit-counter": counter, "sorted-strip": strip}
+    os.makedirs(a.out_dir, exist_ok=True)
+    for name, fn in figs.items():
+        for lang in ("zh", "en"):
+            s = fn(lang)
+            p = os.path.join(a.out_dir, f"{name}.{lang}.svg")
+            open(p, "w", encoding="utf-8").write(s)
+            print(p)
+            if lang == "zh" and a.note_dir:
+                p = os.path.join(a.note_dir, f"branch-{name}.svg")
+                open(p, "w", encoding="utf-8").write(s)
+                print(p)
+
+
+if __name__ == "__main__":
+    main()
