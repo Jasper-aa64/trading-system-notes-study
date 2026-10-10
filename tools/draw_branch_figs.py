@@ -7,6 +7,7 @@
   two-bit-counter  2 位饱和计数器的 4 个状态，加一个循环的例子
   sorted-strip     不排序 vs 排序后，这条 if 的方向和 2 位计数器猜错的位置（按计数器真的模拟出来）
   cmov-chain       轮 2：even_sum 每个元素的依赖链，猜对的分支 1 个周期 vs cmov 2 个周期
+  bsearch-timeline 轮 2：大数组二分查找最后 6 层的读，cmov 排队 vs 分支猜着先读 vs cmov + 预取两个候选（模型，不是实测）
 --note-dir 给了就把中文版也写一份到那里（学习仓库的笔记用）。只用标准库。
 """
 import argparse
@@ -275,12 +276,63 @@ def chain(lang):
     return svg(lang, W, 420, o)
 
 
+# ---------------------------------------------------------------- 5. 二分查找的读：cmov vs 分支 vs 预取（轮 2）
+BS = {
+    "zh": dict(title="大数组二分查找的最后 6 层，每层都要从内存读一次。横轴：一格 = 一次内存延迟（约 80–120 ns）",
+               rows=["cmov", "保留分支", "cmov + 预取"],
+               subs=["下一层的地址要等这一层读回来", "猜一个方向，下一层的读先发出去", "下一层左右两个候选都先读"],
+               ok="猜对", bad="猜错", two="×2", total="{n} 格",
+               legend=[("#ddf4ff", "#54aeff", "这一层的读"), ("#dafbe1", "#4ac26b", "按猜的方向提前发的读"), ("url(#hatch)", "#8c959f", "猜错的读，作废"), ("#fff8c5", "#d4a72c", "预取：左右各读一个，一个白读")],
+               note="这是按机制画的模型，不是实测：分支版假设一次只往前猜一层，猜对、猜错各一半；CPU 能往前猜更多层，猜对的层还能更多。"),
+    "en": dict(title="The last 6 levels of a binary search over a large array; each level reads memory once. One column = one memory latency (about 80–120 ns)",
+               rows=["cmov", "branch kept", "cmov + prefetch"],
+               subs=["next address waits for this read", "guess a side, issue the next read early", "read both candidates of the next level"],
+               ok="right", bad="wrong", two="×2", total="{n} columns",
+               legend=[("#ddf4ff", "#54aeff", "this level's read"), ("#dafbe1", "#4ac26b", "read issued early on the guessed side"), ("url(#hatch)", "#8c959f", "wrong guess, discarded"), ("#fff8c5", "#d4a72c", "prefetch: both sides, one wasted")],
+               note="A model drawn from the mechanism, not a measurement: the branch row guesses one level ahead and is right half the time; a real CPU can guess further ahead and overlap more."),
+}
+
+
+def bsearch(lang):
+    t = BS[lang]
+    W, L, CW = 1180, 250, 130
+    o = [text(20, 34, t["title"], "t")]
+    for k in range(7):
+        x = L + k * CW
+        o.append(f'<line x1="{x}" y1="56" x2="{x}" y2="440" stroke="#eaeef2"/>')
+    fill = {"load": ("#ddf4ff", "#54aeff"), "early": ("#dafbe1", "#4ac26b"), "bad": ("url(#hatch)", "#8c959f"), "pref": ("#fff8c5", "#d4a72c")}
+    rows = [
+        [[("L1", "load")], [("L2", "load")], [("L3", "load")], [("L4", "load")], [("L5", "load")], [("L6", "load")]],
+        [[("L1", "load"), ("L2 " + t["ok"], "early")], [("L3", "load"), ("L4 " + t["bad"], "bad")], [("L4", "load"), ("L5 " + t["ok"], "early")], [("L6", "load")]],
+        [[("L1", "load"), ("L2 " + t["two"], "pref")], [("L3 " + t["two"], "pref"), ("L4 " + t["two"], "pref")], [("L5 " + t["two"], "pref"), ("L6 " + t["two"], "pref")]],
+    ]
+    for r, cells in enumerate(rows):
+        y = 70 + r * 125
+        o.append(text(20, y + 40, t["rows"][r], "t"))
+        o.append(text(20, y + 62, t["subs"][r], "k"))
+        for k, items in enumerate(cells):
+            for j, (lab, kind) in enumerate(items):
+                f, st = fill[kind]
+                yy = y + 8 + j * 48
+                o.append(f'<rect x="{L + k * CW + 6}" y="{yy}" width="{CW - 12}" height="40" rx="5" fill="{f}" stroke="{st}" stroke-width="1.5"/>')
+                o.append(text(L + k * CW + CW / 2, yy + 25, lab, "c", "middle"))
+        n = len(cells)
+        o.append(text(L + n * CW + 12, y + 54, t["total"].format(n=n), "c", extra=' style="fill:#cf222e"'))
+    x = 20
+    for f, st, lab in t["legend"]:
+        o.append(f'<rect x="{x}" y="452" width="18" height="14" rx="3" fill="{f}" stroke="{st}"/>')
+        o.append(text(x + 24, 464, lab, "k"))
+        x += 24 + len(lab) * (13 if lang == "zh" else 6.6) + 30
+    o.append(text(20, 494, t["note"], "s"))
+    return svg(lang, W, 512, o)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--note-dir")
     a = ap.parse_args()
-    figs = {"pipeline-flush": pipeline, "two-bit-counter": counter, "sorted-strip": strip, "cmov-chain": chain}
+    figs = {"pipeline-flush": pipeline, "two-bit-counter": counter, "sorted-strip": strip, "cmov-chain": chain, "bsearch-timeline": bsearch}
     os.makedirs(a.out_dir, exist_ok=True)
     for name, fn in figs.items():
         for lang in ("zh", "en"):

@@ -3,6 +3,8 @@
 //   g++ -std=c++20 -O2 -S -o - 12-branchless-check.cpp   // 看各函数的汇编
 // 只验证正确性和指令形态，不计时（计时见 12-branch-bench.cpp）。
 #include <cstdio>
+#include <algorithm>
+#include <cstddef>
 #include <cstdint>
 #include <random>
 #include <vector>
@@ -120,6 +122,27 @@ NOINLINE long long sum_unroll4(const int* a, unsigned n) {
     return s0 + s1 + s2 + s3;
 }
 
+// 3. 二分查找（lower_bound）：GCC -O2 把 if 和三元都编成 cmovg，要保留分支得加 -fno-if-conversion
+NOINLINE const int* lower_bound_cmov(const int* base, std::size_t n, int key) {
+    while (n > 1) {
+        std::size_t half = n / 2;
+        base = (base[half] < key) ? base + half : base;   // cmov：下一层的地址要等 base[half] 读回来
+        n -= half;
+    }
+    return base + (*base < key);
+}
+// 3. cmov + 预取下一层的两个候选：两个读同时在路上，没有猜错
+NOINLINE const int* lower_bound_prefetch(const int* base, std::size_t n, int key) {
+    while (n > 1) {
+        std::size_t half = n / 2;
+        n -= half;
+        __builtin_prefetch(base + n / 2);          // 下一层往左走要读的
+        __builtin_prefetch(base + half + n / 2);   // 下一层往右走要读的
+        base = (base[half] < key) ? base + half : base;
+    }
+    return base + (*base < key);
+}
+
 int main() {
     int bad = 0;
     for (int x = -3; x <= 3; ++x)
@@ -144,6 +167,17 @@ int main() {
     for (unsigned k = 0; k < 6; ++k) on_msg(k, Order{0, 1});
     std::printf("handled = %lld %lld %lld\n", handled[0], handled[1], handled[2]);
     if (handled[0] != 3 || handled[1] != 3 || handled[2] != 4) ++bad;
+
+    for (int t = 0; t < 2000; ++t) {
+        std::size_t n = 1 + rng() % 300;
+        std::vector<int> v(n);
+        for (int& x : v) x = static_cast<int>(rng() % 500);
+        std::sort(v.begin(), v.end());
+        int key = static_cast<int>(rng() % 520) - 10;
+        auto want = std::lower_bound(v.begin(), v.end(), key) - v.begin();
+        if (lower_bound_cmov(v.data(), n, key) - v.data() != want) ++bad;
+        if (lower_bound_prefetch(v.data(), n, key) - v.data() != want) ++bad;
+    }
 
     std::printf("%s\n", bad ? "MISMATCH" : "all ok");
     return bad != 0;

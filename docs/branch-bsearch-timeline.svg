@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 512" width="1180" height="512" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#eaeef2"/><line x1="0" y1="0" x2="0" y2="8" stroke="#afb8c1" stroke-width="3"/></pattern><style>.h{font-size:19px;font-weight:700;fill:#1f2328}.t{font-size:14px;font-weight:600;fill:#1f2328}.s{font-size:13px;fill:#57606a}.c{font-size:13px;font-weight:600;fill:#1f2328}.red{fill:#cf222e}.k{font-size:12px;fill:#57606a}</style></defs>
+<rect x="0" y="0" width="1180" height="512" fill="#ffffff"/>
+<text x="20" y="34" class="t">大数组二分查找的最后 6 层，每层都要从内存读一次。横轴：一格 = 一次内存延迟（约 80–120 ns）</text>
+<line x1="250" y1="56" x2="250" y2="440" stroke="#eaeef2"/>
+<line x1="380" y1="56" x2="380" y2="440" stroke="#eaeef2"/>
+<line x1="510" y1="56" x2="510" y2="440" stroke="#eaeef2"/>
+<line x1="640" y1="56" x2="640" y2="440" stroke="#eaeef2"/>
+<line x1="770" y1="56" x2="770" y2="440" stroke="#eaeef2"/>
+<line x1="900" y1="56" x2="900" y2="440" stroke="#eaeef2"/>
+<line x1="1030" y1="56" x2="1030" y2="440" stroke="#eaeef2"/>
+<text x="20" y="110" class="t">cmov</text>
+<text x="20" y="132" class="k">下一层的地址要等这一层读回来</text>
+<rect x="256" y="78" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="315.0" y="103" class="c" text-anchor="middle">L1</text>
+<rect x="386" y="78" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="445.0" y="103" class="c" text-anchor="middle">L2</text>
+<rect x="516" y="78" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="575.0" y="103" class="c" text-anchor="middle">L3</text>
+<rect x="646" y="78" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="705.0" y="103" class="c" text-anchor="middle">L4</text>
+<rect x="776" y="78" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="835.0" y="103" class="c" text-anchor="middle">L5</text>
+<rect x="906" y="78" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="965.0" y="103" class="c" text-anchor="middle">L6</text>
+<text x="1042" y="124" class="c" style="fill:#cf222e">6 格</text>
+<text x="20" y="235" class="t">保留分支</text>
+<text x="20" y="257" class="k">猜一个方向，下一层的读先发出去</text>
+<rect x="256" y="203" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="315.0" y="228" class="c" text-anchor="middle">L1</text>
+<rect x="256" y="251" width="118" height="40" rx="5" fill="#dafbe1" stroke="#4ac26b" stroke-width="1.5"/>
+<text x="315.0" y="276" class="c" text-anchor="middle">L2 猜对</text>
+<rect x="386" y="203" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="445.0" y="228" class="c" text-anchor="middle">L3</text>
+<rect x="386" y="251" width="118" height="40" rx="5" fill="url(#hatch)" stroke="#8c959f" stroke-width="1.5"/>
+<text x="445.0" y="276" class="c" text-anchor="middle">L4 猜错</text>
+<rect x="516" y="203" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="575.0" y="228" class="c" text-anchor="middle">L4</text>
+<rect x="516" y="251" width="118" height="40" rx="5" fill="#dafbe1" stroke="#4ac26b" stroke-width="1.5"/>
+<text x="575.0" y="276" class="c" text-anchor="middle">L5 猜对</text>
+<rect x="646" y="203" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="705.0" y="228" class="c" text-anchor="middle">L6</text>
+<text x="782" y="249" class="c" style="fill:#cf222e">4 格</text>
+<text x="20" y="360" class="t">cmov + 预取</text>
+<text x="20" y="382" class="k">下一层左右两个候选都先读</text>
+<rect x="256" y="328" width="118" height="40" rx="5" fill="#ddf4ff" stroke="#54aeff" stroke-width="1.5"/>
+<text x="315.0" y="353" class="c" text-anchor="middle">L1</text>
+<rect x="256" y="376" width="118" height="40" rx="5" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.5"/>
+<text x="315.0" y="401" class="c" text-anchor="middle">L2 ×2</text>
+<rect x="386" y="328" width="118" height="40" rx="5" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.5"/>
+<text x="445.0" y="353" class="c" text-anchor="middle">L3 ×2</text>
+<rect x="386" y="376" width="118" height="40" rx="5" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.5"/>
+<text x="445.0" y="401" class="c" text-anchor="middle">L4 ×2</text>
+<rect x="516" y="328" width="118" height="40" rx="5" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.5"/>
+<text x="575.0" y="353" class="c" text-anchor="middle">L5 ×2</text>
+<rect x="516" y="376" width="118" height="40" rx="5" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.5"/>
+<text x="575.0" y="401" class="c" text-anchor="middle">L6 ×2</text>
+<text x="652" y="374" class="c" style="fill:#cf222e">3 格</text>
+<rect x="20" y="452" width="18" height="14" rx="3" fill="#ddf4ff" stroke="#54aeff"/>
+<text x="44" y="464" class="k">这一层的读</text>
+<rect x="139" y="452" width="18" height="14" rx="3" fill="#dafbe1" stroke="#4ac26b"/>
+<text x="163" y="464" class="k">按猜的方向提前发的读</text>
+<rect x="323" y="452" width="18" height="14" rx="3" fill="url(#hatch)" stroke="#8c959f"/>
+<text x="347" y="464" class="k">猜错的读，作废</text>
+<rect x="468" y="452" width="18" height="14" rx="3" fill="#fff8c5" stroke="#d4a72c"/>
+<text x="492" y="464" class="k">预取：左右各读一个，一个白读</text>
+<text x="20" y="494" class="s">这是按机制画的模型，不是实测：分支版假设一次只往前猜一层，猜对、猜错各一半；CPU 能往前猜更多层，猜对的层还能更多。</text>
+</svg>
