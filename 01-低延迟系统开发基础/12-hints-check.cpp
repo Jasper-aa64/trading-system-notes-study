@@ -6,6 +6,8 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
+#include <memory>
+#include <random>
 #include <string>
 #include <type_traits>
 #include <vector>
@@ -192,6 +194,46 @@ NOINLINE ActionType decide(const MarketContext& c) {
     return CompiledStrategy<ExampleStrategy>::execute(c);   // -O2：3 条条件跳转 + 1 个 setbe
 }
 
+// 6. 同一个策略的另两种写法：手写嵌套 if（GCC -O2 也是 3 条条件跳转 + 1 个 setbe，和上面的树一样），
+//    以及运行时用虚函数拼的树（每层一次经函数指针的间接调用 + 一次虚调用 + 读子节点指针）
+NOINLINE ActionType decide_hand(const MarketContext& c) {
+    if (std::abs(c.position) >= 100) return ActionType::CLOSE;
+    if (c.volatility > 0.5) return ActionType::NONE;
+    if (c.obi > 0.2) return ActionType::BUY;
+    if (c.obi > -0.2) return ActionType::NONE;
+    return ActionType::SELL;
+}
+
+struct Node {
+    virtual ~Node() = default;
+    virtual ActionType evaluate(const MarketContext& ctx) const = 0;
+};
+struct Leaf : Node {
+    ActionType action;
+    explicit Leaf(ActionType a) : action(a) {}
+    ActionType evaluate(const MarketContext&) const override { return action; }
+};
+struct Decision : Node {
+    bool (*check)(const MarketContext&);
+    std::unique_ptr<Node> left, right;
+    Decision(bool (*c)(const MarketContext&), std::unique_ptr<Node> l, std::unique_ptr<Node> r)
+        : check(c), left(std::move(l)), right(std::move(r)) {}
+    ActionType evaluate(const MarketContext& ctx) const override {
+        return check(ctx) ? left->evaluate(ctx) : right->evaluate(ctx);
+    }
+};
+static std::unique_ptr<Node> build_runtime_tree() {   // 真实系统里从配置文件读出来再拼
+    auto leaf = [](ActionType a) { return std::make_unique<Leaf>(a); };
+    auto momentum = std::make_unique<Decision>(
+        [](const MarketContext& c) { return c.obi > 0.2; }, leaf(ActionType::BUY),
+        std::make_unique<Decision>([](const MarketContext& c) { return c.obi > -0.2; },
+                                   leaf(ActionType::NONE), leaf(ActionType::SELL)));
+    auto inner = std::make_unique<Decision>(
+        [](const MarketContext& c) { return c.volatility > 0.5; }, leaf(ActionType::NONE), std::move(momentum));
+    return std::make_unique<Decision>(
+        [](const MarketContext& c) { return std::abs(c.position) < 100; }, std::move(inner), leaf(ActionType::CLOSE));
+}
+
 int main() {
     int bad = 0;
     int q[3] = {4, 5, 6};
@@ -219,6 +261,13 @@ int main() {
     if (decide({0, 0.5, 0.1, 10}) != ActionType::BUY) ++bad;
     if (decide({0, 0.0, 0.1, 10}) != ActionType::NONE) ++bad;
     if (decide({0, -0.5, 0.1, -10}) != ActionType::SELL) ++bad;
+
+    auto rt = build_runtime_tree();
+    std::mt19937 rng(9);
+    for (int t = 0; t < 10000; ++t) {
+        MarketContext c{0, (int(rng() % 200) - 100) / 100.0, (rng() % 100) / 100.0, int(rng() % 300) - 150};
+        if (decide(c) != decide_hand(c) || decide(c) != rt->evaluate(c)) ++bad;
+    }
 
     std::printf("%s\n", bad ? "MISMATCH" : "all ok");
     return bad != 0;
