@@ -30,12 +30,18 @@
   <!-- Core 0 -->
   <rect x="40" y="110" width="390" height="460" rx="8" class="core"/>
   <text x="56" y="132" class="t">核心 0</text>
-  <text x="110" y="132" class="tag">2 个硬件线程共用这个核(SMT,§1 轮2)</text>
+  <text x="110" y="132" class="tag">2 个硬件线程共用这个核(SMT,超线程,§1 轮2)</text>
 
-  <rect x="60" y="145" width="350" height="62" class="box"/>
-  <text x="72" y="168" class="t">流水线:取指 → 译码 → 乱序执行 → 退休</text>
-  <text x="72" y="186" class="tag">§5 轮5 依赖链 · 多累加器 · 11补 ROB</text>
-  <text x="72" y="200" class="tag">#12 分支预测(待讲)</text>
+  <rect x="60" y="145" width="165" height="62" class="box"/>
+  <text x="72" y="165" class="t">前端(front end)</text>
+  <text x="72" y="181" class="s">取指 fetch → 译码 decode</text>
+  <text x="72" y="196" class="tag">#12 分支预测 · BTB</text>
+
+  <rect x="245" y="145" width="165" height="62" class="box"/>
+  <text x="257" y="163" class="t">后端(back end)</text>
+  <text x="257" y="178" class="s">乱序执行 OoO → 退休 retire</text>
+  <text x="257" y="192" class="tag">§5 轮5 依赖链 · 多累加器</text>
+  <text x="257" y="204" class="tag">11补 ROB</text>
 
   <rect x="60" y="220" width="165" height="62" class="box"/>
   <text x="72" y="243" class="t">寄存器</text>
