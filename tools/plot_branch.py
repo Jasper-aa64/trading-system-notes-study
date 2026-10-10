@@ -1,7 +1,8 @@
 """把 12-branch-bench 的 CSV 画成“分支可猜程度 vs 速度”的实测图（SVG，中英文各一张）。
 
 用法:
-  python tools/plot_branch.py branch.csv cmov.csv --machine "AMD Ryzen 5 5600GT" --out-dir <目录> [--name branch-predictability]
+  python tools/plot_branch.py b1m.csv b16k.csv c1m.csv --machine "AMD Ryzen 5 5600GT" --out-dir <目录> [--name branch-predictability]
+  python tools/plot_branch.py bsizes.csv --sizes --machine "AMD Ryzen 5 5600GT" --out-dir <目录> --name predictor-memorize
 
 横轴是数组里偶数的比例 p（0%–100%），纵轴是每个元素花的 ns；每个 CSV 一条线，
 p = 50% 那组数排序以后的结果画成一个空心点。只用标准库。
@@ -93,13 +94,88 @@ def render(series, machine, lang):
     return "\n".join(o) + "\n"
 
 
+SIZES = {
+    "zh": dict(title="实测：p = 50% 的随机数组反复跑，数组多长预测器就背不下来（{m}，一个核）",
+               xl="数组长度 n（对数坐标）", yl="每个元素花的时间（ns）",
+               rnd="p = 50%，随机", srt="同一组数排序后",
+               foot="保留分支的版本；同一组数反复跑约 6700 万个元素，每个 n 测 5 次取最快。"),
+    "en": dict(title="Measured: a random p = 50% array re-run many times; how long before the predictor can't memorize it ({m}, one core)",
+               xl="Array length n (log scale)", yl="Time per element (ns)",
+               rnd="p = 50%, random", srt="same numbers, sorted",
+               foot="Branch-kept build; the same numbers are re-run for about 67 million elements, best of 5 per n."),
+}
+
+
+def render_sizes(rows, machine, lang):
+    """rows: [(n, 随机的 ns, 排序后的 ns)]"""
+    t = SIZES[lang]
+    font = TEXT[lang]["font"]
+    W, H = 1100, 520
+    L, R, T, B = 90, 1060, 70, 420
+    ns = [n for n, _, _ in rows]
+    x0, x1 = math.log2(min(ns)), math.log2(max(ns))
+    ymax = nice_max(max(v for _, v, _ in rows) * 1.1)
+
+    def X(n):
+        return L + (math.log2(n) - x0) / (x1 - x0) * (R - L)
+
+    def Y(v):
+        return B - v / ymax * (B - T)
+
+    o = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="{font}">',
+        "<style>.h{font-size:18px;font-weight:700;fill:#1f2328}.ax{stroke:#57606a;stroke-width:1.2}"
+        ".g{stroke:#d0d7de;stroke-width:1}.tk{font-size:12.5px;fill:#57606a}.lab{font-size:13.5px;fill:#1f2328}"
+        ".ft{font-size:12px;fill:#57606a}.lg{font-size:13.5px;fill:#1f2328}</style>",
+        f'<rect x="0" y="0" width="{W}" height="{H}" fill="#ffffff"/>',
+        f'<text class="h" x="{L}" y="36">{t["title"].format(m=machine)}</text>',
+    ]
+    for k in range(6):
+        v = ymax * k / 5
+        o.append(f'<line class="g" x1="{L}" y1="{Y(v):.1f}" x2="{R}" y2="{Y(v):.1f}"/>')
+        o.append(f'<text class="tk" x="{L - 10}" y="{Y(v) + 4:.1f}" text-anchor="end">{v:g}</text>')
+    for n in ns:
+        o.append(f'<text class="tk" x="{X(n):.1f}" y="{B + 20}" text-anchor="middle">{fmt_n(n)}</text>')
+    o.append(f'<line class="ax" x1="{L}" y1="{B}" x2="{R}" y2="{B}"/><line class="ax" x1="{L}" y1="{T}" x2="{L}" y2="{B}"/>')
+    for idx, (c, lab) in enumerate((("#cf222e", t["rnd"]), ("#1a7f37", t["srt"]))):
+        pts = [(row[0], row[1 + idx]) for row in rows]
+        o.append('<path d="M' + " L".join(f"{X(n):.1f},{Y(v):.1f}" for n, v in pts) + f'" stroke="{c}" stroke-width="2.5" fill="none"/>')
+        for n, v in pts:
+            o.append(f'<circle cx="{X(n):.1f}" cy="{Y(v):.1f}" r="3.5" fill="{c}"/>')
+        ly = T + 14 + idx * 24
+        o.append(f'<line x1="{L + 20}" y1="{ly}" x2="{L + 50}" y2="{ly}" stroke="{c}" stroke-width="2.5"/>')
+        o.append(f'<text class="lg" x="{L + 58}" y="{ly + 5}">{lab}</text>')
+    o.append(f'<text class="lab" x="{(L + R) / 2}" y="{B + 46}" text-anchor="middle">{t["xl"]}</text>')
+    o.append(f'<text class="lab" transform="translate(30,{(T + B) / 2}) rotate(-90)" text-anchor="middle">{t["yl"]}</text>')
+    o.append(f'<text class="ft" x="{R}" y="{H - 14}" text-anchor="end">{t["foot"]}</text>')
+    o.append("</svg>")
+    return "\n".join(o) + "\n"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("csv", nargs="+")
     ap.add_argument("--machine", required=True)
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--name", default="branch-predictability")
+    ap.add_argument("--sizes", action="store_true", help="CSV 是按 n 扫的 p = 50%%（另画一张“数组多长背不下来”）")
     a = ap.parse_args()
+    if a.sizes:
+        by_n = {}
+        for path in a.csv:
+            with open(path, newline="") as f:
+                for r in csv.DictReader(f):
+                    if r["variant"] == "variant":
+                        continue  # 每次运行多打的表头
+                    by_n.setdefault(int(r["n"]), {})[r["p"]] = float(r["ns_per_elem"])
+        rows = [(n, d["50"], d["sorted"]) for n, d in sorted(by_n.items())]
+        os.makedirs(a.out_dir, exist_ok=True)
+        for lang in ("zh", "en"):
+            p = os.path.join(a.out_dir, f"{a.name}.{lang}.svg")
+            with open(p, "w", encoding="utf-8") as f:
+                f.write(render_sizes(rows, a.machine, lang))
+            print(p)
+        return
     series = {}
     for path in a.csv:  # 每个 CSV 里可以是一个或多个 (variant, n)
         with open(path, newline="") as f:

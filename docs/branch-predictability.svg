@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" width="1100" height="560" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<style>.h{font-size:19px;font-weight:700;fill:#1f2328}.ax{stroke:#57606a;stroke-width:1.2}.g{stroke:#d0d7de;stroke-width:1}.tk{font-size:12.5px;fill:#57606a}.lab{font-size:13.5px;fill:#1f2328}.ft{font-size:12px;fill:#57606a}.lg{font-size:13.5px;fill:#1f2328}</style>
+<rect x="0" y="0" width="1100" height="560" fill="#ffffff"/>
+<text class="h" x="90" y="36">实测：if (data[c] % 2 == 0) 的速度和数组里偶数的比例（AMD Ryzen 5 5600GT，一个核）</text>
+<line class="g" x1="90" y1="460.0" x2="1060" y2="460.0"/>
+<text class="tk" x="80" y="464.0" text-anchor="end">0</text>
+<line class="g" x1="90" y1="382.0" x2="1060" y2="382.0"/>
+<text class="tk" x="80" y="386.0" text-anchor="end">0.8</text>
+<line class="g" x1="90" y1="304.0" x2="1060" y2="304.0"/>
+<text class="tk" x="80" y="308.0" text-anchor="end">1.6</text>
+<line class="g" x1="90" y1="226.0" x2="1060" y2="226.0"/>
+<text class="tk" x="80" y="230.0" text-anchor="end">2.4</text>
+<line class="g" x1="90" y1="148.0" x2="1060" y2="148.0"/>
+<text class="tk" x="80" y="152.0" text-anchor="end">3.2</text>
+<line class="g" x1="90" y1="70.0" x2="1060" y2="70.0"/>
+<text class="tk" x="80" y="74.0" text-anchor="end">4</text>
+<text class="tk" x="90.0" y="480" text-anchor="middle">0%</text>
+<text class="tk" x="187.0" y="480" text-anchor="middle">10%</text>
+<text class="tk" x="284.0" y="480" text-anchor="middle">20%</text>
+<text class="tk" x="381.0" y="480" text-anchor="middle">30%</text>
+<text class="tk" x="478.0" y="480" text-anchor="middle">40%</text>
+<text class="tk" x="575.0" y="480" text-anchor="middle">50%</text>
+<text class="tk" x="672.0" y="480" text-anchor="middle">60%</text>
+<text class="tk" x="769.0" y="480" text-anchor="middle">70%</text>
+<text class="tk" x="866.0" y="480" text-anchor="middle">80%</text>
+<text class="tk" x="963.0" y="480" text-anchor="middle">90%</text>
+<text class="tk" x="1060.0" y="480" text-anchor="middle">100%</text>
+<line class="ax" x1="90" y1="460" x2="1060" y2="460"/><line class="ax" x1="90" y1="70" x2="90" y2="460"/>
+<path d="M90.0,416.8 L138.5,394.2 L187.0,371.7 L235.5,348.4 L284.0,324.9 L332.5,298.8 L381.0,271.4 L429.5,241.9 L478.0,213.3 L526.5,191.0 L575.0,180.4 L623.5,190.8 L672.0,216.6 L720.5,250.0 L769.0,281.8 L817.5,310.3 L866.0,336.0 L914.5,362.3 L963.0,390.2 L1011.5,410.7 L1060.0,435.4" stroke="#cf222e" stroke-width="2.5" fill="none"/>
+<circle cx="90.0" cy="416.8" r="3" fill="#cf222e"/>
+<circle cx="138.5" cy="394.2" r="3" fill="#cf222e"/>
+<circle cx="187.0" cy="371.7" r="3" fill="#cf222e"/>
+<circle cx="235.5" cy="348.4" r="3" fill="#cf222e"/>
+<circle cx="284.0" cy="324.9" r="3" fill="#cf222e"/>
+<circle cx="332.5" cy="298.8" r="3" fill="#cf222e"/>
+<circle cx="381.0" cy="271.4" r="3" fill="#cf222e"/>
+<circle cx="429.5" cy="241.9" r="3" fill="#cf222e"/>
+<circle cx="478.0" cy="213.3" r="3" fill="#cf222e"/>
+<circle cx="526.5" cy="191.0" r="3" fill="#cf222e"/>
+<circle cx="575.0" cy="180.4" r="3" fill="#cf222e"/>
+<circle cx="623.5" cy="190.8" r="3" fill="#cf222e"/>
+<circle cx="672.0" cy="216.6" r="3" fill="#cf222e"/>
+<circle cx="720.5" cy="250.0" r="3" fill="#cf222e"/>
+<circle cx="769.0" cy="281.8" r="3" fill="#cf222e"/>
+<circle cx="817.5" cy="310.3" r="3" fill="#cf222e"/>
+<circle cx="866.0" cy="336.0" r="3" fill="#cf222e"/>
+<circle cx="914.5" cy="362.3" r="3" fill="#cf222e"/>
+<circle cx="963.0" cy="390.2" r="3" fill="#cf222e"/>
+<circle cx="1011.5" cy="410.7" r="3" fill="#cf222e"/>
+<circle cx="1060.0" cy="435.4" r="3" fill="#cf222e"/>
+<circle cx="575.0" cy="421.5" r="7" fill="#ffffff" stroke="#cf222e" stroke-width="2.5"/>
+<line x1="730" y1="80" x2="760" y2="80" stroke="#cf222e" stroke-width="2.5"/>
+<text class="lg" x="768" y="85">保留分支，1M 个数</text>
+<path d="M90.0,417.0 L138.5,400.5 L187.0,397.3 L235.5,399.7 L284.0,397.1 L332.5,395.3 L381.0,387.7 L429.5,385.3 L478.0,393.6 L526.5,395.5 L575.0,395.9 L623.5,397.6 L672.0,401.1 L720.5,404.8 L769.0,410.2 L817.5,413.8 L866.0,417.5 L914.5,415.1 L963.0,412.6 L1011.5,417.5 L1060.0,430.3" stroke="#fb8f44" stroke-width="2.5" fill="none"/>
+<circle cx="90.0" cy="417.0" r="3" fill="#fb8f44"/>
+<circle cx="138.5" cy="400.5" r="3" fill="#fb8f44"/>
+<circle cx="187.0" cy="397.3" r="3" fill="#fb8f44"/>
+<circle cx="235.5" cy="399.7" r="3" fill="#fb8f44"/>
+<circle cx="284.0" cy="397.1" r="3" fill="#fb8f44"/>
+<circle cx="332.5" cy="395.3" r="3" fill="#fb8f44"/>
+<circle cx="381.0" cy="387.7" r="3" fill="#fb8f44"/>
+<circle cx="429.5" cy="385.3" r="3" fill="#fb8f44"/>
+<circle cx="478.0" cy="393.6" r="3" fill="#fb8f44"/>
+<circle cx="526.5" cy="395.5" r="3" fill="#fb8f44"/>
+<circle cx="575.0" cy="395.9" r="3" fill="#fb8f44"/>
+<circle cx="623.5" cy="397.6" r="3" fill="#fb8f44"/>
+<circle cx="672.0" cy="401.1" r="3" fill="#fb8f44"/>
+<circle cx="720.5" cy="404.8" r="3" fill="#fb8f44"/>
+<circle cx="769.0" cy="410.2" r="3" fill="#fb8f44"/>
+<circle cx="817.5" cy="413.8" r="3" fill="#fb8f44"/>
+<circle cx="866.0" cy="417.5" r="3" fill="#fb8f44"/>
+<circle cx="914.5" cy="415.1" r="3" fill="#fb8f44"/>
+<circle cx="963.0" cy="412.6" r="3" fill="#fb8f44"/>
+<circle cx="1011.5" cy="417.5" r="3" fill="#fb8f44"/>
+<circle cx="1060.0" cy="430.3" r="3" fill="#fb8f44"/>
+<circle cx="575.0" cy="417.3" r="7" fill="#ffffff" stroke="#fb8f44" stroke-width="2.5"/>
+<line x1="730" y1="104" x2="760" y2="104" stroke="#fb8f44" stroke-width="2.5"/>
+<text class="lg" x="768" y="109">保留分支，16K 个数</text>
+<path d="M90.0,416.9 L138.5,416.7 L187.0,416.5 L235.5,416.7 L284.0,416.7 L332.5,416.8 L381.0,416.7 L429.5,416.3 L478.0,416.8 L526.5,416.8 L575.0,416.7 L623.5,416.5 L672.0,416.7 L720.5,416.7 L769.0,417.1 L817.5,416.7 L866.0,416.2 L914.5,416.3 L963.0,416.3 L1011.5,416.6 L1060.0,416.7" stroke="#0969da" stroke-width="2.5" fill="none"/>
+<circle cx="90.0" cy="416.9" r="3" fill="#0969da"/>
+<circle cx="138.5" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="187.0" cy="416.5" r="3" fill="#0969da"/>
+<circle cx="235.5" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="284.0" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="332.5" cy="416.8" r="3" fill="#0969da"/>
+<circle cx="381.0" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="429.5" cy="416.3" r="3" fill="#0969da"/>
+<circle cx="478.0" cy="416.8" r="3" fill="#0969da"/>
+<circle cx="526.5" cy="416.8" r="3" fill="#0969da"/>
+<circle cx="575.0" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="623.5" cy="416.5" r="3" fill="#0969da"/>
+<circle cx="672.0" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="720.5" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="769.0" cy="417.1" r="3" fill="#0969da"/>
+<circle cx="817.5" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="866.0" cy="416.2" r="3" fill="#0969da"/>
+<circle cx="914.5" cy="416.3" r="3" fill="#0969da"/>
+<circle cx="963.0" cy="416.3" r="3" fill="#0969da"/>
+<circle cx="1011.5" cy="416.6" r="3" fill="#0969da"/>
+<circle cx="1060.0" cy="416.7" r="3" fill="#0969da"/>
+<circle cx="575.0" cy="416.7" r="7" fill="#ffffff" stroke="#0969da" stroke-width="2.5"/>
+<line x1="730" y1="128" x2="760" y2="128" stroke="#0969da" stroke-width="2.5"/>
+<text class="lg" x="768" y="133">-O2 默认（if 变成 cmov），1M 个数</text>
+<circle cx="745" cy="152" r="7" fill="#ffffff" stroke="#57606a" stroke-width="2.5"/>
+<text class="lg" x="768" y="157">p = 50% 排序后</text>
+<text class="lab" x="575.0" y="506" text-anchor="middle">数组里偶数的比例 p（随机打乱）</text>
+<text class="lab" transform="translate(30,265.0) rotate(-90)" text-anchor="middle">每个元素花的时间（ns）</text>
+<text class="ft" x="1060" y="546" text-anchor="end">同一组数反复跑约 6700 万个元素，每个 p 测 5 次取最快；测的是这段循环，不是硬件峰值。</text>
+</svg>

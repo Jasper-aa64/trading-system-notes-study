@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="1100" height="520" font-family="PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<style>.h{font-size:18px;font-weight:700;fill:#1f2328}.ax{stroke:#57606a;stroke-width:1.2}.g{stroke:#d0d7de;stroke-width:1}.tk{font-size:12.5px;fill:#57606a}.lab{font-size:13.5px;fill:#1f2328}.ft{font-size:12px;fill:#57606a}.lg{font-size:13.5px;fill:#1f2328}</style>
+<rect x="0" y="0" width="1100" height="520" fill="#ffffff"/>
+<text class="h" x="90" y="36">实测：p = 50% 的随机数组反复跑，数组多长预测器就背不下来（AMD Ryzen 5 5600GT，一个核）</text>
+<line class="g" x1="90" y1="420.0" x2="1060" y2="420.0"/>
+<text class="tk" x="80" y="424.0" text-anchor="end">0</text>
+<line class="g" x1="90" y1="350.0" x2="1060" y2="350.0"/>
+<text class="tk" x="80" y="354.0" text-anchor="end">0.8</text>
+<line class="g" x1="90" y1="280.0" x2="1060" y2="280.0"/>
+<text class="tk" x="80" y="284.0" text-anchor="end">1.6</text>
+<line class="g" x1="90" y1="210.0" x2="1060" y2="210.0"/>
+<text class="tk" x="80" y="214.0" text-anchor="end">2.4</text>
+<line class="g" x1="90" y1="140.0" x2="1060" y2="140.0"/>
+<text class="tk" x="80" y="144.0" text-anchor="end">3.2</text>
+<line class="g" x1="90" y1="70.0" x2="1060" y2="70.0"/>
+<text class="tk" x="80" y="74.0" text-anchor="end">4</text>
+<text class="tk" x="90.0" y="440" text-anchor="middle">1K</text>
+<text class="tk" x="170.8" y="440" text-anchor="middle">2K</text>
+<text class="tk" x="251.7" y="440" text-anchor="middle">4K</text>
+<text class="tk" x="332.5" y="440" text-anchor="middle">8K</text>
+<text class="tk" x="413.3" y="440" text-anchor="middle">16K</text>
+<text class="tk" x="494.2" y="440" text-anchor="middle">32K</text>
+<text class="tk" x="575.0" y="440" text-anchor="middle">64K</text>
+<text class="tk" x="655.8" y="440" text-anchor="middle">128K</text>
+<text class="tk" x="736.7" y="440" text-anchor="middle">256K</text>
+<text class="tk" x="898.3" y="440" text-anchor="middle">1M</text>
+<text class="tk" x="1060.0" y="440" text-anchor="middle">4M</text>
+<line class="ax" x1="90" y1="420" x2="1060" y2="420"/><line class="ax" x1="90" y1="70" x2="90" y2="420"/>
+<path d="M90.0,366.3 L170.8,362.7 L251.7,362.8 L332.5,362.6 L413.3,361.7 L494.2,232.7 L575.0,199.0 L655.8,180.2 L736.7,172.9 L898.3,170.5 L1060.0,170.9" stroke="#cf222e" stroke-width="2.5" fill="none"/>
+<circle cx="90.0" cy="366.3" r="3.5" fill="#cf222e"/>
+<circle cx="170.8" cy="362.7" r="3.5" fill="#cf222e"/>
+<circle cx="251.7" cy="362.8" r="3.5" fill="#cf222e"/>
+<circle cx="332.5" cy="362.6" r="3.5" fill="#cf222e"/>
+<circle cx="413.3" cy="361.7" r="3.5" fill="#cf222e"/>
+<circle cx="494.2" cy="232.7" r="3.5" fill="#cf222e"/>
+<circle cx="575.0" cy="199.0" r="3.5" fill="#cf222e"/>
+<circle cx="655.8" cy="180.2" r="3.5" fill="#cf222e"/>
+<circle cx="736.7" cy="172.9" r="3.5" fill="#cf222e"/>
+<circle cx="898.3" cy="170.5" r="3.5" fill="#cf222e"/>
+<circle cx="1060.0" cy="170.9" r="3.5" fill="#cf222e"/>
+<line x1="110" y1="84" x2="140" y2="84" stroke="#cf222e" stroke-width="2.5"/>
+<text class="lg" x="148" y="89">p = 50%，随机</text>
+<path d="M90.0,380.8 L170.8,383.0 L251.7,375.2 L332.5,380.4 L413.3,381.1 L494.2,384.9 L575.0,386.5 L655.8,384.8 L736.7,386.1 L898.3,386.3 L1060.0,382.8" stroke="#1a7f37" stroke-width="2.5" fill="none"/>
+<circle cx="90.0" cy="380.8" r="3.5" fill="#1a7f37"/>
+<circle cx="170.8" cy="383.0" r="3.5" fill="#1a7f37"/>
+<circle cx="251.7" cy="375.2" r="3.5" fill="#1a7f37"/>
+<circle cx="332.5" cy="380.4" r="3.5" fill="#1a7f37"/>
+<circle cx="413.3" cy="381.1" r="3.5" fill="#1a7f37"/>
+<circle cx="494.2" cy="384.9" r="3.5" fill="#1a7f37"/>
+<circle cx="575.0" cy="386.5" r="3.5" fill="#1a7f37"/>
+<circle cx="655.8" cy="384.8" r="3.5" fill="#1a7f37"/>
+<circle cx="736.7" cy="386.1" r="3.5" fill="#1a7f37"/>
+<circle cx="898.3" cy="386.3" r="3.5" fill="#1a7f37"/>
+<circle cx="1060.0" cy="382.8" r="3.5" fill="#1a7f37"/>
+<line x1="110" y1="108" x2="140" y2="108" stroke="#1a7f37" stroke-width="2.5"/>
+<text class="lg" x="148" y="113">同一组数排序后</text>
+<text class="lab" x="575.0" y="466" text-anchor="middle">数组长度 n（对数坐标）</text>
+<text class="lab" transform="translate(30,245.0) rotate(-90)" text-anchor="middle">每个元素花的时间（ns）</text>
+<text class="ft" x="1060" y="506" text-anchor="end">保留分支的版本；同一组数反复跑约 6700 万个元素，每个 n 测 5 次取最快。</text>
+</svg>
