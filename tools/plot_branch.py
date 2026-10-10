@@ -17,21 +17,25 @@ TEXT = {
         title="实测：if (data[c] % 2 == 0) 的速度和数组里偶数的比例（{m}，一个核）",
         xl="数组里偶数的比例 p（随机打乱）",
         yl="每个元素花的时间（ns）",
-        names={"branch": "保留分支（-fno-if-conversion）", "cmov": "-O2 默认（if 变成 cmov）"},
+        names={"branch": "保留分支，{n} 个数", "cmov": "-O2 默认（if 变成 cmov），{n} 个数"},
         sorted="p = 50% 排序后",
-        foot="16384 个 int，每个 p 测 5 次取最快；测的是这段循环，不是硬件峰值。",
+        foot="同一组数反复跑约 6700 万个元素，每个 p 测 5 次取最快；测的是这段循环，不是硬件峰值。",
     ),
     "en": dict(
         font="Helvetica, Arial, sans-serif",
         title="Measured: if (data[c] % 2 == 0) speed vs the share of even numbers ({m}, one core)",
         xl="Share of even numbers p (shuffled)",
         yl="Time per element (ns)",
-        names={"branch": "branch kept (-fno-if-conversion)", "cmov": "-O2 default (if becomes cmov)"},
+        names={"branch": "branch kept, {n} numbers", "cmov": "-O2 default (if becomes cmov), {n} numbers"},
         sorted="p = 50%, sorted",
-        foot="16384 ints, best of 5 per p; measures this loop, not the hardware peak.",
+        foot="The same numbers are re-run for about 67 million elements, best of 5 per p; measures this loop, not the hardware peak.",
     ),
 }
-COLORS = {"branch": "#cf222e", "cmov": "#0969da"}
+COLORS = ["#cf222e", "#fb8f44", "#0969da", "#54aeff"]
+
+
+def fmt_n(n):
+    return f"{n >> 20}M" if n >= 1 << 20 and n % (1 << 20) == 0 else (f"{n >> 10}K" if n % 1024 == 0 else str(n))
 
 
 def nice_max(v):
@@ -69,8 +73,8 @@ def render(series, machine, lang):
         o.append(f'<text class="tk" x="{X(p):.1f}" y="{B + 20}" text-anchor="middle">{p}%</text>')
     o.append(f'<line class="ax" x1="{L}" y1="{B}" x2="{R}" y2="{B}"/><line class="ax" x1="{L}" y1="{T}" x2="{L}" y2="{B}"/>')
     ly = T + 10
-    for name, s in series.items():
-        c = COLORS.get(name, "#57606a")
+    for k, ((name, n), s) in enumerate(series.items()):
+        c = COLORS[k % len(COLORS)]
         pts = sorted(s["pts"].items())
         o.append(f'<path d="M' + " L".join(f"{X(p):.1f},{Y(v):.1f}" for p, v in pts) + f'" stroke="{c}" stroke-width="2.5" fill="none"/>')
         for p, v in pts:
@@ -78,7 +82,7 @@ def render(series, machine, lang):
         if s["sorted"] is not None:
             o.append(f'<circle cx="{X(50):.1f}" cy="{Y(s["sorted"]):.1f}" r="7" fill="#ffffff" stroke="{c}" stroke-width="2.5"/>')
         o.append(f'<line x1="{R - 330}" y1="{ly}" x2="{R - 300}" y2="{ly}" stroke="{c}" stroke-width="2.5"/>')
-        o.append(f'<text class="lg" x="{R - 292}" y="{ly + 5}">{t["names"].get(name, name)}</text>')
+        o.append(f'<text class="lg" x="{R - 292}" y="{ly + 5}">{t["names"].get(name, name).format(n=fmt_n(n))}</text>')
         ly += 24
     o.append(f'<circle cx="{R - 315}" cy="{ly}" r="7" fill="#ffffff" stroke="#57606a" stroke-width="2.5"/>')
     o.append(f'<text class="lg" x="{R - 292}" y="{ly + 5}">{t["sorted"]}</text>')
@@ -97,10 +101,10 @@ def main():
     ap.add_argument("--name", default="branch-predictability")
     a = ap.parse_args()
     series = {}
-    for path in a.csv:
+    for path in a.csv:  # 每个 CSV 里可以是一个或多个 (variant, n)
         with open(path, newline="") as f:
             for r in csv.DictReader(f):
-                s = series.setdefault(r["variant"], {"pts": {}, "sorted": None})
+                s = series.setdefault((r["variant"], int(r["n"])), {"pts": {}, "sorted": None})
                 if r["p"] == "sorted":
                     s["sorted"] = float(r["ns_per_elem"])
                 else:
