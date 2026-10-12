@@ -3,10 +3,12 @@
 //   g++ -std=c++20 -O2 -S -o - 14-crtp-check.cpp      // 看 run_crtp / run_virtual
 //   clang++ -std=c++23 -O2 -DDEDUCING_THIS 14-crtp-check.cpp && ./a.out   // 第 6 节：C++23 deducing this（GCC 14 起、Clang 18 支持，GCC 13 不支持）
 //   g++ -std=c++20 -fsyntax-only -DWRONG_BASE 14-crtp-check.cpp           // 第 4.1 节：基类写错，加了私有构造后编译报错
-// 预期输出：Derived1… / Derived2… / 6 9 / 1 0 1 / 2 1 / all ok
+// 预期输出：Derived1… / Derived2… / 6 9 / 1 0 1 / cb 7 / bad_weak_ptr x2, sizeof(Session) 24 / 2 1 / all ok
 #include <cstdio>
+#include <functional>
 #include <iostream>
 #include <memory>
+#include <vector>
 
 #define NOINLINE __attribute__((noinline))
 
@@ -89,6 +91,19 @@ struct Price : EqualityOps<Price> {
     friend bool operator==(const Price& a, const Price& b) { return a.ticks == b.ticks; }
 };
 
+// 3.2〔补〕std::enable_shared_from_this：成员函数里拿到“和外面共用一个计数”的 shared_ptr
+std::vector<std::function<void()>> g_loop;     // 假装是事件循环：回调先存起来，以后再跑
+struct Session : std::enable_shared_from_this<Session> {
+    int id = 7;
+    void start() {
+        auto self = shared_from_this();        // 计数 +1，和外面那个 shared_ptr 共用控制块
+        g_loop.push_back([self] { std::printf("cb %d\n", self->id); });
+    }
+};
+struct Hidden : private std::enable_shared_from_this<Hidden> {   // 私有继承：shared_ptr 看不见基类，不会填 weak_ptr
+    std::shared_ptr<Hidden> get() { return shared_from_this(); }
+};
+
 // 3.3 每个子类一份独立的静态计数：Base<A> 和 Base<B> 是两个类型，静态成员各一份
 template <typename Derived>
 struct InstanceCounter {
@@ -144,6 +159,21 @@ int main() {
     Price p1{{}, 100}, p2{{}, 101}, p3{{}, 100};
     std::printf("%d %d %d\n", p1 != p2, p1 != p3, p1 == p3);
     if (!(p1 != p2) || (p1 != p3)) ++bad;
+
+    {
+        auto s = std::make_shared<Session>();
+        s->start();
+        if (s.use_count() != 2) ++bad;         // 外面一个 + 回调里一个
+    }                                          // 外面那个没了，Session 还活着
+    for (auto& cb : g_loop) cb();              // cb 7
+    g_loop.clear();                            // 最后一个 shared_ptr 没了，这时才析构
+    int thrown = 0;
+    Session on_stack;                          // 不归 shared_ptr 管
+    try { on_stack.shared_from_this(); } catch (const std::bad_weak_ptr&) { ++thrown; }
+    auto h = std::make_shared<Hidden>();
+    try { h->get(); } catch (const std::bad_weak_ptr&) { ++thrown; }
+    std::printf("bad_weak_ptr x%d, sizeof(Session) %zu\n", thrown, sizeof(Session));
+    if (thrown != 2) ++bad;
 
     OrderA a1, a2;
     {
