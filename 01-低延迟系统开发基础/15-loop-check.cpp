@@ -71,6 +71,15 @@ NOINLINE void add_or_sub(float* a, const float* b, int n, bool do_add) {
     }
 }
 
+// 2.5 手写的 unswitching：-O2 下判断只做一次，但仍是逐个 addss / subss（-O2 不向量化）；-O3 和 add_or_sub 一样拆开并向量化
+NOINLINE void add_or_sub_unswitched(float* a, const float* b, int n, bool do_add) {
+    if (do_add) {
+        for (int i = 0; i < n; i++) a[i] += b[i];
+    } else {
+        for (int i = 0; i < n; i++) a[i] -= b[i];
+    }
+}
+
 // 4.3 源 :124-145（逐字）：-O3 下 slow 版本身就向量化（subps + divps），拆成两遍反而多扫一遍内存
 NOINLINE void batchnorm_slow(float v[], int n, float mean, float var, float eps) {
     float denom = sqrtf(var + eps);
@@ -151,6 +160,11 @@ int main() {
     add_or_sub(p, q, 5, false);
     add_or_sub(p, q, 5, false);
     bool as_ok = p[0] == 0 && p[4] == 4;
+    float p2[5] = {1, 2, 3, 4, 5};
+    add_or_sub_unswitched(p2, q, 5, true);
+    add_or_sub_unswitched(p2, q, 5, false);
+    add_or_sub_unswitched(p2, q, 5, false);
+    if (p2[0] != 0 || p2[4] != 4) as_ok = false;
     std::printf("addsub %s\n", as_ok ? "ok" : "MISMATCH");
     if (!as_ok) ++bad;
 
