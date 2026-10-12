@@ -67,6 +67,18 @@ struct OkxFeed : IFeed {
 };
 NOINLINE int run_virtual(IFeed& f, int px) { return f.on_tick(px); }      // 读 vptr、读 vtable，和 OkxFeed::on_tick 比一下：是就走内联版，不是就间接跳转
 
+// 2〔补〕放进循环：CRTP 版 mult 提到循环外、-O3 还能向量化；虚函数版每轮读 vptr + call，进函数先存 4 个寄存器
+NOINLINE long sum_crtp(BinanceFeed& f, const int* px, int n) {
+    long s = 0;
+    for (int i = 0; i < n; ++i) s += f.on_tick(px[i]);
+    return s;
+}
+NOINLINE long sum_virtual(IFeed& f, const int* px, int n) {
+    long s = 0;
+    for (int i = 0; i < n; ++i) s += f.on_tick(px[i]);
+    return s;
+}
+
 // 3.2 往子类里注入功能：子类只写 ==，基类免费给出 !=
 template <typename Derived>
 struct EqualityOps {
@@ -126,6 +138,8 @@ int main() {
     int x = run_crtp(b, 3), y = run_virtual(o, 3);
     std::printf("%d %d\n", x, y);
     if (x != 6 || y != 9) ++bad;
+    int pxs[] = {1, 2, 3, 4, 5};
+    if (sum_crtp(b, pxs, 5) != 30 || sum_virtual(o, pxs, 5) != 45) ++bad;
 
     Price p1{{}, 100}, p2{{}, 101}, p3{{}, 100};
     std::printf("%d %d %d\n", p1 != p2, p1 != p3, p1 == p3);
