@@ -2,7 +2,7 @@
 //   g++ -std=c++20 -O3 -Wall -Wextra 15-loop-check.cpp && ./a.out
 //   g++ -std=c++20 -O3 -S -o - 15-loop-check.cpp | c++filt      // 看 vecdot_basic / vecdot_acc4 / batchnorm_slow
 //   g++ -std=c++20 -O3 -c 15-loop-check.cpp -fopt-info-vec -fopt-info-loop   // 哪些循环被向量化、哪个被 unswitch
-// 预期输出：dot 70 70 70 / bn ok / ind ok / addsub ok / transpose ok / sentinel 5 / all ok
+// 预期输出：dot 70 70 70 / bn ok / ind ok / addsub ok / transpose ok / collapse ok / sentinel 5 / all ok
 #include <cmath>
 #include <cstdio>
 #include <vector>
@@ -117,6 +117,19 @@ NOINLINE void transpose_tiled(const float* a, float* b) {
                     b[tj * N + ti] = a[ti * N + tj];
 }
 
+// 4.4 扁平化：每行 cols 个数，cols 运行时才知道。嵌套版 -O3 只向量化内层，cols = 3 时向量主循环一次都进不去
+NOINLINE void scale_nested(float* m, int rows, int cols, float s) {
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            m[i * cols + j] *= s;
+}
+// 4.4 并成一层：一条 rows * cols 长的循环，mulps 一次 4 个
+NOINLINE void scale_flat(float* m, int rows, int cols, float s) {
+    int total = rows * cols;
+    for (int k = 0; k < total; k++)
+        m[k] *= s;
+}
+
 // 5.2 哨兵：末尾多留一格放一个负数，循环里只判断“是不是负数”，不再判断 i < n
 NOINLINE int find_first_negative(int* a, int n) {   // a 至少有 n + 1 格
     int saved = a[n];
@@ -177,6 +190,14 @@ int main() {
             if (t[j * N + i] != m[i * N + j]) tr_ok = false;
     std::printf("transpose %s\n", tr_ok ? "ok" : "MISMATCH");
     if (!tr_ok) ++bad;
+
+    std::vector<float> sn(301), sf(301);
+    for (int i = 0; i < 301; i++) sn[i] = sf[i] = float(i);
+    scale_nested(sn.data(), 100, 3, 2.0f);
+    scale_flat(sf.data(), 100, 3, 2.0f);
+    bool sc_ok = sn == sf && sn[299] == 598 && sn[300] == 300;
+    std::printf("collapse %s\n", sc_ok ? "ok" : "MISMATCH");
+    if (!sc_ok) ++bad;
 
     int s[9] = {3, 1, 4, 1, 5, -9, 2, 6, 0};        // 前 8 格是数据，第 9 格留给哨兵
     int pos = find_first_negative(s, 8);
