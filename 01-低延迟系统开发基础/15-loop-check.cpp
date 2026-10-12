@@ -50,9 +50,17 @@ NOINLINE float vecdot_acc4(const float* v1, const float* v2, int n) {
     return (s0 + s1) + (s2 + s3);
 }
 
-// 2.2 强度削弱：10 * i 是归纳变量，-O3 照样向量化（paddd）
+// 2.2 强度削弱：10 * i 是归纳变量，-O3 照样向量化（{0,1,2,3} + 4，再移位加法 ×10）
 NOINLINE void fill_10i(int* a, int n) {
     for (int i = 0; i < n; i++) a[i] = 10 * i;
+}
+// 2.2 手写的强度削弱：-O2 下和 fill_10i 编出同一个循环（addl $10）；-O3 向量化成 {0,10,20,30} + 40
+NOINLINE void fill_10i_sr(int* a, int n) {
+    int x = 0;
+    for (int i = 0; i < n; i++) {
+        a[i] = x;
+        x += 10;
+    }
 }
 
 // 2.5 源 :25 说的“循环分布”其实叫 loop unswitching：循环里判断一个不变的条件，-O3 把它提到循环外、拆成两个循环
@@ -132,6 +140,9 @@ int main() {
     std::vector<int> a(100);
     fill_10i(a.data(), 100);
     bool ind_ok = a[0] == 0 && a[37] == 370 && a[99] == 990;
+    std::vector<int> a2(100);
+    fill_10i_sr(a2.data(), 100);
+    if (a2 != a) ind_ok = false;
     std::printf("ind %s\n", ind_ok ? "ok" : "MISMATCH");
     if (!ind_ok) ++bad;
 
