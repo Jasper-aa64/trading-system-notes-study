@@ -1,0 +1,2 @@
+Error:
+The perf.serial.data file has no samples!

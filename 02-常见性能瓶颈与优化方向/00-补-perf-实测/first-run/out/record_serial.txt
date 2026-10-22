@@ -1,0 +1,3 @@
+sum_serial: total = 4.148225e+10
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.188 MB perf.serial.data (2537 samples) ]

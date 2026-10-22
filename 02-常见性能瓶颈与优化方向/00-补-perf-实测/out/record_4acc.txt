@@ -1,0 +1,3 @@
+sum_4acc: total = 4.148224e+10
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.069 MB perf.4acc.data (805 samples) ]

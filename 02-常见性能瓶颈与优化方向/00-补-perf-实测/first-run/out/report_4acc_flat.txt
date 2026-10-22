@@ -1,0 +1,88 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 768  of event 'cpu-clock'
+# Event count (approx.): 192000000
+#
+# Children      Self  Command    Shared Object      Symbol                    
+# ........  ........  .........  .................  ..........................
+#
+    97.53%     0.00%  perf_demo  libc-2.17.so       [.] __libc_start_main
+    68.62%    68.62%  perf_demo  perf_demo          [.] 0x0000000000000a5a
+    68.62%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a5a
+    23.44%    23.44%  perf_demo  perf_demo          [.] 0x0000000000000a53
+    23.44%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a53
+     1.04%     1.04%  perf_demo  perf_demo          [.] 0x00000000000009e7
+     1.04%     1.04%  perf_demo  perf_demo          [.] 0x00000000000009ed
+     1.04%     0.00%  perf_demo  perf_demo          [.] 0x00000000004009e7
+     1.04%     0.00%  perf_demo  perf_demo          [.] 0x00000000004009ed
+     0.65%     0.65%  perf_demo  perf_demo          [.] 0x00000000000009d8
+     0.65%     0.65%  perf_demo  perf_demo          [.] 0x0000000000000a48
+     0.65%     0.26%  perf_demo  [kernel.kallsyms]  [k] __do_page_fault
+     0.65%     0.00%  perf_demo  [kernel.kallsyms]  [k] do_page_fault
+     0.65%     0.00%  perf_demo  [kernel.kallsyms]  [k] page_fault
+     0.65%     0.00%  perf_demo  perf_demo          [.] 0x00000000004009d8
+     0.65%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a48
+     0.52%     0.52%  perf_demo  ld-2.17.so         [.] do_lookup_x
+     0.52%     0.00%  perf_demo  ld-2.17.so         [.] _dl_sysdep_start
+     0.52%     0.00%  perf_demo  ld-2.17.so         [.] dl_main
+     0.39%     0.39%  perf_demo  perf_demo          [.] 0x00000000000009e0
+     0.39%     0.26%  perf_demo  ld-2.17.so         [.] strcmp
+     0.39%     0.13%  perf_demo  [kernel.kallsyms]  [k] handle_mm_fault
+     0.39%     0.13%  perf_demo  ld-2.17.so         [.] _dl_relocate_object
+     0.39%     0.00%  perf_demo  ld-2.17.so         [.] _dl_map_object
+     0.39%     0.00%  perf_demo  ld-2.17.so         [.] 0x00007f62a5f95f5a
+     0.39%     0.00%  perf_demo  perf_demo          [.] 0x00000000004009e0
+     0.26%     0.26%  perf_demo  ld-2.17.so         [.] _dl_lookup_symbol_x
+     0.26%     0.26%  perf_demo  ld-2.17.so         [.] check_match.9525
+     0.26%     0.26%  perf_demo  perf_demo          [.] 0x00000000000009dc
+     0.26%     0.26%  perf_demo  perf_demo          [.] 0x0000000000000a4b
+     0.26%     0.26%  perf_demo  perf_demo          [.] 0x0000000000000a57
+     0.26%     0.13%  perf_demo  [kernel.kallsyms]  [k] __alloc_pages_nodemask
+     0.26%     0.13%  perf_demo  ld-2.17.so         [.] _dl_setup_hash
+     0.26%     0.00%  perf_demo  [kernel.kallsyms]  [k] __pte_alloc
+     0.26%     0.00%  perf_demo  [kernel.kallsyms]  [k] alloc_pages_current
+     0.26%     0.00%  perf_demo  [kernel.kallsyms]  [k] pte_alloc_one
+     0.26%     0.00%  perf_demo  perf_demo          [.] 0x00000000004009dc
+     0.26%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a4b
+     0.26%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a57
+     0.13%     0.13%  perf_demo  [kernel.kallsyms]  [k] clear_page
+     0.13%     0.13%  perf_demo  [kernel.kallsyms]  [k] unmap_page_range
+     0.13%     0.13%  perf_demo  libc-2.17.so       [.] intel_check_word
+     0.13%     0.13%  perf_demo  perf_demo          [.] 0x00000000000007ca
+     0.13%     0.13%  perf_demo  perf_demo          [.] 0x0000000000000987
+     0.13%     0.13%  perf_demo  perf_demo          [.] 0x00000000000009d0
+     0.13%     0.13%  perf_demo  perf_demo          [.] 0x0000000000000a35
+     0.13%     0.13%  perf_demo  perf_demo          [.] 0x0000000000000a41
+     0.13%     0.13%  perf_demo  perf_demo          [.] 0x0000000000000a6e
+     0.13%     0.13%  perf_demo  perf_demo          [.] 0x0000000000000aa5
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] do_exit
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] do_group_exit
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] exit_mmap
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] mmput
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] sys_exit_group
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] system_call_fastpath
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] unmap_single_vma
+     0.13%     0.00%  perf_demo  [kernel.kallsyms]  [k] unmap_vmas
+     0.13%     0.00%  perf_demo  ld-2.17.so         [.] _dl_map_object_from_fd
+     0.13%     0.00%  perf_demo  libc-2.17.so       [.] sysmalloc
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400680
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x00000000004007ca
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400987
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x00000000004009d0
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a35
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a41
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400a6e
+     0.13%     0.00%  perf_demo  perf_demo          [.] 0x0000000000400aa5
+     0.13%     0.00%  perf_demo  [unknown]          [.] 0000000000000000
+     0.13%     0.00%  perf_demo  [unknown]          [.] 0x00000000000b4640
+     0.13%     0.00%  perf_demo  [unknown]          [.] 0x00000000000ca3f0
+     0.13%     0.00%  perf_demo  [unknown]          [.] 0x0000000000154350
+     0.13%     0.00%  perf_demo  [unknown]          [k] 0x000000000019b7cf
+
+
+#
+# (Tip: List events using substring match: perf list <keyword>)
+#

@@ -1,0 +1,75 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 805  of event 'cpu-clock'
+# Event count (approx.): 201250000
+#
+# Children      Self  Command    Shared Object        Symbol                                 
+# ........  ........  .........  ...................  .......................................
+#
+    97.64%     0.00%  perf_demo  libc-2.17.so         [.] __libc_start_main
+    93.17%    93.17%  perf_demo  perf_demo            [.] sum_4acc
+     4.10%     4.10%  perf_demo  perf_demo            [.] refresh
+     0.62%     0.62%  perf_demo  ld-2.17.so           [.] do_lookup_x
+     0.37%     0.37%  perf_demo  ld-2.17.so           [.] check_match.9525
+     0.37%     0.25%  perf_demo  ld-2.17.so           [.] mmap64
+     0.37%     0.00%  perf_demo  ld-2.17.so           [.] _dl_sysdep_start
+     0.37%     0.00%  perf_demo  ld-2.17.so           [.] dl_main
+     0.25%     0.25%  perf_demo  ld-2.17.so           [.] strcmp
+     0.25%     0.25%  perf_demo  perf_demo            [.] main
+     0.25%     0.12%  perf_demo  [kernel.kallsyms]    [k] __do_page_fault
+     0.25%     0.12%  perf_demo  ld-2.17.so           [.] _dl_relocate_object
+     0.25%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_page_fault
+     0.25%     0.00%  perf_demo  [kernel.kallsyms]    [k] page_fault
+     0.25%     0.00%  perf_demo  [kernel.kallsyms]    [k] system_call_fastpath
+     0.12%     0.12%  perf_demo  [kernel.kallsyms]    [k] __zone_watermark_ok
+     0.12%     0.12%  perf_demo  [kernel.kallsyms]    [k] avc_has_perm_flags
+     0.12%     0.12%  perf_demo  [kernel.kallsyms]    [k] generic_exec_single
+     0.12%     0.12%  perf_demo  [kernel.kallsyms]    [k] unroll_tree_refs
+     0.12%     0.12%  perf_demo  ld-2.17.so           [.] _dl_lookup_symbol_x
+     0.12%     0.12%  perf_demo  ld-2.17.so           [.] _dl_runtime_resolve_xsavec
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] __alloc_pages_nodemask
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] __pte_alloc
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] alloc_pages_current
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] arch_tlb_finish_mmu
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_exit
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_group_exit
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_mprotect_pkey
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] exit_mmap
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] file_has_perm
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] file_map_prot_check
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] flush_tlb_mm_range
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] get_page_from_freelist
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] handle_mm_fault
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] inode_has_perm.isra.35.constprop.72
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] mmput
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] native_flush_tlb_others
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] pte_alloc_one
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] security_file_mprotect
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] selinux_file_mprotect
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] smp_call_function_many
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] smp_call_function_single
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] sys_exit_group
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] sys_mprotect
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] sysret_audit
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] tlb_finish_mmu
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] tlb_flush_mmu_tlbonly
+     0.12%     0.00%  perf_demo  ld-2.17.so           [.] _dl_map_object
+     0.12%     0.00%  perf_demo  ld-2.17.so           [.] _dl_setup_hash
+     0.12%     0.00%  perf_demo  ld-2.17.so           [.] mprotect
+     0.12%     0.00%  perf_demo  ld-2.17.so           [.] 0x00007f886096ef5a
+     0.12%     0.00%  perf_demo  libstdc++.so.6.0.30  [.] std::future_category
+     0.12%     0.00%  perf_demo  perf_demo            [.] __gxx_personality_v0@plt
+     0.12%     0.00%  perf_demo  [unknown]            [.] 0x00000000000c7010
+     0.12%     0.00%  perf_demo  [unknown]            [.] 0x00000000000ca3f0
+     0.12%     0.00%  perf_demo  [unknown]            [.] 0x00000000001399e0
+     0.12%     0.00%  perf_demo  [unknown]            [.] 0x0000000000409618
+     0.12%     0.00%  perf_demo  [unknown]            [k] 0x00007ffe0305cc94
+     0.12%     0.00%  perf_demo  [unknown]            [k] 0x44580034006f6d65
+
+
+#
+# (Tip: See assembly instructions with percentage: perf annotate <symbol>)
+#

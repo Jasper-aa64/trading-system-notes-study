@@ -1,0 +1,4 @@
+== which g++
+/usr/local/gcc-12.2.0/bin/g++
+== /usr/bin/g++
+g++ (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)

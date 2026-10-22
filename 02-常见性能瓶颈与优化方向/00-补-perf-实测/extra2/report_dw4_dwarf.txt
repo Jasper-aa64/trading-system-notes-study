@@ -1,0 +1,153 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+BFD: Dwarf Error: found dwarf version '5', this reader only handles version 2, 3 and 4 information.
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock'
+# Event count (approx.): 565000000
+#
+# Children      Self  Command        Shared Object        Symbol                          
+# ........  ........  .............  ...................  ................................
+#
+    99.16%     0.00%  perf_demo_dw4  perf_demo_dw4        [.] _start
+            |
+            ---_start
+               __libc_start_main
+               main
+               |          
+               |--97.96%--sum_serial
+               |          
+                --1.06%--refresh
+
+    99.16%     0.00%  perf_demo_dw4  libc-2.17.so         [.] __libc_start_main
+            |
+            ---__libc_start_main
+               main
+               |          
+               |--97.96%--sum_serial
+               |          
+                --1.06%--refresh
+
+    99.16%     0.09%  perf_demo_dw4  perf_demo_dw4        [.] main
+            |          
+             --99.07%--main
+                       |          
+                       |--97.96%--sum_serial
+                       |          
+                        --1.06%--refresh
+
+    97.96%    97.96%  perf_demo_dw4  perf_demo_dw4        [.] sum_serial
+            |
+            ---_start
+               __libc_start_main
+               main
+               sum_serial
+
+     1.06%     1.06%  perf_demo_dw4  perf_demo_dw4        [.] refresh
+            |
+            ---_start
+               __libc_start_main
+               main
+               refresh
+
+     0.62%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _start
+            |
+            ---_start
+               _dl_start
+               _dl_sysdep_start
+               |          
+                --0.58%--dl_main
+                          |          
+                           --0.53%--_dl_relocate_object
+
+     0.62%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _dl_start
+            |
+            ---_dl_start
+               _dl_sysdep_start
+               |          
+                --0.58%--dl_main
+                          |          
+                           --0.53%--_dl_relocate_object
+
+     0.62%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _dl_sysdep_start
+            |
+            ---_dl_sysdep_start
+               |          
+                --0.58%--dl_main
+                          |          
+                           --0.53%--_dl_relocate_object
+
+     0.58%     0.00%  perf_demo_dw4  ld-2.17.so           [.] dl_main
+            |
+            ---dl_main
+               |          
+                --0.53%--_dl_relocate_object
+
+     0.58%     0.04%  perf_demo_dw4  ld-2.17.so           [.] _dl_relocate_object
+            |          
+             --0.53%--_dl_relocate_object
+
+     0.44%     0.13%  perf_demo_dw4  ld-2.17.so           [.] _dl_lookup_symbol_x
+     0.27%     0.04%  perf_demo_dw4  ld-2.17.so           [.] do_lookup_x
+     0.22%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] page_fault
+     0.22%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] do_page_fault
+     0.22%     0.09%  perf_demo_dw4  [kernel.kallsyms]    [k] __do_page_fault
+     0.22%     0.13%  perf_demo_dw4  ld-2.17.so           [.] check_match.9525
+     0.13%     0.04%  perf_demo_dw4  [kernel.kallsyms]    [k] __do_fault.isra.61
+     0.13%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] handle_mm_fault
+     0.13%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] do_read_fault.isra.63
+     0.09%     0.04%  perf_demo_dw4  [kernel.kallsyms]    [k] __find_get_page
+     0.09%     0.00%  perf_demo_dw4  ld-2.17.so           [.] __mmap (inlined)
+     0.09%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] system_call_fastpath
+     0.09%     0.04%  perf_demo_dw4  ld-2.17.so           [.] strcmp
+     0.09%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _dl_start_user
+     0.09%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _dl_init_internal
+     0.09%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] xfs_filemap_fault
+     0.09%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] __xfs_filemap_fault
+     0.09%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] filemap_fault
+     0.09%     0.09%  perf_demo_dw4  [kernel.kallsyms]    [k] system_call_after_swapgs
+     0.04%     0.04%  perf_demo_dw4  [kernel.kallsyms]    [k] fsnotify
+     0.04%     0.04%  perf_demo_dw4  [kernel.kallsyms]    [k] __radix_tree_lookup
+     0.04%     0.04%  perf_demo_dw4  [kernel.kallsyms]    [k] vmware_sched_clock
+     0.04%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _dl_map_object_deps
+     0.04%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _dl_catch_error
+     0.04%     0.00%  perf_demo_dw4  ld-2.17.so           [.] strlen
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] sys_mmap
+     0.04%     0.00%  perf_demo_dw4  ld-2.17.so           [.] openaux
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] sys_mmap_pgoff
+     0.04%     0.00%  perf_demo_dw4  ld-2.17.so           [.] _dl_map_object
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] vm_mmap_pgoff
+     0.04%     0.00%  perf_demo_dw4  ld-2.17.so           [.] __open (inlined)
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] do_mmap
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] mmap_region
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] sys_open
+     0.04%     0.04%  perf_demo_dw4  libc-2.17.so         [.] _IO_default_xsputn
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] do_sys_open
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] perf_event_mmap
+     0.04%     0.00%  perf_demo_dw4  libstdc++.so.6.0.30  [.] _GLOBAL__sub_I_eh_alloc.cc
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] do_filp_open
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] perf_iterate_sb
+     0.04%     0.00%  perf_demo_dw4  libc-2.17.so         [.] __GI___libc_malloc (inlined)
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] path_openat
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] perf_iterate_ctx
+     0.04%     0.00%  perf_demo_dw4  libc-2.17.so         [.] _int_malloc
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] do_last
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] perf_event_mmap_output
+     0.04%     0.00%  perf_demo_dw4  libc-2.17.so         [.] __printf (inlined)
+     0.04%     0.00%  perf_demo_dw4  libc-2.17.so         [.] sysmalloc
+     0.04%     0.04%  perf_demo_dw4  libc-2.17.so         [.] init_cacheinfo
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] __perf_event_header__init_id
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] vfs_open
+     0.04%     0.00%  perf_demo_dw4  libc-2.17.so         [.] _IO_vfprintf_internal (inlined)
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] do_dentry_open
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] local_clock
+     0.04%     0.00%  perf_demo_dw4  [kernel.kallsyms]    [k] radix_tree_lookup_slot
+     0.04%     0.00%  perf_demo_dw4  libc-2.17.so         [.] _IO_new_file_xsputn (inlined)
+     0.04%     0.00%  perf_demo_dw4  libm-2.17.so         [.] __ieee754_atan2 (inlined)
+     0.04%     0.00%  perf_demo_dw4  libc-2.17.so         [.] __GI__IO_default_xsputn (inlined)
+
+
+#
+# (Tip: To see callchains in a more compact form: perf report -g folded)
+#

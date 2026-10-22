@@ -1,0 +1,3 @@
+sum_serial = 414822.4688
+sum_4acc   = 414822.3750
+double ref = 414822.4000

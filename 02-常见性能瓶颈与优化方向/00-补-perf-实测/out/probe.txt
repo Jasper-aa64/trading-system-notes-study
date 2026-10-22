@@ -1,0 +1,13 @@
+
+ Performance counter stats for '/bin/true':
+
+   <not supported>      cycles                                                      
+   <not supported>      instructions                                                
+
+       0.002029639 seconds time elapsed
+
+       0.000000000 seconds user
+       0.002424000 seconds sys
+
+
+exit code: 0

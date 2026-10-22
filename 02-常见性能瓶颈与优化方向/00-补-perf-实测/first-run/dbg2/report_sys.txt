@@ -1,0 +1,37 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock'
+# Event count (approx.): 628000000
+#
+# Overhead  Command   Shared Object      Symbol                           
+# ........  ........  .................  .................................
+#
+    83.04%  demo_sys  demo_sys           [.] 0x0000000000000925
+     5.53%  demo_sys  demo_sys           [.] 0x00000000000008ee
+     4.66%  demo_sys  demo_sys           [.] 0x00000000000008f2
+     2.39%  demo_sys  demo_sys           [.] 0x00000000000008ea
+     1.75%  demo_sys  demo_sys           [.] 0x00000000000008e6
+     1.59%  demo_sys  demo_sys           [.] 0x00000000000008f7
+     0.28%  demo_sys  demo_sys           [.] 0x0000000000000920
+     0.08%  demo_sys  [kernel.kallsyms]  [k] __do_page_fault
+     0.08%  demo_sys  demo_sys           [.] 0x0000000000000929
+     0.08%  demo_sys  ld-2.17.so         [.] _dl_relocate_object
+     0.08%  demo_sys  ld-2.17.so         [.] check_match.9525
+     0.08%  demo_sys  ld-2.17.so         [.] do_lookup_x
+     0.04%  demo_sys  [kernel.kallsyms]  [k] remove_vma
+     0.04%  demo_sys  [kernel.kallsyms]  [k] xfs_filemap_fault
+     0.04%  demo_sys  demo_sys           [.] 0x000000000000075b
+     0.04%  demo_sys  demo_sys           [.] 0x0000000000000772
+     0.04%  demo_sys  demo_sys           [.] 0x00000000000008b5
+     0.04%  demo_sys  demo_sys           [.] 0x0000000000000913
+     0.04%  demo_sys  ld-2.17.so         [.] _dl_load_cache_lookup
+     0.04%  demo_sys  ld-2.17.so         [.] init_cpu_features.constprop.0
+     0.04%  demo_sys  ld-2.17.so         [.] strcmp
+
+
+#
+# (Tip: For a higher level overview, try: perf report --sort comm,dso)
+#

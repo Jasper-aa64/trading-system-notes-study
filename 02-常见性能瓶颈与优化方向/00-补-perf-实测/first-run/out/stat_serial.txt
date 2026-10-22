@@ -1,0 +1,16 @@
+# started on Thu Oct 22 15:03:25 2026
+
+
+ Performance counter stats for './perf_demo 1' (10 runs):
+
+            540.92 msec task-clock                #    0.999 CPUs utilized            ( +-  1.06% )
+                 0      context-switches          #    0.001 K/sec                    ( +- 33.33% )
+                 1      cpu-migrations            #    0.001 K/sec                    ( +- 27.22% )
+               376      page-faults               #    0.695 K/sec                  
+   <not supported>      cycles                                                      
+   <not supported>      instructions                                                
+   <not supported>      branches                                                    
+   <not supported>      branch-misses                                               
+
+           0.54171 +- 0.00577 seconds time elapsed  ( +-  1.06% )
+

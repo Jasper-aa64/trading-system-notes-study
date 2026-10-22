@@ -1,0 +1,101 @@
+build id event received for [kernel.kallsyms]: d385baac38e808a4017cbfe3a61916db197e579b
+build id event received for /usr/lib64/ld-2.17.so: 62c449974331341bb08dcce3859560a22af1e172
+build id event received for [vdso]: 7ec6bfb14fef0f6f271cd73ba4eff55a0d0a5078
+build id event received for /usr/lib64/libc-2.17.so: 1a8fb61bb4614a483833d5334202ab50edda2a25
+Looking at the vmlinux_path (8 entries long)
+symsrc__init: cannot get elf header.
+Using /proc/kcore for kernel data
+Using /proc/kallsyms for symbols
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock'
+# Event count (approx.): 634250000
+#
+# Children      Self  Command    Shared Object                      Symbol                                            
+# ........  ........  .........  .................................  ..................................................
+#
+    99.25%     0.00%  perf_demo  /usr/lib64/libc-2.17.so            0x7ff4b75f3555     B [.] __libc_start_main
+    97.95%    97.95%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0xa14              j [.] 0x0000000000000a14
+    97.95%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x400a14           j [.] 0x0000000000400a14
+     0.32%     0.32%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x9e7              j [.] 0x00000000000009e7
+     0.32%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x4009e7           j [.] 0x00000000004009e7
+     0.24%     0.24%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x9d0              j [.] 0x00000000000009d0
+     0.24%     0.08%  perf_demo  /proc/kcore                        0xffffffffa47bf7d3 k [k] __do_page_fault
+     0.24%     0.00%  perf_demo  /proc/kcore                        0xffffffffa47bfb05 k [k] do_page_fault
+     0.24%     0.00%  perf_demo  /proc/kcore                        0xffffffffa47bb7b8 k [k] page_fault
+     0.24%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x4009d0           j [.] 0x00000000004009d0
+     0.20%     0.12%  perf_demo  /usr/lib64/ld-2.17.so              0x19dc0            B [.] strcmp
+     0.20%     0.00%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82ed078     B [.] _dl_sysdep_start
+     0.16%     0.16%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x9d8              j [.] 0x00000000000009d8
+     0.16%     0.16%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x9ed              j [.] 0x00000000000009ed
+     0.16%     0.00%  perf_demo  /proc/kcore                        0xffffffffa42021d3 k [k] handle_mm_fault
+     0.16%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x4009d8           j [.] 0x00000000004009d8
+     0.16%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x4009ed           j [.] 0x00000000004009ed
+     0.16%     0.00%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82d999a     B [.] dl_main
+     0.12%     0.12%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x9e0              j [.] 0x00000000000009e0
+     0.12%     0.12%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0xa10              j [.] 0x0000000000000a10
+     0.12%     0.08%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82e0ab9     B [.] _dl_relocate_object
+     0.12%     0.00%  perf_demo  /proc/kcore                        0xffffffffa41fa7cc k [k] do_read_fault.isra.63
+     0.12%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x4009e0           j [.] 0x00000000004009e0
+     0.12%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x400a10           j [.] 0x0000000000400a10
+     0.08%     0.08%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x99c              j [.] 0x000000000000099c
+     0.08%     0.08%  perf_demo  /usr/lib64/ld-2.17.so              0x9d60             B [.] do_lookup_x
+     0.08%     0.04%  perf_demo  /proc/kcore                        0x7fffa41ca619     k [k] __find_get_page
+     0.08%     0.00%  perf_demo  /proc/kcore                        0xffffffffa41fa21a k [k] __do_fault.isra.61
+     0.08%     0.00%  perf_demo  /proc/kcore                        0xffffffffc0384ffe k [k] __xfs_filemap_fault
+     0.08%     0.00%  perf_demo  /proc/kcore                        0xffffffffa41cbba4 k [k] filemap_fault
+     0.08%     0.00%  perf_demo  /proc/kcore                        0xffffffffa47c539a k [k] system_call_fastpath
+     0.08%     0.00%  perf_demo  /proc/kcore                        0xffffffffc038520c k [k] xfs_filemap_fault
+     0.08%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x40099c           j [.] 0x000000000040099c
+     0.08%     0.00%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82f1f5a     B [.] 0x00007ff4b82f1f5a
+     0.08%     0.00%  perf_demo  [unknown]                          0                  ! [.] 0000000000000000
+     0.04%     0.04%  perf_demo  /proc/kcore                        0x7fffa40ce564     k [k] __wake_up_bit
+     0.04%     0.04%  perf_demo  /proc/kcore                        0x7fffa47bc720     k [k] _raw_qspin_lock
+     0.04%     0.04%  perf_demo  /proc/kcore                        0x7fffa41d5482     k [k] get_page_from_freelist
+     0.04%     0.04%  perf_demo  /proc/kcore                        0x7fffa4237c08     k [k] kmem_cache_alloc
+     0.04%     0.04%  perf_demo  /proc/kcore                        0x7fffa43a43da     k [k] radix_tree_descend
+     0.04%     0.04%  perf_demo  /proc/kcore                        0x7fffa47c72f9     k [k] system_call_after_swapgs
+     0.04%     0.04%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x7ca              j [.] 0x00000000000007ca
+     0.04%     0.04%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x9ea              j [.] 0x00000000000009ea
+     0.04%     0.04%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0xa18              j [.] 0x0000000000000a18
+     0.04%     0.04%  perf_demo  /usr/lib64/ld-2.17.so              0x9f80             B [.] _dl_lookup_symbol_x
+     0.04%     0.04%  perf_demo  /usr/lib64/ld-2.17.so              0x9574             B [.] check_match.9525
+     0.04%     0.04%  perf_demo  /usr/lib64/libc-2.17.so            0x7a2a0            B [.] _IO_file_stat
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa425e1fe k [k] ____fput
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa41d3fa4 k [k] __alloc_pages_nodemask
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa425dfcc k [k] __fput
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa43a3b64 k [k] __radix_tree_lookup
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa4229419 k [k] alloc_pages_vma
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa41fb0a4 k [k] do_cow_fault
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa40a6174 k [k] do_exit
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa40a694f k [k] do_group_exit
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa425abc9 k [k] do_sys_open
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa426e392 k [k] getname
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa426e22f k [k] getname_flags
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa43a3c02 k [k] radix_tree_lookup_slot
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa40a69c4 k [k] sys_exit_group
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa425ad0e k [k] sys_open
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa40c7f6b k [k] task_work_run
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffa41c914b k [k] unlock_page
+     0.04%     0.00%  perf_demo  /proc/kcore                        0xffffffffc0384f75 k [k] xfs_file_release
+     0.04%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x4007ca           j [.] 0x00000000004007ca
+     0.04%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x4009ea           j [.] 0x00000000004009ea
+     0.04%     0.00%  perf_demo  /tmp/perf-demo-20261022/perf_demo  0x400a18           j [.] 0x0000000000400a18
+     0.04%     0.00%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82ebaf3     B [.] _dl_cache_libcmp
+     0.04%     0.00%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82ebbe0     B [.] _dl_load_cache_lookup
+     0.04%     0.00%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82dd966     B [.] _dl_map_object
+     0.04%     0.00%  perf_demo  /usr/lib64/ld-2.17.so              0x7ff4b82ee677     B [.] open64
+     0.04%     0.00%  perf_demo  /usr/lib64/libc-2.17.so            0x7ff4b76528be     B [.] sysmalloc
+     0.04%     0.00%  perf_demo  [unknown]                          0xa5b10            ! [k] 0x00000000000a5b10
+     0.04%     0.00%  perf_demo  [unknown]                          0x117da0           ! [k] 0x0000000000117da0
+     0.04%     0.00%  perf_demo  [unknown]                          0x132280           ! [.] 0x0000000000132280
+     0.04%     0.00%  perf_demo  [unknown]                          0x172f30           ! [.] 0x0000000000172f30
+     0.04%     0.00%  perf_demo  [unknown]                          0x415750           ! [.] 0x0000000000415750
+
+
+#
+# (Tip: List events using substring match: perf list <keyword>)
+#

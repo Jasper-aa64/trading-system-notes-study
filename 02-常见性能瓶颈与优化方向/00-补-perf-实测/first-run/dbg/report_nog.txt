@@ -1,0 +1,32 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock'
+# Event count (approx.): 574750000
+#
+# Overhead  Command   Shared Object      Symbol                     
+# ........  ........  .................  ...........................
+#
+    98.26%  demo_nog  demo_nog           [.] 0x0000000000000a14
+     0.30%  demo_nog  demo_nog           [.] 0x00000000000009e0
+     0.26%  demo_nog  demo_nog           [.] 0x00000000000009d0
+     0.26%  demo_nog  demo_nog           [.] 0x00000000000009e7
+     0.26%  demo_nog  demo_nog           [.] 0x00000000000009ed
+     0.17%  demo_nog  demo_nog           [.] 0x00000000000009d8
+     0.09%  demo_nog  ld-2.17.so         [.] check_match.9525
+     0.04%  demo_nog  [kernel.kallsyms]  [k] __do_page_fault
+     0.04%  demo_nog  [kernel.kallsyms]  [k] radix_tree_descend
+     0.04%  demo_nog  [kernel.kallsyms]  [k] unmap_page_range
+     0.04%  demo_nog  [kernel.kallsyms]  [k] vma_compute_subtree_gap
+     0.04%  demo_nog  demo_nog           [.] 0x00000000000007ca
+     0.04%  demo_nog  demo_nog           [.] 0x00000000000007de
+     0.04%  demo_nog  demo_nog           [.] 0x0000000000000987
+     0.04%  demo_nog  ld-2.17.so         [.] _dl_relocate_object
+     0.04%  demo_nog  ld-2.17.so         [.] strcmp
+
+
+#
+# (Tip: To report cacheline events from previous recording: perf c2c report)
+#

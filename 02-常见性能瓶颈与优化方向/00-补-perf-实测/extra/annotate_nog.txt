@@ -1,0 +1,23 @@
+ Percent |	Source code & Disassembly of perf_demo_nog for cpu-clock (2124 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :            Disassembly of section .text:
+         :
+         :            0000000000400a00 <sum_serial(float const*, int)>:
+         :            sum_serial(float const*, int):
+    0.00 :   400a00:       test   %esi,%esi
+    0.00 :   400a02:       jle    400a20 <sum_serial(float const*, int)+0x20>
+    0.00 :   400a04:       movslq %esi,%rsi
+    0.00 :   400a07:       pxor   %xmm0,%xmm0
+    0.00 :   400a0b:       lea    (%rdi,%rsi,4),%rax
+    0.00 :   400a0f:       nop
+    0.00 :   400a10:       addss  (%rdi),%xmm0
+  100.00 :   400a14:       add    $0x4,%rdi
+    0.00 :   400a18:       cmp    %rax,%rdi
+    0.00 :   400a1b:       jne    400a10 <sum_serial(float const*, int)+0x10>
+    0.00 :   400a1d:       ret
+    0.00 :   400a1e:       xchg   %ax,%ax
+    0.00 :   400a20:       pxor   %xmm0,%xmm0
+    0.00 :   400a24:       ret

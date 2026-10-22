@@ -1,0 +1,75 @@
+ Percent |	Source code & Disassembly of perf_demo for cpu-clock (750 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         :            Disassembly of section .text:
+         :
+         :            0000000000400a30 <sum_4acc(float const*, int)>:
+         :            sum_4acc(float const*, int):
+         :
+         :            // 修法：四个累加器，四条加法链互不等待
+         :            __attribute__((noinline)) float sum_4acc(const float* a, int n) {
+         :                float s0 = 0.0f, s1 = 0.0f, s2 = 0.0f, s3 = 0.0f;
+         :                int i = 0;
+         :                for (; i + 4 <= n; i += 4) {
+    0.00 :   400a30:       cmp    $0x3,%esi
+    0.00 :   400a33:       jle    400ab0 <sum_4acc(float const*, int)+0x80>
+    0.13 :   400a35:       lea    -0x4(%rsi),%edx
+    0.00 :   400a38:       xor    %eax,%eax
+    0.00 :   400a3a:       pxor   %xmm1,%xmm1
+    0.00 :   400a3e:       shr    $0x2,%edx
+    0.00 :   400a41:       add    $0x1,%edx
+    0.00 :   400a44:       nopl   0x0(%rax)
+         :                    s0 += a[i];
+         :                    s1 += a[i + 1];
+         :                    s2 += a[i + 2];
+         :                    s3 += a[i + 3];
+    0.00 :   400a48:       mov    %rax,%rcx
+    0.00 :   400a4b:       add    $0x1,%rax
+    0.13 :   400a4f:       shl    $0x4,%rcx
+   25.20 :   400a53:       movups (%rdi,%rcx,1),%xmm0
+    0.40 :   400a57:       addps  %xmm0,%xmm1
+         :                for (; i + 4 <= n; i += 4) {
+   73.87 :   400a5a:       cmp    %edx,%eax
+    0.00 :   400a5c:       jb     400a48 <sum_4acc(float const*, int)+0x18>
+    0.00 :   400a5e:       movaps %xmm1,%xmm3
+         :                }
+         :                for (; i < n; ++i) s0 += a[i];
+         :                return (s0 + s1) + (s2 + s3);
+    0.00 :   400a61:       movaps %xmm1,%xmm2
+    0.00 :   400a64:       movaps %xmm1,%xmm0
+         :                for (; i + 4 <= n; i += 4) {
+    0.00 :   400a67:       shl    $0x2,%edx
+         :                return (s0 + s1) + (s2 + s3);
+    0.00 :   400a6a:       shufps $0xff,%xmm1,%xmm2
+    0.13 :   400a6e:       shufps $0x55,%xmm1,%xmm3
+    0.13 :   400a72:       unpckhps %xmm1,%xmm1
+    0.00 :   400a75:       addss  %xmm2,%xmm1
+         :                for (; i < n; ++i) s0 += a[i];
+    0.00 :   400a79:       cmp    %edx,%esi
+    0.00 :   400a7b:       jle    400a9d <sum_4acc(float const*, int)+0x6d>
+    0.00 :   400a7d:       movslq %edx,%rcx
+    0.00 :   400a80:       sub    %edx,%esi
+    0.00 :   400a82:       add    %rcx,%rsi
+    0.00 :   400a85:       lea    (%rdi,%rcx,4),%rax
+    0.00 :   400a89:       lea    (%rdi,%rsi,4),%rdx
+    0.00 :   400a8d:       nopl   (%rax)
+    0.00 :   400a90:       addss  (%rax),%xmm0
+    0.00 :   400a94:       add    $0x4,%rax
+    0.00 :   400a98:       cmp    %rax,%rdx
+    0.00 :   400a9b:       jne    400a90 <sum_4acc(float const*, int)+0x60>
+         :                return (s0 + s1) + (s2 + s3);
+    0.00 :   400a9d:       addss  %xmm3,%xmm0
+    0.00 :   400aa1:       addss  %xmm1,%xmm0
+         :            }
+    0.00 :   400aa5:       ret
+    0.00 :   400aa6:       cs nopw 0x0(%rax,%rax,1)
+         :                for (; i + 4 <= n; i += 4) {
+    0.00 :   400ab0:       pxor   %xmm1,%xmm1
+         :                int i = 0;
+    0.00 :   400ab4:       xor    %edx,%edx
+         :                float s0 = 0.0f, s1 = 0.0f, s2 = 0.0f, s3 = 0.0f;
+    0.00 :   400ab6:       movaps %xmm1,%xmm3
+    0.00 :   400ab9:       movaps %xmm1,%xmm0
+    0.00 :   400abc:       jmp    400a79 <sum_4acc(float const*, int)+0x49>

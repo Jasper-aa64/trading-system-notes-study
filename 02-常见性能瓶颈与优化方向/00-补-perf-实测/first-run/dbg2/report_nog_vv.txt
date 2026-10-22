@@ -1,0 +1,39 @@
+build id event received for [kernel.kallsyms]: d385baac38e808a4017cbfe3a61916db197e579b
+build id event received for /usr/lib64/ld-2.17.so: 62c449974331341bb08dcce3859560a22af1e172
+build id event received for [vdso]: 7ec6bfb14fef0f6f271cd73ba4eff55a0d0a5078
+Looking at the vmlinux_path (8 entries long)
+symsrc__init: cannot get elf header.
+Using /proc/kcore for kernel data
+Using /proc/kallsyms for symbols
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock'
+# Event count (approx.): 574750000
+#
+# Overhead  Command   Shared Object                     Symbol                                          
+# ........  ........  ................................  ................................................
+#
+    98.26%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0xa14              j [.] 0x0000000000000a14
+     0.30%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x9e0              j [.] 0x00000000000009e0
+     0.26%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x9d0              j [.] 0x00000000000009d0
+     0.26%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x9e7              j [.] 0x00000000000009e7
+     0.26%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x9ed              j [.] 0x00000000000009ed
+     0.17%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x9d8              j [.] 0x00000000000009d8
+     0.09%  demo_nog  /usr/lib64/ld-2.17.so             0x9570             B [.] check_match.9525
+     0.04%  demo_nog  /proc/kcore                       0x7fffa47c169e     k [k] __do_page_fault
+     0.04%  demo_nog  /proc/kcore                       0x7fffa43a43da     k [k] radix_tree_descend
+     0.04%  demo_nog  /proc/kcore                       0x7fffa41ff04a     k [k] unmap_page_range
+     0.04%  demo_nog  /proc/kcore                       0x7fffa4207447     k [k] vma_compute_subtree_gap
+     0.04%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x7ca              j [.] 0x00000000000007ca
+     0.04%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x7de              j [.] 0x00000000000007de
+     0.04%  demo_nog  /tmp/perf-demo-20261022/demo_nog  0x987              j [.] 0x0000000000000987
+     0.04%  demo_nog  /usr/lib64/ld-2.17.so             0xbd25             B [.] _dl_relocate_object
+     0.04%  demo_nog  /usr/lib64/ld-2.17.so             0x19dc6            B [.] strcmp
+
+
+#
+# (Tip: Boolean options have negative forms, e.g.: perf report --no-children)
+#

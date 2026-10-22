@@ -1,0 +1,47 @@
+0000000000400a30 <sum_4acc(float const*, int)>:
+  400a30:	cmp    $0x3,%esi
+  400a33:	jle    400ab0 <sum_4acc(float const*, int)+0x80>
+  400a35:	lea    -0x4(%rsi),%edx
+  400a38:	xor    %eax,%eax
+  400a3a:	pxor   %xmm1,%xmm1
+  400a3e:	shr    $0x2,%edx
+  400a41:	add    $0x1,%edx
+  400a44:	nopl   0x0(%rax)
+  400a48:	mov    %rax,%rcx
+  400a4b:	add    $0x1,%rax
+  400a4f:	shl    $0x4,%rcx
+  400a53:	movups (%rdi,%rcx,1),%xmm0
+  400a57:	addps  %xmm0,%xmm1
+  400a5a:	cmp    %edx,%eax
+  400a5c:	jb     400a48 <sum_4acc(float const*, int)+0x18>
+  400a5e:	movaps %xmm1,%xmm3
+  400a61:	movaps %xmm1,%xmm2
+  400a64:	movaps %xmm1,%xmm0
+  400a67:	shl    $0x2,%edx
+  400a6a:	shufps $0xff,%xmm1,%xmm2
+  400a6e:	shufps $0x55,%xmm1,%xmm3
+  400a72:	unpckhps %xmm1,%xmm1
+  400a75:	addss  %xmm2,%xmm1
+  400a79:	cmp    %edx,%esi
+  400a7b:	jle    400a9d <sum_4acc(float const*, int)+0x6d>
+  400a7d:	movslq %edx,%rcx
+  400a80:	sub    %edx,%esi
+  400a82:	add    %rcx,%rsi
+  400a85:	lea    (%rdi,%rcx,4),%rax
+  400a89:	lea    (%rdi,%rsi,4),%rdx
+  400a8d:	nopl   (%rax)
+  400a90:	addss  (%rax),%xmm0
+  400a94:	add    $0x4,%rax
+  400a98:	cmp    %rax,%rdx
+  400a9b:	jne    400a90 <sum_4acc(float const*, int)+0x60>
+  400a9d:	addss  %xmm3,%xmm0
+  400aa1:	addss  %xmm1,%xmm0
+  400aa5:	ret
+  400aa6:	cs nopw 0x0(%rax,%rax,1)
+  400ab0:	pxor   %xmm1,%xmm1
+  400ab4:	xor    %edx,%edx
+  400ab6:	movaps %xmm1,%xmm3
+  400ab9:	movaps %xmm1,%xmm0
+  400abc:	jmp    400a79 <sum_4acc(float const*, int)+0x49>
+  400abe:	xchg   %ax,%ax
+

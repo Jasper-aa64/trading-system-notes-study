@@ -1,0 +1,183 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+BFD: Dwarf Error: found dwarf version '5', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '5', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '5', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '8448', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '6102', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '51463', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '2048', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '6408', this reader only handles version 2, 3 and 4 information.
+BFD: Dwarf Error: found dwarf version '4864', this reader only handles version 2, 3 and 4 information.
+#
+# Total Lost Samples: 0
+#
+# Samples: 2K of event 'cpu-clock'
+# Event count (approx.): 627000000
+#
+# Children      Self  Command    Shared Object        Symbol                                
+# ........  ........  .........  ...................  ......................................
+#
+    99.04%     0.00%  perf_demo  perf_demo            [.] _start
+            |
+            ---_start
+               __libc_start_main
+               main
+               |          
+               |--97.93%--sum_serial
+               |          
+                --1.12%--refresh
+
+    99.04%     0.00%  perf_demo  libc-2.17.so         [.] __libc_start_main
+            |
+            ---__libc_start_main
+               main
+               |          
+               |--97.93%--sum_serial
+               |          
+                --1.12%--refresh
+
+    99.04%     0.00%  perf_demo  perf_demo            [.] main
+            |
+            ---main
+               |          
+               |--97.93%--sum_serial
+               |          
+                --1.12%--refresh
+
+    97.93%    97.93%  perf_demo  perf_demo            [.] sum_serial
+            |
+            ---_start
+               __libc_start_main
+               main
+               sum_serial
+
+     1.12%     1.12%  perf_demo  perf_demo            [.] refresh
+            |
+            ---_start
+               __libc_start_main
+               main
+               refresh
+
+     0.80%     0.00%  perf_demo  ld-2.17.so           [.] _start
+            |
+            ---_start
+               _dl_start
+               |          
+                --0.76%--_dl_sysdep_start
+                          dl_main
+                          |          
+                           --0.64%--_dl_relocate_object
+                                     |          
+                                      --0.52%--_dl_lookup_symbol_x
+                                                do_lookup_x
+
+     0.80%     0.00%  perf_demo  ld-2.17.so           [.] _dl_start
+            |
+            ---_dl_start
+               |          
+                --0.76%--_dl_sysdep_start
+                          dl_main
+                          |          
+                           --0.64%--_dl_relocate_object
+                                     |          
+                                      --0.52%--_dl_lookup_symbol_x
+                                                do_lookup_x
+
+     0.76%     0.00%  perf_demo  ld-2.17.so           [.] _dl_sysdep_start
+            |
+            ---_dl_sysdep_start
+               dl_main
+               |          
+                --0.64%--_dl_relocate_object
+                          |          
+                           --0.52%--_dl_lookup_symbol_x
+                                     do_lookup_x
+
+     0.76%     0.00%  perf_demo  ld-2.17.so           [.] dl_main
+            |
+            ---dl_main
+               |          
+                --0.64%--_dl_relocate_object
+                          |          
+                           --0.52%--_dl_lookup_symbol_x
+                                     do_lookup_x
+
+     0.64%     0.08%  perf_demo  ld-2.17.so           [.] _dl_relocate_object
+            |          
+             --0.56%--_dl_relocate_object
+                       |          
+                        --0.52%--_dl_lookup_symbol_x
+                                  do_lookup_x
+
+     0.52%     0.00%  perf_demo  ld-2.17.so           [.] _dl_lookup_symbol_x
+            |
+            ---_dl_lookup_symbol_x
+               do_lookup_x
+
+     0.52%     0.20%  perf_demo  ld-2.17.so           [.] do_lookup_x
+     0.32%     0.20%  perf_demo  ld-2.17.so           [.] check_match.9525
+     0.24%     0.00%  perf_demo  [kernel.kallsyms]    [k] page_fault
+     0.24%     0.08%  perf_demo  [kernel.kallsyms]    [k] __do_page_fault
+     0.24%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_page_fault
+     0.16%     0.00%  perf_demo  [kernel.kallsyms]    [k] handle_mm_fault
+     0.12%     0.04%  perf_demo  ld-2.17.so           [.] strcmp
+     0.12%     0.00%  perf_demo  [kernel.kallsyms]    [k] system_call_fastpath
+     0.08%     0.04%  perf_demo  [kernel.kallsyms]    [k] __find_get_page
+     0.08%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_read_fault.isra.63
+     0.08%     0.00%  perf_demo  ld-2.17.so           [.] _dl_start_user
+     0.08%     0.00%  perf_demo  [kernel.kallsyms]    [k] __do_fault.isra.61
+     0.08%     0.00%  perf_demo  ld-2.17.so           [.] _dl_init_internal
+     0.08%     0.00%  perf_demo  [kernel.kallsyms]    [k] xfs_filemap_fault
+     0.08%     0.00%  perf_demo  [kernel.kallsyms]    [k] __xfs_filemap_fault
+     0.08%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_wp_page
+     0.08%     0.00%  perf_demo  [kernel.kallsyms]    [k] filemap_fault
+     0.04%     0.04%  perf_demo  [kernel.kallsyms]    [k] radix_tree_descend
+     0.04%     0.04%  perf_demo  [kernel.kallsyms]    [k] change_pte_range
+     0.04%     0.04%  perf_demo  [kernel.kallsyms]    [k] __inc_zone_state
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] _dl_map_object_deps
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] _dl_catch_error
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] openaux
+     0.04%     0.04%  perf_demo  [kernel.kallsyms]    [k] _raw_qspin_lock
+     0.04%     0.04%  perf_demo  ld-2.17.so           [.] match_symbol
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] _dl_map_object
+     0.04%     0.04%  perf_demo  [kernel.kallsyms]    [k] copy_page
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] sys_exit_group
+     0.04%     0.00%  perf_demo  [unknown]            [.] 0x00000000000081a3
+     0.04%     0.04%  perf_demo  [kernel.kallsyms]    [k] xfs_file_mmap
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_group_exit
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] __mmap (inlined)
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] __mprotect (inlined)
+     0.04%     0.00%  perf_demo  libstdc++.so.6.0.30  [.] _GLOBAL__sub_I_eh_alloc.cc
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_exit
+     0.04%     0.00%  perf_demo  libc-2.17.so         [.] __GI___libc_malloc (inlined)
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] mmput
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] sys_mmap
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] sys_mprotect
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] _dl_receive_error
+     0.04%     0.00%  perf_demo  libc-2.17.so         [.] _int_malloc
+     0.04%     0.04%  perf_demo  libgcc_s.so.1        [.] get_available_features.constprop.0
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_mprotect_pkey
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] exit_mmap
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] sys_mmap_pgoff
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] wp_page_copy.isra.73
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] version_check_doit
+     0.04%     0.00%  perf_demo  libc-2.17.so         [.] sysmalloc
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] mprotect_fixup
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] page_add_new_anon_rmap
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] radix_tree_lookup_slot
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] unmap_vmas
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] vm_mmap_pgoff
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] _dl_check_all_versions
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] __inc_zone_page_state
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] __radix_tree_lookup
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] change_protection
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] do_mmap
+     0.04%     0.00%  perf_demo  [kernel.kallsyms]    [k] unmap_single_vma
+     0.04%     0.00%  perf_demo  ld-2.17.so           [.] _dl_check_map_versions
+     0.04%     0.00%  perf_demo  libgcc_s.so.1        [.] __cpu_indicator_init@GCC_4.8.0
+
+
+#
+# (Tip: Print event counts in CSV format with: perf stat -x,)
+#
